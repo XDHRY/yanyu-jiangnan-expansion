@@ -1339,7 +1339,7 @@ def build_hero_lantern_lights(scene, builder, config):
     # One broad, weak bounce above the market prevents eye-level shots from
     # collapsing into a black eave tunnel while keeping the moonlit night intact.
     fill_data = bpy.data.lights.new("JNX_HERO_MARKET_BOUNCE", "AREA")
-    fill_data.energy = 165.0
+    fill_data.energy = 110.0
     fill_data.color = (1.0, 0.50, 0.24)
     fill_data.shape = "DISK"
     fill_data.size = 12.0
@@ -1657,8 +1657,8 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     a facade turned away from it is a black rectangle -- and keeps the first
     candidate whose eye position is clear of solid geometry.
     """
-    eye_h = 4.15
-    look_h = 4.25
+    eye_h = 3.35
+    look_h = 4.10
     mx, my = _moon_from_xy(mood)
     # Emissive lantern paper saturates whatever else is in the frame, so the
     # test is whether a lantern falls inside the lens rather than how far away
@@ -1710,8 +1710,8 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     for density, lit, x, y, fx, fy, tx, ty in candidates:
         # Stand back far enough to frame the whole bay, and step sideways so the
         # row recedes instead of filling the lens with one flat wall.
-        for stand, drift in ((18.0, -10.0), (18.0, 10.0), (21.0, -13.0),
-                             (21.0, 13.0), (24.0, -8.0)):
+        for stand, drift in ((13.0, 11.0), (13.0, -11.0), (16.0, 14.0),
+                             (16.0, -14.0), (20.0, 10.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
             if _blocked(boxes, eye) or _inside_footprint(footprints, eye):
                 continue
@@ -1719,10 +1719,10 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
             # composition turned a temporary stall into the whole frame and
             # exposed the procedural bay as a blocky facade.
             along = -1.0 if drift >= 0.0 else 1.0
-            target = (x + fx * 0.8 + tx * along * 21.0,
-                      y + fy * 0.8 + ty * along * 21.0, look_h)
-            shot = dict(name="JNX_Lane", lens=48.0, district=hero_id,
-                        location=eye, target=target, dof_distance=25.0, fstop=3.8)
+            target = (x + fx * 0.8 + tx * along * 18.0,
+                      y + fy * 0.8 + ty * along * 18.0, look_h)
+            shot = dict(name="JNX_Lane", lens=44.0, district=hero_id,
+                        location=eye, target=target, dof_distance=22.0, fstop=3.6)
             if not _line_clear(boxes, eye, target):
                 continue
             # Lantern emission was tamed by pixel QA, so do not exile the camera
