@@ -1,0 +1,4793 @@
+{
+  "schema_version": 1,
+  "loop": [
+    "planned",
+    "implemented",
+    "validated",
+    "integrated"
+  ],
+  "total": 340,
+  "counts": {
+    "implemented": 138,
+    "planned": 202
+  },
+  "tasks": [
+    {
+      "id": "S01",
+      "type": "system",
+      "name": "S01",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03"
+      ],
+      "path": "tasks/systems/S01_water_network.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S02",
+      "type": "system",
+      "name": "S02",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [],
+      "path": "tasks/systems/S02_coordinates.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S03",
+      "type": "system",
+      "name": "S03",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02"
+      ],
+      "path": "tasks/systems/S03_sockets.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S04",
+      "type": "system",
+      "name": "S04",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02"
+      ],
+      "path": "tasks/systems/S04_material_registry.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S05",
+      "type": "system",
+      "name": "S05",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/systems/S05_weather_hooks.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S06",
+      "type": "system",
+      "name": "S06",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/systems/S06_lod_instancing.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S07",
+      "type": "system",
+      "name": "S07",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04"
+      ],
+      "path": "tasks/systems/S07_uv_textures.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "S08",
+      "type": "system",
+      "name": "S08",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03"
+      ],
+      "path": "tasks/systems/S08_collision_navigation.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "S09",
+      "type": "system",
+      "name": "S09",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S08"
+      ],
+      "path": "tasks/systems/S09_spatial_placement.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "S10",
+      "type": "system",
+      "name": "S10",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S09"
+      ],
+      "path": "tasks/systems/S10_camera_review.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "S11",
+      "type": "system",
+      "name": "S11",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S09"
+      ],
+      "path": "tasks/systems/S11_legacy_adapter.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "S12",
+      "type": "system",
+      "name": "S12",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S01",
+        "S03",
+        "S04",
+        "S06",
+        "S08",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "path": "tasks/systems/S12_assembly_handoff.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A001",
+      "type": "asset",
+      "name": "A001",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A001.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A002",
+      "type": "asset",
+      "name": "A002",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A002.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A003",
+      "type": "asset",
+      "name": "A003",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A003.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A004",
+      "type": "asset",
+      "name": "A004",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A004.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A005",
+      "type": "asset",
+      "name": "A005",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A005.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A006",
+      "type": "asset",
+      "name": "A006",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A006.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A007",
+      "type": "asset",
+      "name": "A007",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A007.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A008",
+      "type": "asset",
+      "name": "A008",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A008.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A009",
+      "type": "asset",
+      "name": "A009",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A009.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A010",
+      "type": "asset",
+      "name": "A010",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A010.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A011",
+      "type": "asset",
+      "name": "A011",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A011.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A012",
+      "type": "asset",
+      "name": "A012",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A012.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A013",
+      "type": "asset",
+      "name": "A013",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A013.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A014",
+      "type": "asset",
+      "name": "A014",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A014.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A015",
+      "type": "asset",
+      "name": "A015",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A015.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A016",
+      "type": "asset",
+      "name": "A016",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A016.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A017",
+      "type": "asset",
+      "name": "A017",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A017.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A018",
+      "type": "asset",
+      "name": "A018",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A018.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A019",
+      "type": "asset",
+      "name": "A019",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A019.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A020",
+      "type": "asset",
+      "name": "A020",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A020.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A021",
+      "type": "asset",
+      "name": "A021",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A021.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A022",
+      "type": "asset",
+      "name": "A022",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A022.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A023",
+      "type": "asset",
+      "name": "A023",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A023.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A024",
+      "type": "asset",
+      "name": "A024",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A024.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A025",
+      "type": "asset",
+      "name": "A025",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A025.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A026",
+      "type": "asset",
+      "name": "A026",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A026.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A027",
+      "type": "asset",
+      "name": "A027",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A027.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A028",
+      "type": "asset",
+      "name": "A028",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A028.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A029",
+      "type": "asset",
+      "name": "A029",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A029.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A030",
+      "type": "asset",
+      "name": "A030",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A030.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A031",
+      "type": "asset",
+      "name": "A031",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A031.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A032",
+      "type": "asset",
+      "name": "A032",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A032.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A033",
+      "type": "asset",
+      "name": "A033",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A033.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A034",
+      "type": "asset",
+      "name": "A034",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A034.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A035",
+      "type": "asset",
+      "name": "A035",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A035.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A036",
+      "type": "asset",
+      "name": "A036",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A036.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A037",
+      "type": "asset",
+      "name": "A037",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A037.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A038",
+      "type": "asset",
+      "name": "A038",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A038.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A039",
+      "type": "asset",
+      "name": "A039",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A039.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A040",
+      "type": "asset",
+      "name": "A040",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A040.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A041",
+      "type": "asset",
+      "name": "A041",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A041.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A042",
+      "type": "asset",
+      "name": "A042",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A042.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A043",
+      "type": "asset",
+      "name": "A043",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A043.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A044",
+      "type": "asset",
+      "name": "A044",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A044.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A045",
+      "type": "asset",
+      "name": "A045",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A045.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A046",
+      "type": "asset",
+      "name": "A046",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A046.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A047",
+      "type": "asset",
+      "name": "A047",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A047.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A048",
+      "type": "asset",
+      "name": "A048",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A048.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A049",
+      "type": "asset",
+      "name": "A049",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A049.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A050",
+      "type": "asset",
+      "name": "A050",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A050.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A051",
+      "type": "asset",
+      "name": "A051",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A051.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A052",
+      "type": "asset",
+      "name": "A052",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A052.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A053",
+      "type": "asset",
+      "name": "A053",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A053.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A054",
+      "type": "asset",
+      "name": "A054",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A054.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A055",
+      "type": "asset",
+      "name": "A055",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A055.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A056",
+      "type": "asset",
+      "name": "A056",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A056.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A057",
+      "type": "asset",
+      "name": "A057",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A057.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A058",
+      "type": "asset",
+      "name": "A058",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A058.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A059",
+      "type": "asset",
+      "name": "A059",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A059.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A060",
+      "type": "asset",
+      "name": "A060",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A060.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A061",
+      "type": "asset",
+      "name": "A061",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A061.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A062",
+      "type": "asset",
+      "name": "A062",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A062.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A063",
+      "type": "asset",
+      "name": "A063",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A063.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A064",
+      "type": "asset",
+      "name": "A064",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A064.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A065",
+      "type": "asset",
+      "name": "A065",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A065.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A066",
+      "type": "asset",
+      "name": "A066",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A066.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A067",
+      "type": "asset",
+      "name": "A067",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A067.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A068",
+      "type": "asset",
+      "name": "A068",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A068.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A069",
+      "type": "asset",
+      "name": "A069",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A069.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A070",
+      "type": "asset",
+      "name": "A070",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A070.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A071",
+      "type": "asset",
+      "name": "A071",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A071.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A072",
+      "type": "asset",
+      "name": "A072",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A072.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A073",
+      "type": "asset",
+      "name": "A073",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A073.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A074",
+      "type": "asset",
+      "name": "A074",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A074.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A075",
+      "type": "asset",
+      "name": "A075",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A075.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A076",
+      "type": "asset",
+      "name": "A076",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A076.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A077",
+      "type": "asset",
+      "name": "A077",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A077.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A078",
+      "type": "asset",
+      "name": "A078",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A078.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A079",
+      "type": "asset",
+      "name": "A079",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A079.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A080",
+      "type": "asset",
+      "name": "A080",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A080.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A081",
+      "type": "asset",
+      "name": "A081",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A081.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A082",
+      "type": "asset",
+      "name": "A082",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A082.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A083",
+      "type": "asset",
+      "name": "A083",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A083.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A084",
+      "type": "asset",
+      "name": "A084",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A084.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A085",
+      "type": "asset",
+      "name": "A085",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A085.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A086",
+      "type": "asset",
+      "name": "A086",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A086.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A087",
+      "type": "asset",
+      "name": "A087",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A087.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A088",
+      "type": "asset",
+      "name": "A088",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A088.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A089",
+      "type": "asset",
+      "name": "A089",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A089.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A090",
+      "type": "asset",
+      "name": "A090",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A090.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A091",
+      "type": "asset",
+      "name": "A091",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A091.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A092",
+      "type": "asset",
+      "name": "A092",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A092.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A093",
+      "type": "asset",
+      "name": "A093",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A093.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "A094",
+      "type": "asset",
+      "name": "A094",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A094.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A095",
+      "type": "asset",
+      "name": "A095",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A095.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A096",
+      "type": "asset",
+      "name": "A096",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A096.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M01",
+      "type": "material",
+      "name": "M01",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M01_lime_plaster.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M02",
+      "type": "material",
+      "name": "M02",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M02_grey_brick.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M03",
+      "type": "material",
+      "name": "M03",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M03_roof_clay.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M04",
+      "type": "material",
+      "name": "M04",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M04_aged_timber.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M05",
+      "type": "material",
+      "name": "M05",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M05_paving_stone.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M06",
+      "type": "material",
+      "name": "M06",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M06_quay_stone.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M07",
+      "type": "material",
+      "name": "M07",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M07_bamboo_skin.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M08",
+      "type": "material",
+      "name": "M08",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M08_plum_bark.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M09",
+      "type": "material",
+      "name": "M09",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M09_undyed_cloth.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M10",
+      "type": "material",
+      "name": "M10",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M10_indigo_cloth.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M11",
+      "type": "material",
+      "name": "M11",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M11_lantern_paper.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M12",
+      "type": "material",
+      "name": "M12",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M12_rough_ceramic.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M13",
+      "type": "material",
+      "name": "M13",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M13_forged_iron.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M14",
+      "type": "material",
+      "name": "M14",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M14_mud_soil.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M15",
+      "type": "material",
+      "name": "M15",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M15_moss_lichen.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "M16",
+      "type": "material",
+      "name": "M16",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M16_leaf_atlas.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "K01",
+      "type": "assembly",
+      "name": "K01",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A002",
+        "A005",
+        "A006",
+        "A036",
+        "A037",
+        "A039",
+        "A053",
+        "A057",
+        "A059",
+        "A085",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K01.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "K02",
+      "type": "assembly",
+      "name": "K02",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A003",
+        "A009",
+        "A018",
+        "A043",
+        "A057",
+        "A060",
+        "A061",
+        "A062",
+        "A063",
+        "A074",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K02.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K03",
+      "type": "assembly",
+      "name": "K03",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A010",
+        "A023",
+        "A043",
+        "A045",
+        "A047",
+        "A048",
+        "A050",
+        "A055",
+        "A068",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K03.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K04",
+      "type": "assembly",
+      "name": "K04",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A041",
+        "A044",
+        "A050",
+        "A052",
+        "A058",
+        "A061",
+        "A073",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K04.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K05",
+      "type": "assembly",
+      "name": "K05",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A015",
+        "A016",
+        "A018",
+        "A035",
+        "A060",
+        "A061",
+        "A075",
+        "A083",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K05.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K06",
+      "type": "assembly",
+      "name": "K06",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A001",
+        "A004",
+        "A026",
+        "A034",
+        "A036",
+        "A037",
+        "A063",
+        "A065",
+        "A066",
+        "A072",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K06.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K07",
+      "type": "assembly",
+      "name": "K07",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A017",
+        "A018",
+        "A035",
+        "A038",
+        "A040",
+        "A060",
+        "A075",
+        "A080",
+        "A083",
+        "A088",
+        "A089",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K07.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "K08",
+      "type": "assembly",
+      "name": "K08",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A007",
+        "A011",
+        "A012",
+        "A055",
+        "A067",
+        "A069",
+        "A071",
+        "A087",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K08.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K09",
+      "type": "assembly",
+      "name": "K09",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A022",
+        "A046",
+        "A049",
+        "A051",
+        "A081",
+        "A082",
+        "A085",
+        "A086",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K09.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K10",
+      "type": "assembly",
+      "name": "K10",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A013",
+        "A014",
+        "A026",
+        "A027",
+        "A031",
+        "A070",
+        "A076",
+        "A090",
+        "A091",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K10.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K11",
+      "type": "assembly",
+      "name": "K11",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A024",
+        "A042",
+        "A051",
+        "A074",
+        "A077",
+        "A079",
+        "A084",
+        "A086",
+        "A089",
+        "A092",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K11.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "K12",
+      "type": "assembly",
+      "name": "K12",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "A017",
+        "A018",
+        "A021",
+        "A038",
+        "A047",
+        "A058",
+        "A073",
+        "A078",
+        "A091",
+        "A094",
+        "A095",
+        "A096",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K12.md",
+      "evidence": "",
+      "status": "planned"
+    },
+    {
+      "id": "D01",
+      "type": "district",
+      "name": "D01",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K01",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D01.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D02",
+      "type": "district",
+      "name": "D02",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K02",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D02.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D03",
+      "type": "district",
+      "name": "D03",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K03",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D03.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D04",
+      "type": "district",
+      "name": "D04",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K04",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D04.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D05",
+      "type": "district",
+      "name": "D05",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K05",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D05.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D06",
+      "type": "district",
+      "name": "D06",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K06",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D06.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D07",
+      "type": "district",
+      "name": "D07",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K07",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D07.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D08",
+      "type": "district",
+      "name": "D08",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K08",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D08.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D09",
+      "type": "district",
+      "name": "D09",
+      "wave": 1,
+      "priority": "P0",
+      "depends_on": [
+        "K09",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D09.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D10",
+      "type": "district",
+      "name": "D10",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "K10",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D10.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D11",
+      "type": "district",
+      "name": "D11",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "K11",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D11.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "D12",
+      "type": "district",
+      "name": "D12",
+      "wave": 1,
+      "priority": "P1",
+      "depends_on": [
+        "K12",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D12.md",
+      "evidence": "scripts/*_detail.py",
+      "status": "implemented"
+    },
+    {
+      "id": "A097",
+      "type": "asset",
+      "name": "格扇门成对",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "real lattice door leaves in the opening",
+      "status": "implemented"
+    },
+    {
+      "id": "A098",
+      "type": "asset",
+      "name": "民居床榻被褥",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "bed, posts and quilt visible through the door",
+      "status": "implemented"
+    },
+    {
+      "id": "A099",
+      "type": "asset",
+      "name": "灶台铁锅",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "interior hearth and iron pot",
+      "status": "implemented"
+    },
+    {
+      "id": "A100",
+      "type": "asset",
+      "name": "店内货架陶坛",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "shop shelves and ceramic jars",
+      "status": "implemented"
+    },
+    {
+      "id": "A101",
+      "type": "asset",
+      "name": "仓内货箱酒缸",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "warehouse crates and vats",
+      "status": "implemented"
+    },
+    {
+      "id": "A102",
+      "type": "asset",
+      "name": "室内油灯",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "paper oil lamp on the floor plate",
+      "status": "implemented"
+    },
+    {
+      "id": "A103",
+      "type": "asset",
+      "name": "二层楼梯",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "stair void between storeys",
+      "status": "planned"
+    },
+    {
+      "id": "A104",
+      "type": "asset",
+      "name": "隔断屏风",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "timber screen dividing the bay",
+      "status": "planned"
+    },
+    {
+      "id": "A105",
+      "type": "asset",
+      "name": "神龛香案",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "household shrine against the back wall",
+      "status": "planned"
+    },
+    {
+      "id": "A106",
+      "type": "asset",
+      "name": "厨房碗柜",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "kitchen cupboard and stacked bowls",
+      "status": "planned"
+    },
+    {
+      "id": "A107",
+      "type": "asset",
+      "name": "客栈铺位",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "inn bunk row",
+      "status": "planned"
+    },
+    {
+      "id": "A108",
+      "type": "asset",
+      "name": "账房桌椅",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "clerk desk visible from the shopfront",
+      "status": "planned"
+    },
+    {
+      "id": "A109",
+      "type": "asset",
+      "name": "阁楼铺板",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "loft boards over the shop",
+      "status": "planned"
+    },
+    {
+      "id": "A110",
+      "type": "asset",
+      "name": "天井排水",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "courtyard drain under the drip line",
+      "status": "planned"
+    },
+    {
+      "id": "A111",
+      "type": "asset",
+      "name": "后门卸货台",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "service stoop at the rear wall",
+      "status": "planned"
+    },
+    {
+      "id": "A112",
+      "type": "asset",
+      "name": "马头墙墀头",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "gable-end brick corbel",
+      "status": "planned"
+    },
+    {
+      "id": "A113",
+      "type": "asset",
+      "name": "内院天井",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "open well between wings",
+      "status": "planned"
+    },
+    {
+      "id": "A114",
+      "type": "asset",
+      "name": "堂屋太师椅",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "pair of chairs facing the door",
+      "status": "planned"
+    },
+    {
+      "id": "A115",
+      "type": "asset",
+      "name": "案上香炉",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "censer on the hall table",
+      "status": "planned"
+    },
+    {
+      "id": "A116",
+      "type": "asset",
+      "name": "书房地台",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "raised study platform",
+      "status": "planned"
+    },
+    {
+      "id": "A117",
+      "type": "asset",
+      "name": "厨房水缸",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "water jar by the hearth",
+      "status": "planned"
+    },
+    {
+      "id": "A118",
+      "type": "asset",
+      "name": "储物壁橱",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "wall cupboard",
+      "status": "planned"
+    },
+    {
+      "id": "A119",
+      "type": "asset",
+      "name": "楼板暴露梁",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "exposed floor joists upstairs",
+      "status": "planned"
+    },
+    {
+      "id": "A120",
+      "type": "asset",
+      "name": "后门门槛",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A001",
+        "S03"
+      ],
+      "evidence": "rear threshold",
+      "status": "planned"
+    },
+    {
+      "id": "A121",
+      "type": "asset",
+      "name": "摊位货篮陶坛布匹",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "stall wares: basket, jar, cloth bolt",
+      "status": "implemented"
+    },
+    {
+      "id": "A122",
+      "type": "asset",
+      "name": "木作刨台",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "carpenter bench in workshop districts",
+      "status": "planned"
+    },
+    {
+      "id": "A123",
+      "type": "asset",
+      "name": "染缸晾架",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "dye vats and drying poles",
+      "status": "planned"
+    },
+    {
+      "id": "A124",
+      "type": "asset",
+      "name": "窑炉匣钵",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "kiln saggars",
+      "status": "planned"
+    },
+    {
+      "id": "A125",
+      "type": "asset",
+      "name": "药柜抽屉",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "apothecary drawers",
+      "status": "planned"
+    },
+    {
+      "id": "A126",
+      "type": "asset",
+      "name": "酒旗幌子",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "hanging trade banner",
+      "status": "planned"
+    },
+    {
+      "id": "A127",
+      "type": "asset",
+      "name": "手推车",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "wood handcart on the quay",
+      "status": "planned"
+    },
+    {
+      "id": "A128",
+      "type": "asset",
+      "name": "砻谷石碾",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "millstone in the farm district",
+      "status": "planned"
+    },
+    {
+      "id": "A129",
+      "type": "asset",
+      "name": "织机占位",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "loom silhouette in the cloth shop",
+      "status": "planned"
+    },
+    {
+      "id": "A130",
+      "type": "asset",
+      "name": "铁砧风箱",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "anvil and bellows",
+      "status": "planned"
+    },
+    {
+      "id": "A131",
+      "type": "asset",
+      "name": "茶焙烘笼",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "tea-drying baskets",
+      "status": "planned"
+    },
+    {
+      "id": "A132",
+      "type": "asset",
+      "name": "渔网修补架",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "net rack on the quay",
+      "status": "planned"
+    },
+    {
+      "id": "A133",
+      "type": "asset",
+      "name": "磨刀石",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "whetstone by the workshop",
+      "status": "planned"
+    },
+    {
+      "id": "A134",
+      "type": "asset",
+      "name": "炭筐",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "charcoal basket",
+      "status": "planned"
+    },
+    {
+      "id": "A135",
+      "type": "asset",
+      "name": "油篓",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "oil jars in a row",
+      "status": "planned"
+    },
+    {
+      "id": "A136",
+      "type": "asset",
+      "name": "酱缸盖",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "crock lids in the kitchen yard",
+      "status": "planned"
+    },
+    {
+      "id": "A137",
+      "type": "asset",
+      "name": "竹帘卷轴",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "rolled bamboo blinds",
+      "status": "planned"
+    },
+    {
+      "id": "A138",
+      "type": "asset",
+      "name": "染布石砧",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "beating stone for cloth",
+      "status": "planned"
+    },
+    {
+      "id": "A139",
+      "type": "asset",
+      "name": "船钉箱",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "nail box at the boat shed",
+      "status": "planned"
+    },
+    {
+      "id": "A140",
+      "type": "asset",
+      "name": "量米斗",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A053",
+        "K08"
+      ],
+      "evidence": "grain dou measure",
+      "status": "planned"
+    },
+    {
+      "id": "A141",
+      "type": "asset",
+      "name": "驳岸苔斑",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "moss patches on wet stone",
+      "status": "planned"
+    },
+    {
+      "id": "A142",
+      "type": "asset",
+      "name": "睡莲浮萍加密",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "lily pads along every reed clump",
+      "status": "implemented"
+    },
+    {
+      "id": "A143",
+      "type": "asset",
+      "name": "月门后借景竹",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "calligraphic bamboo beyond the moon gate",
+      "status": "implemented"
+    },
+    {
+      "id": "A144",
+      "type": "asset",
+      "name": "河滩乱石",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "shore rock groups",
+      "status": "planned"
+    },
+    {
+      "id": "A145",
+      "type": "asset",
+      "name": "茶树行",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "tea rows in D09",
+      "status": "planned"
+    },
+    {
+      "id": "A146",
+      "type": "asset",
+      "name": "稻田块",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "paddy plots",
+      "status": "planned"
+    },
+    {
+      "id": "A147",
+      "type": "asset",
+      "name": "岸边垂柳加密",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "extra willows on the water edge",
+      "status": "planned"
+    },
+    {
+      "id": "A148",
+      "type": "asset",
+      "name": "落叶薄层",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "fallen leaf scatter",
+      "status": "planned"
+    },
+    {
+      "id": "A149",
+      "type": "asset",
+      "name": "青苔瓦沟",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "moss in tile valleys",
+      "status": "planned"
+    },
+    {
+      "id": "A150",
+      "type": "asset",
+      "name": "水埠青苔踏步",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "algae on quay steps",
+      "status": "planned"
+    },
+    {
+      "id": "A151",
+      "type": "asset",
+      "name": "芦苇扩丛",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "reed belts at every district edge",
+      "status": "planned"
+    },
+    {
+      "id": "A152",
+      "type": "asset",
+      "name": "荷花挺茎",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "lotus stems above pads",
+      "status": "planned"
+    },
+    {
+      "id": "A153",
+      "type": "asset",
+      "name": "驳岸藤蔓",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "vines on the revetment",
+      "status": "planned"
+    },
+    {
+      "id": "A154",
+      "type": "asset",
+      "name": "水边苔石",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "mossy stones at the splash line",
+      "status": "planned"
+    },
+    {
+      "id": "A155",
+      "type": "asset",
+      "name": "岸柳气根",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "willow roots into the bank",
+      "status": "planned"
+    },
+    {
+      "id": "A156",
+      "type": "asset",
+      "name": "浮萍条带",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "duckweed strips in still water",
+      "status": "planned"
+    },
+    {
+      "id": "A157",
+      "type": "asset",
+      "name": "芦花穗",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "reed seed heads",
+      "status": "planned"
+    },
+    {
+      "id": "A158",
+      "type": "asset",
+      "name": "池岸鸢尾",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "iris clumps",
+      "status": "planned"
+    },
+    {
+      "id": "A159",
+      "type": "asset",
+      "name": "梅下落英",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "fallen petals under the bough",
+      "status": "planned"
+    },
+    {
+      "id": "A160",
+      "type": "asset",
+      "name": "墙根蕨类",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A077",
+        "A078"
+      ],
+      "evidence": "ferns at the wall foot",
+      "status": "planned"
+    },
+    {
+      "id": "A161",
+      "type": "asset",
+      "name": "井台水桶",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "buckets at the shared well",
+      "status": "planned"
+    },
+    {
+      "id": "A162",
+      "type": "asset",
+      "name": "晾衣竹竿",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "laundry poles in the alley",
+      "status": "planned"
+    },
+    {
+      "id": "A163",
+      "type": "asset",
+      "name": "门前石凳",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "stone stools at house doors",
+      "status": "planned"
+    },
+    {
+      "id": "A164",
+      "type": "asset",
+      "name": "檐下鸟笼",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "cage under the eave",
+      "status": "planned"
+    },
+    {
+      "id": "A165",
+      "type": "asset",
+      "name": "桥头候船凳",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "waiting bench at the ferry",
+      "status": "planned"
+    },
+    {
+      "id": "A166",
+      "type": "asset",
+      "name": "孩童玩具风车",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "tiny pinwheel on a stall",
+      "status": "planned"
+    },
+    {
+      "id": "A167",
+      "type": "asset",
+      "name": "渔篓绳索",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "coiled rope on the boat",
+      "status": "planned"
+    },
+    {
+      "id": "A168",
+      "type": "asset",
+      "name": "蓑衣斗笠",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "rain gear on the boat cabin",
+      "status": "planned"
+    },
+    {
+      "id": "A169",
+      "type": "asset",
+      "name": "灶边柴垛",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "firewood stack",
+      "status": "planned"
+    },
+    {
+      "id": "A170",
+      "type": "asset",
+      "name": "猫狗占位剪影",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "low animal silhouettes, no characters",
+      "status": "planned"
+    },
+    {
+      "id": "A171",
+      "type": "asset",
+      "name": "牌匾字层",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "sign board without fake glyphs",
+      "status": "planned"
+    },
+    {
+      "id": "A172",
+      "type": "asset",
+      "name": "巷口土地龛",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "tiny earth-god niche",
+      "status": "planned"
+    },
+    {
+      "id": "A173",
+      "type": "asset",
+      "name": "门环铺首",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "door knockers",
+      "status": "planned"
+    },
+    {
+      "id": "A174",
+      "type": "asset",
+      "name": "台阶湿痕",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "wet footprints on the stoop",
+      "status": "planned"
+    },
+    {
+      "id": "A175",
+      "type": "asset",
+      "name": "井绳辘轳",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "well windlass",
+      "status": "planned"
+    },
+    {
+      "id": "A176",
+      "type": "asset",
+      "name": "檐下辣椒串",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "drying peppers",
+      "status": "planned"
+    },
+    {
+      "id": "A177",
+      "type": "asset",
+      "name": "巷内水缸",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "shared water jars",
+      "status": "planned"
+    },
+    {
+      "id": "A178",
+      "type": "asset",
+      "name": "桥栏湿手印",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "wear polish on the rail",
+      "status": "planned"
+    },
+    {
+      "id": "A179",
+      "type": "asset",
+      "name": "船头香火",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "tiny incense at the bow",
+      "status": "planned"
+    },
+    {
+      "id": "A180",
+      "type": "asset",
+      "name": "夜巷残灯",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "A066",
+        "K06"
+      ],
+      "evidence": "one lantern left burning",
+      "status": "planned"
+    },
+    {
+      "id": "A181",
+      "type": "asset",
+      "name": "滴水瓦当",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "drip tiles at the eave",
+      "status": "planned"
+    },
+    {
+      "id": "A182",
+      "type": "asset",
+      "name": "正吻走兽",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "ridge beasts already on hip/gable ends",
+      "status": "implemented"
+    },
+    {
+      "id": "A183",
+      "type": "asset",
+      "name": "挂落楣子",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "hanging fascia under the eave beam",
+      "status": "implemented"
+    },
+    {
+      "id": "A184",
+      "type": "asset",
+      "name": "美人靠",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "gallery beauty-lean benches",
+      "status": "implemented"
+    },
+    {
+      "id": "A185",
+      "type": "asset",
+      "name": "砖券月门",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "segmented brick voussoir",
+      "status": "implemented"
+    },
+    {
+      "id": "A186",
+      "type": "asset",
+      "name": "粉墙雨泪痕",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "vertical rain-streak shader",
+      "status": "implemented"
+    },
+    {
+      "id": "A187",
+      "type": "asset",
+      "name": "室内地坪高差",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "threshold absorbs the 0.12 m road step",
+      "status": "planned"
+    },
+    {
+      "id": "A188",
+      "type": "asset",
+      "name": "窗下槛墙",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "sill wall under lattice windows",
+      "status": "planned"
+    },
+    {
+      "id": "A189",
+      "type": "asset",
+      "name": "山墙搏风板",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "barge boards on gables",
+      "status": "planned"
+    },
+    {
+      "id": "A190",
+      "type": "asset",
+      "name": "廊内灯龛",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "lantern niche in the corridor",
+      "status": "planned"
+    },
+    {
+      "id": "A191",
+      "type": "asset",
+      "name": "天井四水归堂",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "inward roof drainage",
+      "status": "planned"
+    },
+    {
+      "id": "A192",
+      "type": "asset",
+      "name": "封火山墙",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "A030",
+        "A035"
+      ],
+      "evidence": "fire gable stepping",
+      "status": "planned"
+    },
+    {
+      "id": "M17",
+      "type": "material",
+      "name": "花瓣透光",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "blossom SSS + faint emission",
+      "status": "implemented"
+    },
+    {
+      "id": "M18",
+      "type": "material",
+      "name": "湿青砖砂浆",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "brick texture with mortar grooves",
+      "status": "implemented"
+    },
+    {
+      "id": "M19",
+      "type": "material",
+      "name": "旧粉墙雨痕",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "plaster rain streaks",
+      "status": "implemented"
+    },
+    {
+      "id": "M20",
+      "type": "material",
+      "name": "油纸伞面",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "oiled paper",
+      "status": "planned"
+    },
+    {
+      "id": "M21",
+      "type": "material",
+      "name": "生锈铁件",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "rusted iron micro",
+      "status": "planned"
+    },
+    {
+      "id": "M22",
+      "type": "material",
+      "name": "青苔湿石",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "algae on quay stone",
+      "status": "planned"
+    },
+    {
+      "id": "M23",
+      "type": "material",
+      "name": "粗陶釉滴",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "ceramic glaze runs",
+      "status": "planned"
+    },
+    {
+      "id": "M24",
+      "type": "material",
+      "name": "旧麻布纤维",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "cloth fibre",
+      "status": "planned"
+    },
+    {
+      "id": "M25",
+      "type": "material",
+      "name": "竹编孔隙",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "woven bamboo holes",
+      "status": "planned"
+    },
+    {
+      "id": "M26",
+      "type": "material",
+      "name": "远山水墨",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "ink-mountain panorama",
+      "status": "implemented"
+    },
+    {
+      "id": "M27",
+      "type": "material",
+      "name": "水面吸收体积",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "water volume absorption",
+      "status": "implemented"
+    },
+    {
+      "id": "M28",
+      "type": "material",
+      "name": "灯笼透光纸",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "lantern paper emission",
+      "status": "implemented"
+    },
+    {
+      "id": "M29",
+      "type": "material",
+      "name": "黛瓦青苔",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "tile moss mix",
+      "status": "planned"
+    },
+    {
+      "id": "M30",
+      "type": "material",
+      "name": "老梅树皮",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "bark triplanar",
+      "status": "implemented"
+    },
+    {
+      "id": "M31",
+      "type": "material",
+      "name": "室内暖木",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "interior timber warmer",
+      "status": "planned"
+    },
+    {
+      "id": "M32",
+      "type": "material",
+      "name": "月色冷石",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "evidence": "moonlit stone response",
+      "status": "planned"
+    },
+    {
+      "id": "S13",
+      "type": "system",
+      "name": "任务板状态机",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "board.json four-state loop",
+      "status": "implemented"
+    },
+    {
+      "id": "S14",
+      "type": "system",
+      "name": "视觉QA统计",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "mean/p01/p99 and dead-black check",
+      "status": "implemented"
+    },
+    {
+      "id": "S15",
+      "type": "system",
+      "name": "贴图与材质审计",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "packed albedo presence",
+      "status": "implemented"
+    },
+    {
+      "id": "S16",
+      "type": "system",
+      "name": "提交预览/成片分流",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "16spp preview vs HQ on main",
+      "status": "implemented"
+    },
+    {
+      "id": "S17",
+      "type": "system",
+      "name": "实例与共享网格",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "content-hash mesh reuse",
+      "status": "implemented"
+    },
+    {
+      "id": "S18",
+      "type": "system",
+      "name": "确定性seed",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "per-instance rng streams",
+      "status": "implemented"
+    },
+    {
+      "id": "S19",
+      "type": "system",
+      "name": "穿模漂浮门禁",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "bounds vs water/ground",
+      "status": "planned"
+    },
+    {
+      "id": "S20",
+      "type": "system",
+      "name": "法线与双面",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "winding and smooth hints",
+      "status": "planned"
+    },
+    {
+      "id": "S21",
+      "type": "system",
+      "name": "面数与性能预算",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "face floors and blend size",
+      "status": "planned"
+    },
+    {
+      "id": "S22",
+      "type": "system",
+      "name": "相机契约",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "six named cameras always present",
+      "status": "implemented"
+    },
+    {
+      "id": "S23",
+      "type": "system",
+      "name": "环境叙事层",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "life props tell use, not decoration",
+      "status": "planned"
+    },
+    {
+      "id": "S24",
+      "type": "system",
+      "name": "旧化PBR通道",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S02",
+        "S04"
+      ],
+      "evidence": "roughness/bump/wetness not baked light",
+      "status": "planned"
+    },
+    {
+      "id": "K13",
+      "type": "assembly",
+      "name": "店宅室内可视组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "door leaves + furniture",
+      "status": "implemented"
+    },
+    {
+      "id": "K14",
+      "type": "assembly",
+      "name": "摊位货品组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "wares on every stall",
+      "status": "implemented"
+    },
+    {
+      "id": "K15",
+      "type": "assembly",
+      "name": "水岸生态带",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "reeds, lilies, moss",
+      "status": "implemented"
+    },
+    {
+      "id": "K16",
+      "type": "assembly",
+      "name": "月门借景组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "bamboo beyond the aperture",
+      "status": "implemented"
+    },
+    {
+      "id": "K17",
+      "type": "assembly",
+      "name": "作坊工具组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "benches and vats",
+      "status": "planned"
+    },
+    {
+      "id": "K18",
+      "type": "assembly",
+      "name": "里巷生活组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "wells, buckets, laundry",
+      "status": "planned"
+    },
+    {
+      "id": "K19",
+      "type": "assembly",
+      "name": "桥头生活组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "ferry bench and ropes",
+      "status": "planned"
+    },
+    {
+      "id": "K20",
+      "type": "assembly",
+      "name": "屋顶收口组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "chiwen + fascia + chimes",
+      "status": "implemented"
+    },
+    {
+      "id": "K21",
+      "type": "assembly",
+      "name": "夜巷灯组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "lanterns plus interior oil lamps",
+      "status": "planned"
+    },
+    {
+      "id": "K22",
+      "type": "assembly",
+      "name": "田庄作物组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "tea and paddy",
+      "status": "planned"
+    },
+    {
+      "id": "K23",
+      "type": "assembly",
+      "name": "寺轴线香案组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "censer already present",
+      "status": "planned"
+    },
+    {
+      "id": "K24",
+      "type": "assembly",
+      "name": "渔船生活组",
+      "wave": 2,
+      "priority": "P1",
+      "depends_on": [
+        "K01",
+        "K07"
+      ],
+      "evidence": "oar, basket, rain gear",
+      "status": "implemented"
+    },
+    {
+      "id": "Q01",
+      "type": "qa",
+      "name": "manifest 计数门禁",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "check_scene floors",
+      "status": "implemented"
+    },
+    {
+      "id": "Q02",
+      "type": "qa",
+      "name": "缺失贴图门禁",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "seven albedo files packed",
+      "status": "implemented"
+    },
+    {
+      "id": "Q03",
+      "type": "qa",
+      "name": "相机六机位门禁",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "named cameras exist",
+      "status": "implemented"
+    },
+    {
+      "id": "Q04",
+      "type": "qa",
+      "name": "死黑检查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "p01 not crushed to 0 on hero shots",
+      "status": "planned"
+    },
+    {
+      "id": "Q05",
+      "type": "qa",
+      "name": "塑料感检查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "roughness not uniformly 0.2",
+      "status": "planned"
+    },
+    {
+      "id": "Q06",
+      "type": "qa",
+      "name": "雾量检查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "mean stays in night range 18-80",
+      "status": "planned"
+    },
+    {
+      "id": "Q07",
+      "type": "qa",
+      "name": "重复图案检查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "organic streets not a 6x6 grid",
+      "status": "planned"
+    },
+    {
+      "id": "Q08",
+      "type": "qa",
+      "name": "尺度检查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "bay 3.2 m, storey 3.25 m",
+      "status": "planned"
+    },
+    {
+      "id": "Q09",
+      "type": "qa",
+      "name": "穿模抽查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "boats sit on water_z",
+      "status": "planned"
+    },
+    {
+      "id": "Q10",
+      "type": "qa",
+      "name": "漂浮抽查",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "no land below water",
+      "status": "planned"
+    },
+    {
+      "id": "Q11",
+      "type": "qa",
+      "name": "江南辨识度",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "moon gate + plaster + tile + canal",
+      "status": "planned"
+    },
+    {
+      "id": "Q12",
+      "type": "qa",
+      "name": "生活逻辑",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "doors, stalls, boats, lanterns",
+      "status": "planned"
+    },
+    {
+      "id": "Q13",
+      "type": "qa",
+      "name": "构图主次",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "斜梅-月门-远山",
+      "status": "planned"
+    },
+    {
+      "id": "Q14",
+      "type": "qa",
+      "name": "冷暖分离",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "moon cold, lanterns warm",
+      "status": "planned"
+    },
+    {
+      "id": "Q15",
+      "type": "qa",
+      "name": "近景厚重",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "threshold, fascia, voussoir read",
+      "status": "planned"
+    },
+    {
+      "id": "Q16",
+      "type": "qa",
+      "name": "中景层次",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "street recedes into mist",
+      "status": "planned"
+    },
+    {
+      "id": "Q17",
+      "type": "qa",
+      "name": "远景留白",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "ink mountains, not a hard horizon",
+      "status": "planned"
+    },
+    {
+      "id": "Q18",
+      "type": "qa",
+      "name": "程序化痕迹",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "no identical tree grid",
+      "status": "planned"
+    },
+    {
+      "id": "Q19",
+      "type": "qa",
+      "name": "面数预算",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "faces >= 700k, blend < 80MB",
+      "status": "planned"
+    },
+    {
+      "id": "Q20",
+      "type": "qa",
+      "name": "实例化",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "unique_meshes << mesh_objects",
+      "status": "planned"
+    },
+    {
+      "id": "Q21",
+      "type": "qa",
+      "name": "确定性",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "same seed, same counts",
+      "status": "planned"
+    },
+    {
+      "id": "Q22",
+      "type": "qa",
+      "name": "HQ分流",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "preview 16spp, HQ on main",
+      "status": "implemented"
+    },
+    {
+      "id": "Q23",
+      "type": "qa",
+      "name": "artifact 完整",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "png + blend + manifest + qa json",
+      "status": "implemented"
+    },
+    {
+      "id": "Q24",
+      "type": "qa",
+      "name": "日志保留",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "blender stdout uploaded",
+      "status": "planned"
+    },
+    {
+      "id": "Q25",
+      "type": "qa",
+      "name": "法线平滑",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "roofs/hulls smoothed, walls faceted",
+      "status": "planned"
+    },
+    {
+      "id": "Q26",
+      "type": "qa",
+      "name": "材质槽合法",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "only PALETTE slots on geometry",
+      "status": "implemented"
+    },
+    {
+      "id": "Q27",
+      "type": "qa",
+      "name": "变体覆盖",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "blossom/lantern_paper/bark resolve",
+      "status": "implemented"
+    },
+    {
+      "id": "Q28",
+      "type": "qa",
+      "name": "室内不被门洞吃掉",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "furniture sits behind 1.4 m",
+      "status": "planned"
+    },
+    {
+      "id": "Q29",
+      "type": "qa",
+      "name": "月门砖缝可读",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "voussoir not a smooth torus",
+      "status": "implemented"
+    },
+    {
+      "id": "Q30",
+      "type": "qa",
+      "name": "白梅夜可读",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "blossoms not dark leaf blobs",
+      "status": "implemented"
+    },
+    {
+      "id": "Q31",
+      "type": "qa",
+      "name": "脊兽不悬空",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "chiwen on ridge, not eave tips",
+      "status": "implemented"
+    },
+    {
+      "id": "Q32",
+      "type": "qa",
+      "name": "挂落贴梁",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "fascia under the eave beam",
+      "status": "implemented"
+    },
+    {
+      "id": "Q33",
+      "type": "qa",
+      "name": "美人靠向外",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "gallery lean toward the street",
+      "status": "implemented"
+    },
+    {
+      "id": "Q34",
+      "type": "qa",
+      "name": "雨泪痕竖直",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "streak noise compressed in Z",
+      "status": "implemented"
+    },
+    {
+      "id": "Q35",
+      "type": "qa",
+      "name": "摊位有货",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "basket/jar/cloth on stalls",
+      "status": "implemented"
+    },
+    {
+      "id": "Q36",
+      "type": "qa",
+      "name": "船有橹有篓",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "oar and fish basket",
+      "status": "implemented"
+    },
+    {
+      "id": "Q37",
+      "type": "qa",
+      "name": "水岸有萍",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "lily pads at reeds",
+      "status": "implemented"
+    },
+    {
+      "id": "Q38",
+      "type": "qa",
+      "name": "灯不抢戏",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "warm only as local accents",
+      "status": "planned"
+    },
+    {
+      "id": "Q39",
+      "type": "qa",
+      "name": "总览不棋盘",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "organic streets, not a CAD plot",
+      "status": "planned"
+    },
+    {
+      "id": "Q40",
+      "type": "qa",
+      "name": "巷道可走",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "6 m spine, 0.12 m road lift",
+      "status": "planned"
+    },
+    {
+      "id": "Q41",
+      "type": "qa",
+      "name": "无IP网格",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "no Wukong/Yan Yun ripped assets",
+      "status": "planned"
+    },
+    {
+      "id": "Q42",
+      "type": "qa",
+      "name": "seed 不交叉",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "district streams isolated",
+      "status": "planned"
+    },
+    {
+      "id": "Q43",
+      "type": "qa",
+      "name": "LOD声明",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "near hero, far instance",
+      "status": "planned"
+    },
+    {
+      "id": "Q44",
+      "type": "qa",
+      "name": "碰撞净空",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "doors 2.25 m, galleries 0.92 m rail",
+      "status": "planned"
+    },
+    {
+      "id": "Q45",
+      "type": "qa",
+      "name": "贴图色彩空间",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "albedo packed sRGB",
+      "status": "planned"
+    },
+    {
+      "id": "Q46",
+      "type": "qa",
+      "name": "体积雾有顶",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "mist_top ~17 m",
+      "status": "planned"
+    },
+    {
+      "id": "Q47",
+      "type": "qa",
+      "name": "AgX 不漂白",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "p99 < 200 on night shots",
+      "status": "planned"
+    },
+    {
+      "id": "Q48",
+      "type": "qa",
+      "name": "每轮出图",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S13",
+        "S14"
+      ],
+      "evidence": "six cameras every validated round",
+      "status": "planned"
+    },
+    {
+      "id": "V01",
+      "type": "view",
+      "name": "听雨轩内视",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "JNX_TingYuXuan from inside the pavilion",
+      "status": "implemented"
+    },
+    {
+      "id": "V02",
+      "type": "view",
+      "name": "月门借景",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "JNX_MoonGate_Vista through the aperture",
+      "status": "implemented"
+    },
+    {
+      "id": "V03",
+      "type": "view",
+      "name": "运河英雄",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "JNX_Canal_Hero along the water",
+      "status": "implemented"
+    },
+    {
+      "id": "V04",
+      "type": "view",
+      "name": "青石巷道",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "JNX_Lane walking height",
+      "status": "implemented"
+    },
+    {
+      "id": "V05",
+      "type": "view",
+      "name": "平水探桥",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "JNX_Water_Level",
+      "status": "implemented"
+    },
+    {
+      "id": "V06",
+      "type": "view",
+      "name": "十二区总览",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "JNX_Overview",
+      "status": "implemented"
+    },
+    {
+      "id": "V07",
+      "type": "view",
+      "name": "店内窥视",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "through a house door at night",
+      "status": "planned"
+    },
+    {
+      "id": "V08",
+      "type": "view",
+      "name": "作坊院落",
+      "wave": 2,
+      "priority": "P0",
+      "depends_on": [
+        "S10",
+        "S22"
+      ],
+      "evidence": "workshop courtyard, D08",
+      "status": "planned"
+    }
+  ]
+}

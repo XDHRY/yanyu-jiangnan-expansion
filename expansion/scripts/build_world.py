@@ -31,10 +31,10 @@ STAGE_LIMITS = {
         "No animation, rain particles or navigation bake",
     ],
     "detail": [
-        "Interiors are implied by openings and galleries, not furnished rooms",
-        "Procedural shaders only; no baked or scanned PBR texture sets",
+        "Interiors are furnished enough to read through the door, not full rooms",
+        "Procedural shaders plus packed albedo; not a scanned PBR set",
         "No production LOD/collision; no UV unwrap for baking",
-        "D07 legacy courtyard is reserved, not imported",
+        "D07 is the Tingyuxuan courtyard, not a reserved empty plinth",
         "No animation, rain particles or navigation bake",
         "Dougong, joinery and tile profiles are restrained stand-ins, not documented dynastic systems",
     ],

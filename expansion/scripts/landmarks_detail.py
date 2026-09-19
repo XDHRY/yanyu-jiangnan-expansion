@@ -367,21 +367,33 @@ def _build_tingyuxuan_courtyard(b, root, stream):
         tw_v, tw_f = g.sweep([(0.04, 0), (0, 0.04), (-0.04, 0), (0, -0.04)], tw_pts, close_profile=True)
         b.mesh(root, f"plum_twig_{tw_idx}", tw_v, tw_f, "timber")
 
-    # Dense blossom clusters on the lateral boughs (点梅五瓣花簇)
-    for b_idx in range(32):
-        t = (b_idx + 1) / 34.0
-        bx = -3.8 + t * 7.8 + stream.uniform(-0.35, 0.35)
-        by = 2.0 + t * 2.4 + stream.uniform(-0.35, 0.35)
-        bz = 2.6 + t * 2.5 + stream.uniform(-0.2, 0.4)
-        cv, cf = g.leaf_cluster(stream.uniform(0.55, 0.85), stream, lobes=5, squash=0.6)
-        b.mesh(root, f"plum_blossoms_{b_idx}", cv, cf, "leaf", (bx, by, bz))
+    # Five-petal ivory blossoms along the bough — night-readable, not leafy blobs.
+    def _orient_blossom(verts, yaw, pitch):
+        cy, sy = math.cos(yaw), math.sin(yaw)
+        cp, sp = math.cos(pitch), math.sin(pitch)
+        out = []
+        for x, y, z in verts:
+            x1, z1 = x * cp + z * sp, -x * sp + z * cp
+            out.append((x1 * cy - y * sy, x1 * sy + y * cy, z1))
+        return out
+
+    for b_idx in range(72):
+        t = (b_idx + 0.5) / 72.0
+        bx = -3.8 + t * 8.0 + stream.uniform(-0.28, 0.28)
+        by = 2.0 + t * 2.4 + stream.uniform(-0.28, 0.28)
+        bz = 2.6 + t * 2.5 + stream.uniform(-0.18, 0.28)
+        size = stream.uniform(0.07, 0.12)
+        cv, cf = g.plum_blossom(size, angle=stream.uniform(0, math.tau))
+        cv = _orient_blossom(cv, stream.uniform(-0.4, 0.4), stream.uniform(-0.9, -0.25))
+        b.mesh(root, f"plum_blossom_{b_idx}", cv, cf, "leaf", (bx, by, bz))
 
     # Petals scattered across the quiet pond surface (水上落梅)
     for p_idx in range(64):
         px = stream.uniform(-8.5, 8.5)
         py = stream.uniform(-9.5, -0.2)
-        b.box(root, f"pond_petal_{p_idx}", (0.10, 0.07, 0.005),
-              (px, py, 0.46), "cloth", rotation=stream.uniform(0, math.tau))
+        pv, pf = g.plum_blossom(stream.uniform(0.05, 0.08), angle=stream.uniform(0, math.tau))
+        pv = _orient_blossom(pv, stream.uniform(0, math.tau), -math.pi / 2 + stream.uniform(-0.15, 0.15))
+        b.mesh(root, f"pond_petal_{p_idx}", pv, pf, "cloth", (px, py, 0.455))
 
     # Stone bench for contemplating the water (观水石榻)
     b.box(root, "stone_bench", (2.4, 0.75, 0.22), (5.5, 1.2, 0.68), "stone")
@@ -392,6 +404,17 @@ def _build_tingyuxuan_courtyard(b, root, stream):
     for p_idx in range(8):
         b.box(root, f"north_stone_path_{p_idx}", (1.6, 0.9, 0.14),
               (gx + 0.3 * math.sin(p_idx * 0.6), gy + 2.5 + p_idx * 1.1, 0.46), "stone")
+    # Calligraphic bamboo beyond the wall: the 借景 that the moon gate is for.
+    for i in range(9):
+        bx = gx + stream.uniform(-3.2, 3.2)
+        by = gy + 5.5 + stream.uniform(0.0, 7.0)
+        h = stream.uniform(4.6, 7.8)
+        lean = stream.uniform(-0.18, 0.18)
+        b.cylinder(root, f"borrowed_bamboo_{i}", 0.045, h,
+                   (bx + lean, by, 0.45), "bamboo", sides=8)
+        fv, ff = g.willow_fronds(5, stream.uniform(0.7, 1.2), stream, radius=0.018)
+        b.mesh(root, f"borrowed_bamboo_frond_{i}", fv, ff, "leaf",
+               (bx + lean, by, 0.45 + h * 0.72))
 
     b.socket(root, "legacy_anchor", (0.0, 0.0, 0.45), (0.0, -1.0, 0.0))
     b.socket(root, "moon_gate", (gx, gy, zc), (0.0, -1.0, 0.0))

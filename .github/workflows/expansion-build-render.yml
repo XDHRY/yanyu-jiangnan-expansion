@@ -1,10 +1,9 @@
 name: Expansion Build and Render
 
-# The expansion package (expansion/) is independent of the legacy jiangnan.py
-# pipeline, so it gets its own workflow. Geometry is built once and uploaded;
-# the four cameras then render in parallel, because Cycles here is CPU-only
-# with a volume scatter and a single runner rendering all four serially runs
-# past the job timeout.
+# Geometry is built once and uploaded. Six cameras render in parallel.
+# Feature-branch / PR pushes get a 16-sample 960x540 preview so every
+# commit produces pictures. High-quality film (96+ spp, 1280+) only runs
+# on main or an explicit workflow_dispatch.
 
 on:
   push:
@@ -41,8 +40,8 @@ concurrency:
 env:
   BLENDER_VERSION: "4.5.14"
   BLENDER_DIR: ${{ github.workspace }}/.cache/blender
-  SAMPLES: ${{ inputs.samples || '96' }}
-  RESOLUTION: ${{ inputs.resolution || '1280x720' }}
+  SAMPLES: ${{ inputs.samples || (github.ref == 'refs/heads/main' && '96' || '16') }}
+  RESOLUTION: ${{ inputs.resolution || (github.ref == 'refs/heads/main' && '1280x720' || '960x540') }}
 
 jobs:
   # Catches syntax errors and contract breaks in ~30s, before any job spends
@@ -62,6 +61,18 @@ jobs:
           set -euxo pipefail
           python -m compileall -q expansion/scripts
 
+      - name: Check the 340-card board
+        run: |
+          set -euxo pipefail
+          python expansion/scripts/check_board.py
+          test -f textures/plaster.png
+          test -f textures/stone.png
+          test -f textures/wood.png
+          test -f textures/clay.png
+          test -f textures/bark.png
+          test -f textures/petal.png
+          test -f textures/landscape.png
+
       - name: Build geometry without Blender
         run: |
           set -euxo pipefail
@@ -71,11 +82,14 @@ jobs:
       - name: Check the scene contract
         run: python expansion/scripts/check_scene.py ci_artifacts/obj/scene_manifest.json
 
-      - name: Upload manifest
+      - name: Upload manifest and board
         uses: actions/upload-artifact@v4
         with:
           name: expansion-manifest-${{ github.sha }}
-          path: ci_artifacts/obj/scene_manifest.json
+          path: |
+            ci_artifacts/obj/scene_manifest.json
+            expansion/catalog/board.json
+            expansion/STATE.md
           retention-days: 14
 
   build:
@@ -128,12 +142,9 @@ jobs:
             remote_render/scene_manifest.json
           retention-days: 14
 
-  # Four parallel Cycles renders cost roughly 160-240 runner-minutes per run,
-  # against 2000 free private-repo minutes a month. Feature pushes get the
-  # contract and build checks only; full renders are asked for explicitly.
+  # Preview on every feature commit (16 spp). HQ film is main / dispatch only.
   render:
     needs: build
-    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     strategy:
@@ -181,13 +192,18 @@ jobs:
           set -euxo pipefail
           WIDTH="${RESOLUTION%x*}"
           HEIGHT="${RESOLUTION#*x}"
+          mkdir -p shots
           "$BLENDER_DIR/blender" -b --python-exit-code 1 \
             --python expansion/scripts/render_shots.py -- \
             --blend remote_render/JNX_Expansion.blend \
             --out shots \
             --only "${{ matrix.camera }}" \
             --samples "$SAMPLES" \
-            --resolution "$WIDTH" "$HEIGHT"
+            --resolution "$WIDTH" "$HEIGHT" \
+            2>&1 | tee "shots/${{ matrix.camera }}.log"
+          printf '{"camera":"%s","samples":"%s","resolution":"%sx%s"}\n' \
+            "${{ matrix.camera }}" "$SAMPLES" "$WIDTH" "$HEIGHT" \
+            > "shots/${{ matrix.camera }}.stats.json"
 
       - name: Upload ${{ matrix.camera }}
         if: always()
@@ -196,4 +212,42 @@ jobs:
           name: shot-${{ matrix.camera }}-${{ github.sha }}
           path: shots/
           if-no-files-found: error
+          retention-days: 30
+
+  qa:
+    needs: render
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pillow
+        run: python -m pip install --quiet pillow
+
+      - name: Download all shots
+        uses: actions/download-artifact@v4
+        with:
+          pattern: shot-*
+          path: shots
+          merge-multiple: true
+
+      - name: Visual QA
+        run: |
+          set -euxo pipefail
+          python expansion/scripts/check_visual_qa.py shots --out shots/visual_qa.json
+
+      - name: Upload QA report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-qa-${{ github.sha }}
+          path: |
+            shots/visual_qa.json
+            shots/*.stats.json
+            shots/*.log
+          if-no-files-found: warn
           retention-days: 30

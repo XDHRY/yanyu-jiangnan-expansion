@@ -4,7 +4,7 @@
 
 把小型庭院项目扩展为具有街区、水路、生活、生产、园林和远景层次的江南环境。当前交付以**大量可执行提示词、细化设计、主要Python体块框架**为主；后续由用户选择其他AI逐项实现、运行，再决定修正与精修。
 
-本轮不会把目标描述写成完成事实：148张任务卡均保留planned；8个Python文件只代表源码框架已写。没有新增完成品.blend或实际渲染，也没有宣称模型已通过Blender验证。
+实施闭环现为 **340 卡**：`planned → implemented → validated → integrated`。权威状态在 `catalog/board.json` 与 `STATE.md`。第一波 148 张详细规格仍保留；第二波 192 张短卡在 `tasks/wave2/`。`validated` 必须有本轮渲染图，不以对象齐全代替。
 
 新增工作全部位于`expansion/`，以`JNX_`命名空间隔离。既有`jiangnan.py`、`Jiangnan.blend`、`tools/`、`asset_db/`、`textures/`、文档与工作流均不在本轮修改范围。
 

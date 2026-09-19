@@ -39,6 +39,8 @@ _VARIANTS = (
                "threshold", "flag"), "paving"),
     ("leaf", ("moss", "weed", "grass", "reed_base"), "moss"),
     ("leaf", ("frond", "willow"), "willow_leaf"),
+    ("leaf", ("blossom", "petal"), "blossom"),
+    ("cloth", ("blossom", "petal"), "blossom"),
     ("paper", ("lantern", "shade", "globe"), "lantern_paper"),
     ("cloth", ("banner", "sign", "flag", "awning", "curtain", "net"), "dyed_cloth"),
 )
@@ -776,6 +778,36 @@ def _willow_leaf(graph):
     return bsdf
 
 
+def _blossom(graph):
+    """Ivory-blush plum petals: translucent, faintly self-lit so they read at night."""
+    bsdf = _base_principled(graph)
+    variation = _noise(graph, 18.0, detail=4.0, roughness=0.45, column=-2, row=1.0)
+    tone = _ramp(graph, [
+        (0.28, (0.78, 0.52, 0.58, 1.0)),
+        (0.52, (0.92, 0.82, 0.84, 1.0)),
+        (0.78, (0.98, 0.94, 0.92, 1.0)),
+    ], column=-1, row=1.0)
+    graph.link(variation, "Fac", tone, "Fac")
+    tex = _triplanar_albedo(graph, "petal", scale=3.2, column=0, row=2.2)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=1, row=1.0)
+        graph.value(mix_tex, "Factor", 0.55)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(tone, "Color", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(tone, "Color", bsdf, "Base Color")
+    graph.value(bsdf, "Roughness", 0.36)
+    if "Subsurface Weight" in bsdf.inputs:
+        graph.value(bsdf, "Subsurface Weight", 0.48)
+        graph.value(bsdf, "Subsurface Radius", (0.12, 0.08, 0.08))
+    if "Emission Color" in bsdf.inputs:
+        graph.value(bsdf, "Emission Color", (0.96, 0.78, 0.74, 1.0))
+        graph.value(bsdf, "Emission Strength", 0.22)
+    return bsdf
+
+
 def _moss(graph):
     """M15: moss on stone and roof edges."""
     bsdf = _base_principled(graph)
@@ -934,6 +966,7 @@ _RECIPES = {
     "water": _water,
     "leaf": _leaf,
     "willow_leaf": _willow_leaf,
+    "blossom": _blossom,
     "moss": _moss,
     "bamboo": _bamboo,
     "cloth": _cloth,
@@ -1213,8 +1246,8 @@ def build_lighting(scene, mood="drizzle"):
 
     # Warm intimate point light hanging inside Tingyuxuan pavilion (D07)
     tingyu_lamp_data = bpy.data.lights.new("JNX_Tingyu_Lamp", "POINT")
-    tingyu_lamp_data.energy = 85.0
-    tingyu_lamp_data.shadow_soft_size = 0.25
+    tingyu_lamp_data.energy = 140.0
+    tingyu_lamp_data.shadow_soft_size = 0.32
     tingyu_lamp_data.color = (1.0, 0.62, 0.28)
     tingyu_lamp = bpy.data.objects.new("JNX_Tingyu_Lamp", tingyu_lamp_data)
     scene.collection.objects.link(tingyu_lamp)
@@ -1506,11 +1539,12 @@ def _shots(builder, config, water_z):
              location=(hx - 64.0, hy + 2.0, 3.7),
              target=(hx + 60.0, hy - 1.0, 5.4),
              dof_distance=34.0, fstop=2.8),
-        # Central garden showcase in D07: Tingyuxuan pavilion, moon gate, leaning plum and distant mountains
-        dict(name="JNX_TingYuXuan", lens=42.0,
-             location=(88.5, 34.0, 3.4),
-             target=(91.4, 53.5, 4.5),
-             dof_distance=20.0, fstop=3.0),
+        # Inside Tingyuxuan looking out: tea table and warm lamp in the
+        # foreground, leaning plum over the pond, moon gate and mountains beyond.
+        dict(name="JNX_TingYuXuan", lens=32.0,
+             location=(80.6, 43.6, 3.55),
+             target=(90.8, 52.8, 4.35),
+             dof_distance=12.0, fstop=2.6),
         # Close artistic framing: gazing through the circular moon gate into borrowed landscape
         dict(name="JNX_MoonGate_Vista", lens=52.0,
              location=(91.0, 42.5, 3.2),

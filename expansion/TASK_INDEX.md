@@ -1,8 +1,10 @@
 # 任务总索引
 
-共148项：96资产 + 12区域 + 16材质 + 12系统 + 12组装套件。以下均是实施规格，当前统一标为planned。
+共 **340** 项。第一波 148 张详细规格卡（96 资产 + 12 区域 + 16 材质 + 12 系统 + 12 组装）仍在 `tasks/`；第二波 192 张短卡在 `tasks/wave2/`。权威状态板是 [catalog/board.json](catalog/board.json)，人读总表是 [STATE.md](STATE.md)。
 
-先读[总指导](MASTER_GUIDE.md)与[接手模板](HANDOFF.md)。机器可读依赖见[catalog/task_graph.json](catalog/task_graph.json)。
+闭环：`planned → implemented → validated → integrated`。`validated` 必须有本轮渲染图；`integrated` 必须进入全景组装。不要因为镇上有同类方盒就把卡标成 integrated。
+
+先读[总指导](MASTER_GUIDE.md)与[接手模板](HANDOFF.md)。第一波依赖见[catalog/task_graph.json](catalog/task_graph.json)。
 
 ## 公共系统
 

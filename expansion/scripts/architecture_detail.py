@@ -203,6 +203,68 @@ def _entry_steps(b, root, prefix, depth, stream):
               (0, -depth / 2 - 0.9 + i * 0.38, h / 2), "stone")
 
 
+def _lattice_door(b, root, prefix, width, depth, family):
+    """A real lattice door in the opening so the void is not a black hole.
+
+    The left leaf stays in the frame; the right leaf is slightly ajar so the
+    interior furniture reads from the street at night.
+    """
+    door_w = 1.5 if family == "house" else 2.0
+    door_h = 2.25
+    y = -depth / 2 + 0.18
+    leaf_w = door_w / 2 - 0.05
+    verts, faces = g.lattice_window(leaf_w, door_h - 0.16, 0.05, 3, 5)
+    b.mesh(root, prefix + "door_leaf_-1", verts, faces, "timber",
+           (-(leaf_w / 2 + 0.04), y, FFL + door_h / 2))
+    b.mesh(root, prefix + "door_leaf_1", verts, faces, "timber",
+           (leaf_w / 2 + 0.18, y + 0.22, FFL + door_h / 2), rotation=-0.45)
+
+
+def _interior(b, root, prefix, width, depth, family, stream):
+    """Lived-in rooms visible through the door: furniture, hearth, stores.
+
+    Kept as shared boxes so the same meshes instance across the town. Nothing
+    sits in the front 1.4 m so the door still reads as a walkable void.
+    """
+    back = depth / 2 - 1.05
+    if family in ("house", "inn"):
+        b.box(root, prefix + "bed", (1.9, 0.95, 0.28),
+              (-width / 2 + 1.4, back, FFL + 0.42), "timber")
+        b.box(root, prefix + "bed_post_a", (0.08, 0.08, 0.85),
+              (-width / 2 + 0.55, back + 0.4, FFL + 0.85), "timber")
+        b.box(root, prefix + "bed_post_b", (0.08, 0.08, 0.85),
+              (-width / 2 + 2.25, back + 0.4, FFL + 0.85), "timber")
+        b.box(root, prefix + "quilt", (1.7, 0.85, 0.08),
+              (-width / 2 + 1.4, back, FFL + 0.58), "cloth")
+        b.box(root, prefix + "hearth", (1.1, 0.7, 0.55),
+              (width / 2 - 1.2, back, FFL + 0.42), "stone")
+        b.cylinder(root, prefix + "pot", 0.18, 0.22,
+                   (width / 2 - 1.2, back, FFL + 0.78), "iron", 8)
+        b.box(root, prefix + "stool", (0.36, 0.36, 0.42),
+              (0.35, -0.15, FFL + 0.28), "timber")
+    if family in ("shop", "inn"):
+        for i in range(3):
+            b.box(root, prefix + f"shelf_{i}", (width * 0.55, 0.28, 0.06),
+                  (0.2, back + 0.15, FFL + 1.05 + i * 0.42), "timber")
+            b.cylinder(root, prefix + f"jar_{i}", 0.12, 0.22,
+                       (-0.55 + i * 0.55, back, FFL + 1.15 + i * 0.02),
+                       "ceramic", 8)
+        b.box(root, prefix + "inner_counter", (width * 0.42, 0.42, 0.78),
+              (0.1, -0.35, FFL + 0.48), "timber")
+    if family == "warehouse":
+        for i in range(4):
+            b.box(root, prefix + f"crate_in_{i}", (0.7, 0.55, 0.5),
+                  (-width / 2 + 1.2 + i * 1.1, 0.4, FFL + 0.32), "timber")
+            b.cylinder(root, prefix + f"vat_in_{i}", 0.28, 0.55,
+                       (-width / 2 + 1.3 + i * 1.1, back - 0.2, FFL + 0.35),
+                       "ceramic", 10)
+    # Oil lamp on the floor plate: night interior without a new light object.
+    sv, sf = g.revolve([(0.03, 0), (0.11, 0.06), (0.12, 0.22), (0.08, 0.28),
+                        (0.03, 0.32)], sides=8)
+    b.mesh(root, prefix + "oil_lantern", sv, sf, "paper",
+           (0.55 if family != "warehouse" else 0.0, -depth / 4, FFL + 0.92))
+
+
 def building(b, root, spec, stream):
     """One layer-2 building. Keeps the layer-1 socket contract."""
     width, depth = spec["width"], spec["depth"]
@@ -232,12 +294,16 @@ def building(b, root, spec, stream):
                       (s * (width / 2 - 0.12), 0, FFL + height / 2), "plaster")
             _floor_plate(b, root, "upper_", width, depth, FFL + STOREY)
             _upper_gallery(b, root, "", width, depth, stream)
+            _interior(b, root, "", width, depth, family, stream)
         elif family == "warehouse":
             _plaster_walls(b, root, "", width, depth, height, bays, stream, family)
             b.box(root, "loading_door", (2.6, 0.1, 2.8),
                   (0, -depth / 2 - 0.02, FFL + 1.4), "timber")
+            _interior(b, root, "", width, depth, family, stream)
         else:
             _plaster_walls(b, root, "", width, depth, height, bays, stream, family)
+            _lattice_door(b, root, "", width, depth, family)
+            _interior(b, root, "", width, depth, family, stream)
             if floors == 2:
                 _floor_plate(b, root, "upper_", width, depth, FFL + STOREY)
         _roof(b, root, "", width, depth, height, stream,

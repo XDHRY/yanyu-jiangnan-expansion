@@ -155,6 +155,9 @@ def build(b, config, plan):
             av, af = g.arched_awning(3.3, 2.2, 0.45, ribs=5)
             b.mesh(r, "awning", av, af, "cloth", (0, 0, 2.3))
             b.box(r, "crate", (0.7, 0.6, 0.5), (stream.uniform(-1, 1), -0.9, 0.25), "timber")
+            b.cylinder(r, "basket", 0.22, 0.28, (0.85, 0.15, 1.06), "bamboo", 8)
+            b.cylinder(r, "jar", 0.14, 0.32, (-0.7, 0.1, 1.06), "ceramic", 8)
+            b.box(r, "cloth_bolt", (0.55, 0.18, 0.12), (0.1, 0.35, 1.04), "cloth")
             b.socket(r, "wares", (0, 0, 0.98), (0, 0, 1))
 
         for i in range(d["dock_count"]):

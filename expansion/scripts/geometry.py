@@ -446,6 +446,40 @@ def branch_skeleton(height, stream, taper=0.14, base_radius=0.26, bends=4, sides
     return (vertices, faces), path
 
 
+def plum_blossom(size=0.085, angle=0.0):
+    """Five-petal plum blossom (五瓣梅). Local +Z is the face normal.
+
+    Thin overlapping ellipses, not a leafy blob: at canal distance this has to
+    read as pale flowers against dark bark, which a clustered icosphere never
+    does under moonlight.
+    """
+    vertices, faces = [], []
+    for k in range(5):
+        a = angle + TAU * k / 5
+        ax, ay = math.cos(a), math.sin(a)
+        sx, sy = -ay, ax
+        idx = len(vertices)
+        vertices.append((0.0, 0.0, 0.008 * size / 0.085))
+        n = 8
+        for j in range(n):
+            t = TAU * j / n
+            px = ax * size * (0.53 + 0.53 * math.cos(t)) + sx * size * 0.43 * math.sin(t)
+            py = ay * size * (0.53 + 0.53 * math.cos(t)) + sy * size * 0.43 * math.sin(t)
+            pz = size * 0.16 * (1.0 + math.cos(t))
+            vertices.append((px, py, pz))
+        for j in range(n):
+            faces.append((idx, idx + 1 + j, idx + 1 + ((j + 1) % n)))
+    # Raised pollen centre.
+    c = len(vertices)
+    r = size * 0.14
+    vertices.extend([(0.0, 0.0, size * 0.20),
+                     (r, 0.0, size * 0.12), (-r, 0.0, size * 0.12),
+                     (0.0, r, size * 0.12), (0.0, -r, size * 0.12)])
+    faces.extend([(c, c + 1, c + 3), (c, c + 3, c + 2),
+                  (c, c + 2, c + 4), (c, c + 4, c + 1)])
+    return vertices, faces
+
+
 def leaf_cluster(radius, stream, lobes=5, sides=7, squash=0.72):
     """A crown built from overlapping blobs so the silhouette is not a cone."""
     vertices, faces = [], []
