@@ -908,7 +908,7 @@ def _lantern_paper(graph):
     """
     bsdf = _paper(graph)
     graph.value(bsdf, "Emission Color", (1.0, 0.62, 0.28, 1.0))
-    graph.value(bsdf, "Emission Strength", 12.0)
+    graph.value(bsdf, "Emission Strength", 4.5)
     return bsdf
 
 
