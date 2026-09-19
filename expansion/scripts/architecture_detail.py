@@ -68,7 +68,7 @@ def _post_row(b, root, prefix, width, depth, height, bays, stream, side):
 
 
 def _shopfront(b, root, prefix, width, depth, height, bays, stream):
-    """Open timber shopfront: removable boards, counter, no plaster wall."""
+    """Open timber shopfront: removable boards, counter, signs and layered bays."""
     y = -depth / 2 + 0.12
     board_h = height - 2.5
     for i in range(bays):
@@ -83,6 +83,16 @@ def _shopfront(b, root, prefix, width, depth, height, bays, stream):
         verts, faces = g.lattice_window(w, 1.5, 0.05, 4, 3)
         b.mesh(root, prefix + f"grille_{i}", verts, faces, "timber",
                (x, y - 0.03, FFL + 1.0))
+
+    # Continuous fascia and a few projecting shop plaques break the formerly
+    # blank upper front into a readable commercial rhythm at street distance.
+    b.box(root, prefix + "shop_fascia", (width - 0.8, 0.12, 0.34),
+          (0, y - 0.11, FFL + 2.58), "timber")
+    for i in range(max(2, min(4, bays))):
+        x = -width * 0.36 + i * (width * 0.72 / max(1, min(4, bays)-1))
+        b.box(root, prefix + f"shop_plaque_{i}", (0.46, 0.07, 0.88),
+              (x, y - 0.18, FFL + 2.02 + stream.uniform(-0.08, 0.08)),
+              "timber")
 
 
 def _plaster_walls(b, root, prefix, width, depth, height, bays, stream, family):
@@ -115,6 +125,29 @@ def _plaster_walls(b, root, prefix, width, depth, height, bays, stream, family):
     for s in (-1, 1):
         b.box(root, prefix + f"wall_side_{s}", (0.24, depth - 0.48, height),
               (s * (width / 2 - 0.12), 0, FFL + height / 2), "plaster")
+
+
+def _side_elevation_details(b, root, prefix, width, depth, height, stream):
+    """Low-cost timber bays and side lattice windows for street-visible flanks."""
+    z0 = FFL + 0.18
+    for side in (-1, 1):
+        x = side * (width / 2 + 0.005)
+        # Vertical post rhythm turns a large plaster slab into a timber-framed wall.
+        for j in range(3):
+            y = -depth * 0.32 + j * depth * 0.32
+            b.box(root, prefix + f"side_post_{side}_{j}",
+                  (0.08, 0.12, max(1.8, height - 0.7)),
+                  (x, y, z0 + max(1.8, height - 0.7)/2), "timber")
+        for z in (FFL + 1.05, FFL + min(height - 0.65, 3.15)):
+            b.box(root, prefix + f"side_rail_{side}_{int(z*100)}",
+                  (0.09, depth - 1.1, 0.10),
+                  (x, 0, z), "timber")
+        # One inset lattice window on each flank catches parallax in oblique shots.
+        ww = min(1.45, max(0.95, depth * 0.20))
+        verts, faces = g.lattice_window(ww, 1.18, 0.045, 3, 3)
+        b.mesh(root, prefix + f"side_window_{side}", verts, faces, "timber",
+               (x - side * 0.05, -depth * 0.08, FFL + 1.40),
+               rotation=side * math.pi / 2)
 
 
 def _upper_gallery(b, root, prefix, width, depth, stream):
@@ -294,6 +327,7 @@ def building(b, root, spec, stream):
                       (s * (width / 2 - 0.12), 0, FFL + height / 2), "plaster")
             _floor_plate(b, root, "upper_", width, depth, FFL + STOREY)
             _upper_gallery(b, root, "", width, depth, stream)
+            _side_elevation_details(b, root, "", width, depth, height, stream)
             _interior(b, root, "", width, depth, family, stream)
         elif family == "warehouse":
             _plaster_walls(b, root, "", width, depth, height, bays, stream, family)
