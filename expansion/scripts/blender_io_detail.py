@@ -1533,12 +1533,14 @@ def _shots(builder, config, water_z):
              location=(lane_x - 2.0, lane_y - 112.0, water_z + 2.0),
              target=(lane_x + 1.0, lane_y + 40.0, water_z + 6.0),
              dof_distance=90.0, fstop=4.0),
-        # Inside the hero district at walking height, down the spine street:
-        # this is the "can you stand here" test the brief asks for.
+        # Walking-height shot looking ACROSS the spine at shopfronts and ajar
+        # doors, not along the street.  The camera stands on the opposite side
+        # of the street from a shop row and looks into their facades so
+        # interiors, signboards and door thresholds fill the middle ground.
         dict(name="JNX_Lane", lens=40.0, district=hero_id,
-             location=(hx - 64.0, hy + 2.0, 3.7),
-             target=(hx + 60.0, hy - 1.0, 5.4),
-             dof_distance=34.0, fstop=2.8),
+             location=(hx - 18.0, hy + 6.8, 3.7),
+             target=(hx - 18.0, hy - 8.0, 4.2),
+             dof_distance=10.0, fstop=2.8),
         # Inside Tingyuxuan looking out: tea table and warm lamp in the
         # foreground, leaning plum over the pond, moon gate and mountains beyond.
         dict(name="JNX_TingYuXuan", lens=32.0,

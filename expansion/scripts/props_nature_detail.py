@@ -236,3 +236,83 @@ def build(b, config, plan):
             # Floating water lilies near the bank
             lv, lf = g.lily_pad_cluster(radius=0.42, count=5, stream=rs)
             b.mesh(r, "lily_pads", lv, lf, "leaf", (rs.uniform(-0.8, 0.8), rs.uniform(-0.8, 0.8), 1.41))
+
+        # --- Canal-bank life: wells, laundry, benches, fishing nets, bollards ---
+        # These populate the quay edge so the waterfront reads as lived-in rather
+        # than a bare retaining wall. Placed along the south quay street with
+        # deterministic spacing so they survive re-seeds.
+        ls = rng(config["seed"], d["id"] + ":bank_life")
+        quay_streets = [s for s in streets if s["kind"].startswith("quay")]
+        life_idx = 0
+        for qs in quay_streets:
+            pts = qs["points"]
+            if len(pts) < 2:
+                continue
+            total_len = sum(math.hypot(pts[k+1][0]-pts[k][0], pts[k+1][1]-pts[k][1])
+                            for k in range(len(pts)-1))
+            spacing = ls.uniform(12.0, 18.0)
+            count = max(1, int(total_len / spacing))
+            for j in range(count):
+                frac = (j + 0.5) / count
+                idx = min(int(frac * (len(pts)-1)), len(pts)-2)
+                (x0, y0), (x1, y1) = pts[idx], pts[idx+1]
+                f = frac * (len(pts)-1) - idx
+                px = x0 + (x1 - x0) * f
+                py = y0 + (y1 - y0) * f
+                tx, ty = x1 - x0, y1 - y0
+                tl = math.hypot(tx, ty) or 1.0
+                nx, ny = -ty / tl, tx / tl
+                rot = math.atan2(ty, tx)
+                # Offset toward the water side of the quay
+                qx = cx + px + nx * (qs["width"] / 2 + ls.uniform(0.8, 2.0))
+                qy = cy + py + ny * (qs["width"] / 2 + ls.uniform(0.8, 2.0))
+
+                kind = life_idx % 5
+                if kind == 0:
+                    # Well with stone surround and bucket
+                    r = b.root(f"JNX_{d['id']}_WELL_{life_idx:02d}", "well", d["id"],
+                               (qx, qy, z), rot, task="tasks/wave2/A161.md")
+                    b.cylinder(r, "well_wall", 0.55, 0.72, (0, 0, 0), "stone", 12)
+                    b.cylinder(r, "well_rim", 0.62, 0.08, (0, 0, 0.72), "stone", 12)
+                    b.cylinder(r, "well_void", 0.42, 0.10, (0, 0, 0.64), "stone", 12)
+                    b.cylinder(r, "bucket", 0.14, 0.28, (0.7, 0, 0.14), "timber", 8)
+                    b.box(r, "bucket_handle", (0.22, 0.02, 0.12), (0.7, 0, 0.36), "iron")
+                    b.socket(r, "draw", (0, 0, 0.80), (0, 0, 1))
+                elif kind == 1:
+                    # Laundry pole with cloth strips
+                    r = b.root(f"JNX_{d['id']}_LAUNDRY_{life_idx:02d}", "laundry", d["id"],
+                               (qx, qy, z), rot, task="tasks/wave2/A162.md")
+                    b.cylinder(r, "pole_a", 0.04, 2.6, (-1.2, 0, 0), "bamboo", 6)
+                    b.cylinder(r, "pole_b", 0.04, 2.6, (1.2, 0, 0), "bamboo", 6)
+                    b.box(r, "crossbar", (2.6, 0.04, 0.04), (0, 0, 2.58), "bamboo")
+                    for ci in range(4):
+                        cx_cloth = -0.9 + ci * 0.6
+                        b.box(r, f"cloth_{ci}", (0.45, 0.02, ls.uniform(0.6, 1.1)),
+                              (cx_cloth, ls.uniform(-0.06, 0.06), 2.58 - ls.uniform(0.3, 0.55)),
+                              "cloth")
+                elif kind == 2:
+                    # Stone bench for resting
+                    r = b.root(f"JNX_{d['id']}_BENCH_{life_idx:02d}", "bench", d["id"],
+                               (qx, qy, z), rot + ls.uniform(-0.15, 0.15),
+                               task="tasks/wave2/A163.md")
+                    b.box(r, "seat", (1.4, 0.45, 0.08), (0, 0, 0.42), "stone")
+                    b.box(r, "leg_a", (0.12, 0.40, 0.42), (-0.55, 0, 0.21), "stone")
+                    b.box(r, "leg_b", (0.12, 0.40, 0.42), (0.55, 0, 0.21), "stone")
+                elif kind == 3:
+                    # Fishing net rack with draped net
+                    r = b.root(f"JNX_{d['id']}_NETRACK_{life_idx:02d}", "net_rack", d["id"],
+                               (qx, qy, z), rot, task="tasks/wave2/A132.md")
+                    b.cylinder(r, "upright_a", 0.05, 2.2, (-0.9, 0, 0), "timber", 6)
+                    b.cylinder(r, "upright_b", 0.05, 2.2, (0.9, 0, 0), "timber", 6)
+                    b.box(r, "bar", (2.0, 0.05, 0.05), (0, 0, 2.18), "timber")
+                    nv, nf = g.draped_net(1.6, 1.4, sag=0.35, nx=8, nz=6)
+                    b.mesh(r, "net", nv, nf, "cloth", (0, 0.08, 0.9))
+                else:
+                    # Mooring bollard
+                    r = b.root(f"JNX_{d['id']}_BOLLARD_{life_idx:02d}", "bollard", d["id"],
+                               (qx, qy, z), rot, task="tasks/assets/A050.md")
+                    b.cylinder(r, "post", 0.09, 0.65, (0, 0, 0), "stone", 8)
+                    b.cylinder(r, "cap", 0.14, 0.06, (0, 0, 0.65), "stone", 8)
+                    # Rope coil around the bollard
+                    b.cylinder(r, "rope_coil", 0.13, 0.18, (0, 0, 0.32), "cloth", 10)
+                life_idx += 1

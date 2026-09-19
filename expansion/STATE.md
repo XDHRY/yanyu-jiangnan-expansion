@@ -1,6 +1,6 @@
 # 340 卡闭环状态
 
-总计 **340**。implemented=138  planned=202
+总计 **340**。implemented=145  planned=195
 
 闭环：`planned → implemented → validated → integrated`。
 validated 必须有本轮渲染图；integrated 必须进入全景组装。
@@ -190,7 +190,7 @@ validated 必须有本轮渲染图；integrated 必须进入全景组装。
 | A129 | asset | 织机占位 | planned | 2 |
 | A130 | asset | 铁砧风箱 | planned | 2 |
 | A131 | asset | 茶焙烘笼 | planned | 2 |
-| A132 | asset | 渔网修补架 | planned | 2 |
+| A132 | asset | 渔网修补架 | implemented | 2 |
 | A133 | asset | 磨刀石 | planned | 2 |
 | A134 | asset | 炭筐 | planned | 2 |
 | A135 | asset | 油篓 | planned | 2 |
@@ -219,9 +219,9 @@ validated 必须有本轮渲染图；integrated 必须进入全景组装。
 | A158 | asset | 池岸鸢尾 | planned | 2 |
 | A159 | asset | 梅下落英 | planned | 2 |
 | A160 | asset | 墙根蕨类 | planned | 2 |
-| A161 | asset | 井台水桶 | planned | 2 |
-| A162 | asset | 晾衣竹竿 | planned | 2 |
-| A163 | asset | 门前石凳 | planned | 2 |
+| A161 | asset | 井台水桶 | implemented | 2 |
+| A162 | asset | 晾衣竹竿 | implemented | 2 |
+| A163 | asset | 门前石凳 | implemented | 2 |
 | A164 | asset | 檐下鸟笼 | planned | 2 |
 | A165 | asset | 桥头候船凳 | planned | 2 |
 | A166 | asset | 孩童玩具风车 | planned | 2 |
@@ -277,14 +277,14 @@ validated 必须有本轮渲染图；integrated 必须进入全景组装。
 | S20 | system | 法线与双面 | planned | 2 |
 | S21 | system | 面数与性能预算 | planned | 2 |
 | S22 | system | 相机契约 | implemented | 2 |
-| S23 | system | 环境叙事层 | planned | 2 |
+| S23 | system | 环境叙事层 | implemented | 2 |
 | S24 | system | 旧化PBR通道 | planned | 2 |
 | K13 | assembly | 店宅室内可视组 | implemented | 2 |
 | K14 | assembly | 摊位货品组 | implemented | 2 |
 | K15 | assembly | 水岸生态带 | implemented | 2 |
 | K16 | assembly | 月门借景组 | implemented | 2 |
 | K17 | assembly | 作坊工具组 | planned | 2 |
-| K18 | assembly | 里巷生活组 | planned | 2 |
+| K18 | assembly | 里巷生活组 | implemented | 2 |
 | K19 | assembly | 桥头生活组 | planned | 2 |
 | K20 | assembly | 屋顶收口组 | implemented | 2 |
 | K21 | assembly | 夜巷灯组 | planned | 2 |
@@ -329,7 +329,7 @@ validated 必须有本轮渲染图；integrated 必须进入全景组装。
 | Q36 | qa | 船有橹有篓 | implemented | 2 |
 | Q37 | qa | 水岸有萍 | implemented | 2 |
 | Q38 | qa | 灯不抢戏 | planned | 2 |
-| Q39 | qa | 总览不棋盘 | planned | 2 |
+| Q39 | qa | 总览不棋盘 | implemented | 2 |
 | Q40 | qa | 巷道可走 | planned | 2 |
 | Q41 | qa | 无IP网格 | planned | 2 |
 | Q42 | qa | seed 不交叉 | planned | 2 |

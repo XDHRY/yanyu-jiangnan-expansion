@@ -8,8 +8,8 @@
   ],
   "total": 340,
   "counts": {
-    "implemented": 138,
-    "planned": 202
+    "implemented": 145,
+    "planned": 195
   },
   "tasks": [
     {
@@ -2759,7 +2759,7 @@
         "K08"
       ],
       "evidence": "net rack on the quay",
-      "status": "planned"
+      "status": "implemented"
     },
     {
       "id": "A133",
@@ -3136,7 +3136,7 @@
         "K06"
       ],
       "evidence": "buckets at the shared well",
-      "status": "planned"
+      "status": "implemented"
     },
     {
       "id": "A162",
@@ -3148,8 +3148,8 @@
         "A066",
         "K06"
       ],
-      "evidence": "laundry poles in the alley",
-      "status": "planned"
+      "evidence": "bamboo laundry poles with hung cloth on the quay",
+      "status": "implemented"
     },
     {
       "id": "A163",
@@ -3161,8 +3161,8 @@
         "A066",
         "K06"
       ],
-      "evidence": "stone stools at house doors",
-      "status": "planned"
+      "evidence": "stone bench along the quay edge",
+      "status": "implemented"
     },
     {
       "id": "A164",
@@ -3890,7 +3890,7 @@
         "S04"
       ],
       "evidence": "life props tell use, not decoration",
-      "status": "planned"
+      "status": "implemented"
     },
     {
       "id": "S24",
@@ -3981,7 +3981,7 @@
         "K07"
       ],
       "evidence": "wells, buckets, laundry",
-      "status": "planned"
+      "status": "implemented"
     },
     {
       "id": "K19",
@@ -4566,7 +4566,7 @@
         "S14"
       ],
       "evidence": "organic streets, not a CAD plot",
-      "status": "planned"
+      "status": "implemented"
     },
     {
       "id": "Q40",

@@ -781,6 +781,28 @@ def boat_oar(length=3.4, blade_len=1.2, blade_w=0.22):
     return verts, faces
 
 
+def draped_net(width=2.0, height=1.6, sag=0.4, nx=6, nz=5):
+    """A rectangular fishing net draped between two top corners.
+
+    The net hangs from the top edge and sags in the middle, giving a catenary
+    look. Returns (verts, faces) as a single-sided quad grid — light enough
+    for background props.
+    """
+    verts = []
+    for iz in range(nz):
+        fz = iz / max(nz - 1, 1)
+        z = height * (1.0 - fz)
+        droop = sag * math.sin(math.pi * fz)
+        for ix in range(nx):
+            fx = ix / max(nx - 1, 1)
+            belly = 4.0 * fx * (1.0 - fx)
+            x = -width / 2 + width * fx
+            y = -droop * belly
+            verts.append((x, y, z))
+    faces = grid_faces(nz, nx)
+    return verts, faces
+
+
 def lily_pad_cluster(radius=0.45, count=6, stream=None):
     """Floating water lily pads (浮萍与睡莲) softening the stone water edges."""
     import random

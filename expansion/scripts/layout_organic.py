@@ -244,7 +244,13 @@ def make_layout(config):
         raise ValueError("duplicate district id")
 
     for d in config["districts"]:
-        cx, cy = d["center"]
+        # Jitter district centres so the overview doesn't read as a checkerboard
+        # of identical islands. The jitter is seeded per-district and capped at
+        # ±18 m so road endpoints (±84/±80 from centre) still land in the
+        # district's land envelope and bridges still span the gap.
+        jitter_stream = rng(seed, d["id"] + ":center_jitter")
+        cx = d["center"][0] + jitter_stream.uniform(-18.0, 18.0)
+        cy = d["center"][1] + jitter_stream.uniform(-18.0, 18.0)
         want = d["building_count"]
         families = d["building_families"]
         streets = _street_plan(d["id"], seed)
@@ -351,9 +357,18 @@ def make_layout(config):
                 rotation=0.0 if horizontal else math.pi / 2,
             ))
 
+    # Recompute jittered centres for the street world-space export so
+    # street polylines match building placement, not the raw grid.
+    _jittered = {}
+    for d in config["districts"]:
+        js = rng(seed, d["id"] + ":center_jitter")
+        _jittered[d["id"]] = (d["center"][0] + js.uniform(-18.0, 18.0),
+                              d["center"][1] + js.uniform(-18.0, 18.0))
+
     return dict(buildings=buildings, links=links,
                 streets={d["id"]: [dict(kind=s.kind, width=s.width,
-                                        points=[[d["center"][0] + x, d["center"][1] + y]
+                                        points=[[_jittered[d["id"]][0] + x,
+                                                 _jittered[d["id"]][1] + y]
                                                 for x, y in s.points])
                                    for s in _street_plan(d["id"], seed)]
                          for d in config["districts"]},

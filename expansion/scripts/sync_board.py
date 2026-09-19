@@ -35,13 +35,15 @@ IMPLEMENTED_148 = {
 # Second-wave ids that this round actually ships geometry for.
 IMPLEMENTED_WAVE2 = {
     "A097", "A098", "A099", "A100", "A101", "A102",
-    "A121", "A142", "A143",
+    "A121", "A132", "A142", "A143",
+    "A161", "A162", "A163",
     "A182", "A183", "A184", "A185", "A186",
     "M17", "M18", "M19", "M26", "M27", "M28", "M30",
-    "S13", "S14", "S15", "S16", "S17", "S18", "S22",
-    "K13", "K14", "K15", "K16", "K20", "K24",
+    "S13", "S14", "S15", "S16", "S17", "S18", "S22", "S23",
+    "K13", "K14", "K15", "K16", "K18", "K20", "K24",
     "Q01", "Q02", "Q03", "Q22", "Q23", "Q26", "Q27",
     "Q29", "Q30", "Q31", "Q32", "Q33", "Q34", "Q35", "Q36", "Q37",
+    "Q39",
     "V01", "V02", "V03", "V04", "V05", "V06",
 }
 
@@ -162,8 +164,8 @@ def _wave2():
 
     life = [
         ("A161", "井台水桶", "buckets at the shared well"),
-        ("A162", "晾衣竹竿", "laundry poles in the alley"),
-        ("A163", "门前石凳", "stone stools at house doors"),
+        ("A162", "晾衣竹竿", "bamboo laundry poles with hung cloth on the quay"),
+        ("A163", "门前石凳", "stone bench along the quay edge"),
         ("A164", "檐下鸟笼", "cage under the eave"),
         ("A165", "桥头候船凳", "waiting bench at the ferry"),
         ("A166", "孩童玩具风车", "tiny pinwheel on a stall"),
