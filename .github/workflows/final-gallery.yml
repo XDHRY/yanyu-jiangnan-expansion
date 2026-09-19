@@ -1,4 +1,4 @@
-name: Final 12-View Gallery
+name: Final 36-View 4K Gallery
 
 on:
   push:
@@ -18,14 +18,14 @@ concurrency:
 env:
   BLENDER_VERSION: "4.5.14"
   BLENDER_DIR: ${{ github.workspace }}/.cache/blender
-  WIDTH: "1920"
-  HEIGHT: "1080"
-  SAMPLES: "128"
+  WIDTH: "3840"
+  HEIGHT: "2160"
+  SAMPLES: "256"
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v7
 
@@ -42,7 +42,9 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p "$BLENDER_DIR"
-          curl --fail --location --retry 3             "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz"             -o "${RUNNER_TEMP}/blender.tar.xz"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o "${RUNNER_TEMP}/blender.tar.xz"
           tar -xJf "${RUNNER_TEMP}/blender.tar.xz" --strip-components=1 -C "$BLENDER_DIR"
 
       - name: Install headless runtime
@@ -53,7 +55,9 @@ jobs:
       - name: Build frozen detail scene once
         run: |
           set -euxo pipefail
-          "$BLENDER_DIR/blender" -b --factory-startup --python-exit-code 1             --python expansion/scripts/build_world.py --             --format blend --stage detail --out final_build
+          "$BLENDER_DIR/blender" -b --factory-startup --python-exit-code 1 \
+            --python expansion/scripts/build_world.py -- \
+            --format blend --stage detail --out final_build
           test -s final_build/JNX_Expansion.blend
 
       - uses: actions/upload-artifact@v7
@@ -67,12 +71,12 @@ jobs:
   render:
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 360
     strategy:
       fail-fast: false
-      max-parallel: 4
+      max-parallel: 2
       matrix:
-        shot: [1,2,3,4,5,6,7,8,9,10,11,12]
+        shot: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36]
     steps:
       - uses: actions/checkout@v7
 
@@ -89,7 +93,9 @@ jobs:
         run: |
           set -euxo pipefail
           mkdir -p "$BLENDER_DIR"
-          curl --fail --location --retry 3             "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz"             -o "${RUNNER_TEMP}/blender.tar.xz"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o "${RUNNER_TEMP}/blender.tar.xz"
           tar -xJf "${RUNNER_TEMP}/blender.tar.xz" --strip-components=1 -C "$BLENDER_DIR"
 
       - name: Install headless runtime
@@ -102,25 +108,31 @@ jobs:
           name: final-scene-${{ github.sha }}
           path: final_build
 
-      - name: Render final shot ${{ matrix.shot }}
+      - name: Render 4K final shot ${{ matrix.shot }}
         env:
           LIBGL_ALWAYS_SOFTWARE: "1"
           EGL_PLATFORM: "surfaceless"
         run: |
           set -euxo pipefail
           mkdir -p final_gallery
-          "$BLENDER_DIR/blender" -b final_build/JNX_Expansion.blend --python-exit-code 1             --python expansion/scripts/final_gallery_render.py --             --shot "${{ matrix.shot }}" --out final_gallery             --width "$WIDTH" --height "$HEIGHT" --samples "$SAMPLES"
+          "$BLENDER_DIR/blender" -b final_build/JNX_Expansion.blend --python-exit-code 1 \
+            --python expansion/scripts/final_gallery_render.py -- \
+            --shot "${{ matrix.shot }}" --out final_gallery \
+            --width "$WIDTH" --height "$HEIGHT" --samples "$SAMPLES"
 
       - uses: actions/upload-artifact@v7
         with:
-          name: final-shot-${{ matrix.shot }}-${{ github.sha }}
+          name: final-4k-shot-${{ matrix.shot }}-${{ github.sha }}
           path: final_gallery/*.png
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 90
 
   publish:
     needs: render
     runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -129,39 +141,80 @@ jobs:
 
       - uses: actions/download-artifact@v7
         with:
-          pattern: final-shot-*
-          path: docs/gallery/final
+          pattern: final-4k-shot-*
+          path: release/original
           merge-multiple: true
 
-      - name: Build GitHub gallery page
+      - name: Build previews, manifest and download packs
         run: |
+          python3 -m pip install --disable-pip-version-check pillow
           python3 - <<'PY'
+          import json, os, zipfile
           from pathlib import Path
-          root=Path("docs/gallery/final")
-          files=sorted(root.glob("*.png"))
-          if len(files)!=12:
-              raise SystemExit(f"expected 12 images, found {len(files)}")
-          lines=[
-            "# 烟雨江南扩建 · Final 12-View Gallery",
-            "",
-            "> Cycles final gallery · 1920×1080 · 128 samples · 16-bit PNG · latest detail scene",
-            "",
-          ]
+          from PIL import Image
+
+          originals=Path("release/original")
+          files=sorted(originals.glob("*.png"))
+          if len(files)!=36:
+              raise SystemExit(f"expected 36 final PNGs, found {len(files)}")
+
+          preview=Path("docs/gallery/4k/preview")
+          preview.mkdir(parents=True,exist_ok=True)
+          for old in preview.glob("*"):
+              if old.is_file(): old.unlink()
+
+          manifest=[]
           for i,p in enumerate(files,1):
-              title=p.stem.replace("-"," ").title()
-              lines += [f"## {i:02d}. {title}", "", f"![{title}](final/{p.name})", ""]
-          Path("docs/gallery/README.md").write_text("\n".join(lines),encoding="utf-8")
+              im=Image.open(p).convert("RGB")
+              im.thumbnail((1600,900),Image.Resampling.LANCZOS)
+              out=preview/(p.stem+".jpg")
+              im.save(out,"JPEG",quality=90,optimize=True,progressive=True)
+              manifest.append({"index":i,"name":p.stem,"original":p.name,"preview":out.name})
+
+          tag="gallery-4k-"+os.environ["GITHUB_SHA"][:12]
+          repo=os.environ["GITHUB_REPOSITORY"]
+          lines=[
+              "# 烟雨江南扩建 · 36机位 4K 最终画廊","",
+              "> 3840×2160 · Cycles · 256 samples（Hero 384）· 16-bit PNG · OIDN/自适应采样","",
+              f"**完整4K原图下载：** https://github.com/{repo}/releases/tag/{tag}","",
+              "原图分为 3 个压缩包，每包 12 张；下方为 1600px 宣传预览。",""
+          ]
+          for m in manifest:
+              title=m["name"].replace("-"," ").title()
+              lines += [f"## {m['index']:02d}. {title}","",f"![{title}](preview/{m['preview']})",""]
+          Path("docs/gallery/4k/README.md").write_text("\n".join(lines),encoding="utf-8")
+          Path("docs/gallery/4k/manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
+
+          packs=Path("release_assets"); packs.mkdir(exist_ok=True)
+          for part,start in enumerate((0,12,24),1):
+              pack=packs/f"yanyu-jiangnan-expansion-36views-4k-part{part}.zip"
+              with zipfile.ZipFile(pack,"w",compression=zipfile.ZIP_STORED,allowZip64=True) as z:
+                  for p in files[start:start+12]:
+                      z.write(p,p.name)
           PY
 
-      - name: Commit gallery back to branch
+      - name: Publish preview gallery to branch
         run: |
           set -euxo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/gallery
-          if git diff --cached --quiet; then
-            echo "Gallery unchanged."
-            exit 0
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git add docs/gallery/4k
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: publish 36-view 4K preview gallery [skip ci]"
+            git push origin HEAD:"$GITHUB_REF_NAME"
           fi
-          git commit -m "docs: publish final 12-view gallery [skip ci]"
-          git push origin HEAD:"${GITHUB_REF_NAME}"
+
+      - name: Publish original 4K packs to GitHub Release
+        run: |
+          set -euxo pipefail
+          TAG="gallery-4k-${GITHUB_SHA:0:12}"
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            gh release upload "$TAG" release_assets/*.zip --clobber --repo "$GITHUB_REPOSITORY"
+          else
+            gh release create "$TAG" release_assets/*.zip \
+              --repo "$GITHUB_REPOSITORY" \
+              --target "$GITHUB_REF_NAME" \
+              --title "烟雨江南扩建 36机位 4K 最终画廊" \
+              --notes "36张 3840×2160 Cycles 最终渲染；分3个压缩包下载。"
+          fi
