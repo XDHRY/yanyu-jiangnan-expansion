@@ -159,6 +159,16 @@ def _roof(b, root, prefix, width, depth, height, stream, hip=False, gable=True):
     b.box(root, prefix + "eave_board", (width + 2 * over, 0.1, 0.18),
           (0, -(depth / 2 + over), z + 0.04), "timber")
 
+    # Bronze wind chimes hanging under the 4 upturned eave corners
+    chime_w = width / 2.0 + flare * 0.55
+    chime_d = depth / 2.0 + over + flare
+    chime_z = z + lift * 0.85
+    for c_sx in (-1, 1):
+        for c_sy in (-1, 1):
+            cv, cf = g.eaves_chime()
+            b.mesh(root, prefix + f"eave_chime_{c_sx}_{c_sy}", cv, cf, "iron",
+                   (c_sx * chime_w, c_sy * chime_d, chime_z))
+
 
 def _entry_steps(b, root, prefix, depth, stream):
     n = 3

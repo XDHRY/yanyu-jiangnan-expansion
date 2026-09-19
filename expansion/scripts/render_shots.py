@@ -34,7 +34,7 @@ def main():
     args = _args()
     bpy.ops.wm.open_mainfile(filepath=str(args.blend))
 
-    out = args.out or args.blend.parent
+    out = (args.out or args.blend.parent).resolve()
     out.mkdir(parents=True, exist_ok=True)
 
     scene = next((s for s in bpy.data.scenes if s.name.startswith("JNX_")),
