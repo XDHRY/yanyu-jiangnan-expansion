@@ -1,0 +1,166 @@
+name: Final 12-View Gallery
+
+on:
+  push:
+    branches: ["impl/**"]
+    paths:
+      - "expansion/**"
+      - ".github/workflows/final-gallery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: expansion-final-gallery-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BLENDER_VERSION: "4.5.14"
+  BLENDER_DIR: ${{ github.workspace }}/.cache/blender
+  WIDTH: "2560"
+  HEIGHT: "1440"
+  SAMPLES: "320"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3             "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz"             -o "${RUNNER_TEMP}/blender.tar.xz"
+          tar -xJf "${RUNNER_TEMP}/blender.tar.xz" --strip-components=1 -C "$BLENDER_DIR"
+
+      - name: Install headless runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri libxi6 libxxf86vm1 libxfixes3 libxrender1
+
+      - name: Build frozen detail scene once
+        run: |
+          set -euxo pipefail
+          "$BLENDER_DIR/blender" -b --factory-startup --python-exit-code 1             --python expansion/scripts/build_world.py --             --format blend --stage detail --out final_build
+          test -s final_build/JNX_Expansion.blend
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-scene-${{ github.sha }}
+          path: |
+            final_build/JNX_Expansion.blend
+            final_build/scene_manifest.json
+          retention-days: 7
+
+  render:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        shot: [1,2,3,4,5,6,7,8,9,10,11,12]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3             "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz"             -o "${RUNNER_TEMP}/blender.tar.xz"
+          tar -xJf "${RUNNER_TEMP}/blender.tar.xz" --strip-components=1 -C "$BLENDER_DIR"
+
+      - name: Install headless runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri libxi6 libxxf86vm1 libxfixes3 libxrender1
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: final-scene-${{ github.sha }}
+          path: final_build
+
+      - name: Render final shot ${{ matrix.shot }}
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          EGL_PLATFORM: "surfaceless"
+        run: |
+          set -euxo pipefail
+          mkdir -p final_gallery
+          "$BLENDER_DIR/blender" -b final_build/JNX_Expansion.blend --python-exit-code 1             --python expansion/scripts/final_gallery_render.py --             --shot "${{ matrix.shot }}" --out final_gallery             --width "$WIDTH" --height "$HEIGHT" --samples "$SAMPLES"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: final-shot-${{ matrix.shot }}-${{ github.sha }}
+          path: final_gallery/*.png
+          if-no-files-found: error
+          retention-days: 30
+
+  publish:
+    needs: render
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: final-shot-*
+          path: docs/gallery/final
+          merge-multiple: true
+
+      - name: Build GitHub gallery page
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          root=Path("docs/gallery/final")
+          files=sorted(root.glob("*.png"))
+          if len(files)!=12:
+              raise SystemExit(f"expected 12 images, found {len(files)}")
+          lines=[
+            "# 烟雨江南扩建 · Final 12-View Gallery",
+            "",
+            "> Cycles final gallery · 2560×1440 · 320 samples · 16-bit PNG · latest detail scene",
+            "",
+          ]
+          for i,p in enumerate(files,1):
+              title=p.stem.replace("-"," ").title()
+              lines += [f"## {i:02d}. {title}", "", f"![{title}](final/{p.name})", ""]
+          Path("docs/gallery/README.md").write_text("\n".join(lines),encoding="utf-8")
+          PY
+
+      - name: Commit gallery back to branch
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/gallery
+          if git diff --cached --quiet; then
+            echo "Gallery unchanged."
+            exit 0
+          fi
+          git commit -m "docs: publish final 12-view gallery [skip ci]"
+          git push origin HEAD:"${GITHUB_REF_NAME}"
