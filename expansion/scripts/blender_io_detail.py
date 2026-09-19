@@ -1276,7 +1276,7 @@ def build_lighting(scene, mood="drizzle"):
 
     # Warm intimate point light hanging inside Tingyuxuan pavilion (D07)
     tingyu_lamp_data = bpy.data.lights.new("JNX_Tingyu_Lamp", "POINT")
-    tingyu_lamp_data.energy = 220.0
+    tingyu_lamp_data.energy = 105.0
     tingyu_lamp_data.shadow_soft_size = 0.32
     tingyu_lamp_data.color = (1.0, 0.62, 0.28)
     tingyu_lamp = bpy.data.objects.new("JNX_Tingyu_Lamp", tingyu_lamp_data)
@@ -1563,14 +1563,14 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     for lit, x, y, fx, fy, tx, ty in candidates:
         # Stand back far enough to frame the whole bay, and step sideways so the
         # row recedes instead of filling the lens with one flat wall.
-        for stand, drift in ((12.0, 5.5), (12.0, -5.5), (14.0, 0.0),
-                             (9.0, 7.0), (16.0, 3.0)):
+        for stand, drift in ((18.0, 10.0), (18.0, -10.0), (22.0, 0.0),
+                             (16.0, 12.0), (24.0, 6.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
             if _blocked(boxes, eye):
                 continue
             target = (x + fx * 0.4, y + fy * 0.4, look_h)
-            shot = dict(name="JNX_Lane", lens=40.0, district=hero_id,
-                        location=eye, target=target, dof_distance=11.0, fstop=3.2)
+            shot = dict(name="JNX_Lane", lens=35.0, district=hero_id,
+                        location=eye, target=target, dof_distance=16.0, fstop=3.5)
             if not lantern_in_frame(eye, target):
                 return shot
             if fallback is None:
@@ -1645,10 +1645,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
         # A perspective establishing shot replaces the map-like orthographic
         # view. It still exposes district structure for QA, but reads as a town
         # in landscape rather than a regular board-game grid.
-        dict(name="JNX_Overview", lens=58.0,
-             location=(cx + span * 0.72, cy - span * 0.86, span * 0.48),
-             target=(cx - span * 0.08, cy + span * 0.05, 7.0),
-             dof_distance=span * 0.65, fstop=7.1),
+        dict(name="JNX_Overview", lens=70.0,
+             location=(hx + span * 0.52, hy - span * 0.68, span * 0.23),
+             target=(hx - span * 0.05, hy + span * 0.13, 6.0),
+             dof_distance=span * 0.52, fstop=8.0),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
