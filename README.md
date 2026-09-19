@@ -108,3 +108,7 @@ GitHub Actions → **Remote Render Preview** 可选择：
 
 - 场景与脚本由 **OpenAI Codex** 经 Blender MCP 工作流生成（2026-09-17/18），灵感方向参考《燕云十六声》与《黑神话：悟空》的美术气质；工作流参考 [newo-ether/blender-mcp](https://github.com/newo-ether/blender-mcp)、[hassledzebra/codex_blender_mcp](https://github.com/hassledzebra/codex_blender_mcp)、[PatrykIti/blender-ai-mcp](https://github.com/PatrykIti/blender-ai-mcp)。
 - 本仓库为私人项目存档，未附带开源许可；如需引用请先联系所有者。
+
+## Final Gallery
+
+- [12 机位最终宣传画廊](docs/gallery/README.md)
