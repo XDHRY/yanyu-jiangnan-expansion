@@ -1,51 +1,24 @@
-# 烟雨江南扩建 · Final 12-View Gallery
+# 烟雨江南扩建 · 36机位 4K 最终画廊
 
-> Cycles final gallery · 1920×1080 · 128 samples · 16-bit PNG · latest detail scene
+> 3840×2160 · Cycles · 256 samples（关键 Hero 机位 384）· 16-bit PNG
 
-## 01. 01 Overview Hero
+当前 36 机位 4K 最终渲染工作流已经启动。由于使用 GitHub 公共 CPU runner，任务会分批排队执行。
 
-![01 Overview Hero](final/01-overview-hero.png)
+## 最终查看位置
 
-## 02. 02 Market Lane
+- 预览宣传页：[`docs/gallery/4k/README.md`](4k/README.md)
+- 完整 4K 原图：仓库 **Releases** 页面
+- 原图将分成 3 个 ZIP，每包 12 张，共 36 张。
+- Actions artifact 同时保留单张 PNG 90 天，作为备用下载渠道。
 
-![02 Market Lane](final/02-market-lane.png)
+## 渲染策略
 
-## 03. 03 Canal Hero
+- 分辨率：3840×2160
+- 引擎：Cycles
+- 普通最终机位：256 samples
+- Hero 机位：384 samples
+- 16-bit PNG
+- 自适应采样 + 去噪
+- 每个仓库最多 2 个 4K 镜头并行，允许长时间排队，避免公共 runner 被一次占满。
 
-![03 Canal Hero](final/03-canal-hero.png)
-
-## 04. 04 Water Level
-
-![04 Water Level](final/04-water-level.png)
-
-## 05. 05 Moon Gate Vista
-
-![05 Moon Gate Vista](final/05-moon-gate-vista.png)
-
-## 06. 06 Tingyu Pavilion
-
-![06 Tingyu Pavilion](final/06-tingyu-pavilion.png)
-
-## 07. 07 Market Close
-
-![07 Market Close](final/07-market-close.png)
-
-## 08. 08 Canal Bank Tele
-
-![08 Canal Bank Tele](final/08-canal-bank-tele.png)
-
-## 09. 09 Water Compressed
-
-![09 Water Compressed](final/09-water-compressed.png)
-
-## 10. 10 Moon Gate Detail
-
-![10 Moon Gate Detail](final/10-moon-gate-detail.png)
-
-## 11. 11 Tingyu Architecture
-
-![11 Tingyu Architecture](final/11-tingyu-architecture.png)
-
-## 12. 12 Town Compressed
-
-![12 Town Compressed](final/12-town-compressed.png)
+工作流全部完成后，此入口页会自动更新为 36 张实际预览图与精确 Release 下载链接。
