@@ -686,3 +686,83 @@ def scholar_rock_sculpt(height, radius, stream, segments=22, rings=18):
     top_base = rings * segments
     faces.append(tuple(range(top_base, top_base + segments)))
     return verts, faces
+
+
+def eaves_chime(drop=0.42, bell_r=0.075, bell_h=0.13):
+    """Bronze wind chime (铁马铜铎) hanging under an upturned eave corner."""
+    verts = []
+    faces = []
+    # cord
+    verts.extend([(-0.01, 0, 0), (0.01, 0, 0), (0.01, 0, -drop * 0.6), (-0.01, 0, -drop * 0.6)])
+    faces.append((0, 1, 2, 3))
+    # bell body (revolve)
+    bz = -drop * 0.6
+    n = 10
+    profile = [(0.02, bz), (bell_r * 0.6, bz - bell_h * 0.3), (bell_r, bz - bell_h), (bell_r * 1.15, bz - bell_h * 1.15)]
+    base_idx = len(verts)
+    for p_r, p_z in profile:
+        for i in range(n):
+            a = math.tau * i / n
+            verts.append((p_r * math.cos(a), p_r * math.sin(a), p_z))
+    for k in range(len(profile) - 1):
+        a = base_idx + k * n
+        b = base_idx + (k + 1) * n
+        for i in range(n):
+            j = (i + 1) % n
+            faces.append((a + i, b + i, b + j, a + j))
+    # wind leaf plate
+    lz = bz - bell_h * 1.15
+    leaf_idx = len(verts)
+    verts.extend([(0, -0.035, lz), (0, 0.035, lz), (0, 0.045, lz - 0.20), (0, -0.045, lz - 0.20)])
+    faces.append((leaf_idx, leaf_idx + 1, leaf_idx + 2, leaf_idx + 3))
+    return verts, faces
+
+
+def boat_oar(length=3.4, blade_len=1.2, blade_w=0.22):
+    """Traditional sculling oar (摇橹) mounted on the boat stern."""
+    verts = []
+    faces = []
+    shaft_l = length - blade_len
+    r = 0.035
+    n = 6
+    for z_pos in (0, shaft_l):
+        for i in range(n):
+            a = math.tau * i / n
+            verts.append((r * math.cos(a), r * math.sin(a), z_pos))
+    for i in range(n):
+        j = (i + 1) % n
+        faces.append((i, j, j + n, i + n))
+    base = len(verts)
+    w = blade_w / 2
+    t = 0.015
+    for z_pos in (shaft_l, length):
+        verts.extend([(-w, -t, z_pos), (w, -t, z_pos), (w, t, z_pos), (-w, t, z_pos)])
+    faces.extend([
+        (base, base + 1, base + 5, base + 4),
+        (base + 1, base + 2, base + 6, base + 5),
+        (base + 2, base + 3, base + 7, base + 6),
+        (base + 3, base, base + 4, base + 7),
+        (base + 4, base + 5, base + 6, base + 7),
+    ])
+    return verts, faces
+
+
+def lily_pad_cluster(radius=0.45, count=6, stream=None):
+    """Floating water lily pads (浮萍与睡莲) softening the stone water edges."""
+    import random
+    s = stream or random.Random(1)
+    verts = []
+    faces = []
+    for k in range(count):
+        ox = s.uniform(-0.6, 0.6)
+        oy = s.uniform(-0.6, 0.6)
+        r = radius * s.uniform(0.65, 1.15)
+        base = len(verts)
+        n = 10
+        verts.append((ox, oy, 0.0))
+        for i in range(n):
+            a = 0.25 + (math.tau - 0.5) * i / (n - 1)
+            verts.append((ox + r * math.cos(a), oy + r * math.sin(a), 0.0))
+        for i in range(1, n):
+            faces.append((base, base + i, base + i + 1))
+    return verts, faces

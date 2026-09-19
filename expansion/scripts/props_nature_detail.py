@@ -112,6 +112,11 @@ def _boat(b, r, stream, awning=True):
         b.mesh(r, "awning", av, af, "bamboo", (stream.uniform(-0.5, 0.5), 0, 0.42))
     b.cylinder(r, "pole", 0.05, stream.uniform(2.6, 3.4), (2.3, 0, 0.35), "bamboo", 6)
     b.box(r, "bench", (0.9, 1.3, 0.09), (-1.4, 0, 0.36), "timber")
+    # Sculling oar mounted at the stern
+    ov, of = g.boat_oar()
+    b.mesh(r, "sculling_oar", ov, of, "timber", (-3.1, 0.45, 0.65), rotation=0.35)
+    # Fish basket on the deck
+    b.cylinder(r, "fish_basket", 0.22, 0.35, (2.1, 0.35, 0.38), "bamboo", sides=8)
     b.socket(r, "moor_bow", (-3.2, 0, 0.5), (-1, 0, 0))
 
 
@@ -225,3 +230,6 @@ def build(b, config, plan):
             wv, wf = g.leaf_cluster(rs.uniform(0.7, 1.1), rs, lobes=3,
                                     squash=0.16)
             b.mesh(r, "weed_base", wv, wf, "leaf", (0, 0, 1.4))
+            # Floating water lilies near the bank
+            lv, lf = g.lily_pad_cluster(radius=0.42, count=5, stream=rs)
+            b.mesh(r, "lily_pads", lv, lf, "leaf", (rs.uniform(-0.8, 0.8), rs.uniform(-0.8, 0.8), 1.41))
