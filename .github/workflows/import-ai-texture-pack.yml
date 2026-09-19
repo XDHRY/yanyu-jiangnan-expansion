@@ -1,0 +1,64 @@
+name: Import AI Texture Pack
+
+on:
+  push:
+    branches: ["ai/asset-pipeline-v1"]
+    paths:
+      - "assets/textures/_incoming/yanyu-ai-albedo-v1.zip"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: import-ai-textures-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract and validate texture pack
+        shell: bash
+        run: |
+          set -euxo pipefail
+          PACK="assets/textures/_incoming/yanyu-ai-albedo-v1.zip"
+          DEST="assets/textures/ai_albedo"
+          rm -rf "$DEST"
+          mkdir -p "$DEST"
+          python - <<'PY'
+          from pathlib import Path
+          import json, zipfile, hashlib
+          pack=Path("assets/textures/_incoming/yanyu-ai-albedo-v1.zip")
+          dest=Path("assets/textures/ai_albedo")
+          with zipfile.ZipFile(pack) as z:
+              bad=[n for n in z.namelist() if Path(n).is_absolute() or ".." in Path(n).parts]
+              assert not bad, bad
+              z.extractall(dest)
+          manifest=json.loads((dest/"texture_manifest.json").read_text(encoding="utf-8"))
+          assert manifest["pack_id"]=="JN_AI_ALBEDO_V1"
+          assert len(manifest["textures"])==4
+          for item in manifest["textures"]:
+              p=dest/item["file"]
+              assert p.is_file(), p
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==item["sha256"], p
+          print("JN_AI_TEXTURE_PACK_OK", len(manifest["textures"]))
+          PY
+
+      - name: Commit imported Blender texture library
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git rm -f assets/textures/_incoming/yanyu-ai-albedo-v1.zip
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/textures/ai_albedo
+          git commit -m "feat(textures): import Jiangnan AI Blender albedo pack v1"
+          git fetch origin ai/asset-pipeline-v1
+          git rebase origin/ai/asset-pipeline-v1
+          git push origin HEAD:ai/asset-pipeline-v1

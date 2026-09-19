@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "systems": [
+    {
+      "task_id": "S01",
+      "name_cn": "统一水系与岸线",
+      "slug": "water_network",
+      "source": "future/systems/water_network.py",
+      "dependencies": [
+        "S02",
+        "S03"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S01_water_network.md"
+    },
+    {
+      "task_id": "S02",
+      "name_cn": "尺度、原点和坐标",
+      "slug": "coordinates",
+      "source": "future/systems/coordinates.py",
+      "dependencies": [],
+      "status": "planned",
+      "task_file": "tasks/systems/S02_coordinates.md"
+    },
+    {
+      "task_id": "S03",
+      "name_cn": "连接点与模块拼装",
+      "slug": "sockets",
+      "source": "future/systems/sockets.py",
+      "dependencies": [
+        "S02"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S03_sockets.md"
+    },
+    {
+      "task_id": "S04",
+      "name_cn": "材质和贴图协议",
+      "slug": "material_registry",
+      "source": "future/systems/material_registry.py",
+      "dependencies": [
+        "S02"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S04_material_registry.md"
+    },
+    {
+      "task_id": "S05",
+      "name_cn": "雨雾风的接入接口",
+      "slug": "weather_hooks",
+      "source": "future/systems/weather_hooks.py",
+      "dependencies": [
+        "S03",
+        "S04"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S05_weather_hooks.md"
+    },
+    {
+      "task_id": "S06",
+      "name_cn": "实例、LOD与性能边界",
+      "slug": "lod_instancing",
+      "source": "future/systems/lod_instancing.py",
+      "dependencies": [
+        "S03",
+        "S04"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S06_lod_instancing.md"
+    },
+    {
+      "task_id": "S07",
+      "name_cn": "UV、纹理密度与通道",
+      "slug": "uv_textures",
+      "source": "future/systems/uv_textures.py",
+      "dependencies": [
+        "S04"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S07_uv_textures.md"
+    },
+    {
+      "task_id": "S08",
+      "name_cn": "通行、碰撞和功能净空",
+      "slug": "collision_navigation",
+      "source": "future/systems/collision_navigation.py",
+      "dependencies": [
+        "S02",
+        "S03"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S08_collision_navigation.md"
+    },
+    {
+      "task_id": "S09",
+      "name_cn": "摆放、留白与避让",
+      "slug": "spatial_placement",
+      "source": "future/systems/spatial_placement.py",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S08"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S09_spatial_placement.md"
+    },
+    {
+      "task_id": "S10",
+      "name_cn": "镜头与成果展示",
+      "slug": "camera_review",
+      "source": "future/systems/camera_review.py",
+      "dependencies": [
+        "S09"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S10_camera_review.md"
+    },
+    {
+      "task_id": "S11",
+      "name_cn": "旧庭院只读接入",
+      "slug": "legacy_adapter",
+      "source": "future/systems/legacy_adapter.py",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S09"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S11_legacy_adapter.md"
+    },
+    {
+      "task_id": "S12",
+      "name_cn": "分任务交付和全景组装",
+      "slug": "assembly_handoff",
+      "source": "future/systems/assembly_handoff.py",
+      "dependencies": [
+        "S01",
+        "S03",
+        "S04",
+        "S06",
+        "S08",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "status": "planned",
+      "task_file": "tasks/systems/S12_assembly_handoff.md"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+name: Apply Jiangnan Source Repairs
+
+on:
+  push:
+    branches: ["ai/asset-pipeline-v1"]
+    paths:
+      - "tools/repair_jiangnan_source.py"
+      - ".github/workflows/apply-source-repairs.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply deterministic source repairs
+        run: python tools/repair_jiangnan_source.py --write
+
+      - name: Verify repaired source compiles
+        run: python -m py_compile jiangnan.py
+
+      - name: Commit repaired generator if changed
+        shell: bash
+        run: |
+          set -euxo pipefail
+          if git diff --quiet -- jiangnan.py; then
+            echo "jiangnan.py already repaired"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add jiangnan.py
+          git commit -m "fix: repair Blender generator source defects"
+          git push origin HEAD:ai/asset-pipeline-v1

@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "project": "yanyu-jiangnan",
+  "color_management": {
+    "base_color": "sRGB",
+    "roughness": "Non-Color",
+    "normal": "Non-Color",
+    "height": "Non-Color",
+    "ao": "Non-Color"
+  },
+  "naming": "textures/pbr/<material>/<material>_<channel>.png",
+  "materials": [
+    {
+      "id": "plaster",
+      "name_cn": "古白墙灰泥",
+      "region": "jiangnan",
+      "status": "albedo_only",
+      "base_color": "textures/plaster.png",
+      "future_pbr": ["roughness", "normal", "height", "ao"],
+      "roughness_range": [0.68, 0.92],
+      "height_mm": [0.2, 2.0],
+      "mapping_scale": [0.32, 0.32, 0.32],
+      "rules": ["low saturation ivory-gray", "damp lower-wall variation", "no baked directional shadow"]
+    },
+    {
+      "id": "stone",
+      "name_cn": "江南湿灰石",
+      "region": "jiangnan",
+      "status": "albedo_only",
+      "base_color": "textures/stone.png",
+      "future_pbr": ["roughness", "normal", "height", "ao"],
+      "roughness_range": [0.28, 0.78],
+      "height_mm": [0.5, 8.0],
+      "mapping_scale": [0.7, 0.7, 0.7],
+      "weather_response": {"rain_roughness_multiplier": 0.55, "moss_bias": "crevices_and_ground_contact"},
+      "rules": ["muted limestone", "restrained moss", "wetness follows exposure and drainage"]
+    },
+    {
+      "id": "bark",
+      "name_cn": "苍梅树皮",
+      "region": "jiangnan",
+      "status": "albedo_only",
+      "base_color": "textures/bark.png",
+      "future_pbr": ["roughness", "normal", "height", "ao"],
+      "roughness_range": [0.68, 0.9],
+      "height_mm": [1.0, 12.0],
+      "mapping_scale": [1.6, 1.6, 0.45],
+      "directional": true,
+      "rules": ["vertical twisted fissures", "old charcoal umber", "sparse lichen only"]
+    },
+    {
+      "id": "clay",
+      "name_cn": "黛瓦黏土",
+      "region": "jiangnan",
+      "status": "albedo_only",
+      "base_color": "textures/clay.png",
+      "future_pbr": ["roughness", "normal", "height", "ao"],
+      "roughness_range": [0.24, 0.62],
+      "height_mm": [0.15, 2.5],
+      "mapping_scale": [0.85, 0.85, 0.85],
+      "weather_response": {"rain_roughness_multiplier": 0.5},
+      "rules": ["blue-charcoal fired clay", "no tile outlines in texture", "subtle mineral pitting"]
+    },
+    {
+      "id": "wood",
+      "name_cn": "老木",
+      "region": "jiangnan",
+      "status": "albedo_only",
+      "base_color": "textures/wood.png",
+      "future_pbr": ["roughness", "normal", "height", "ao"],
+      "roughness_range": [0.38, 0.72],
+      "height_mm": [0.2, 4.0],
+      "mapping_scale": [1.1, 1.1, 0.3],
+      "directional": true,
+      "rules": ["dark walnut-umber", "hand-polished contact zones", "not orange, not glossy"]
+    },
+    {
+      "id": "petal",
+      "name_cn": "梅花瓣",
+      "region": "jiangnan",
+      "status": "albedo_only",
+      "base_color": "textures/petal.png",
+      "future_pbr": ["roughness", "normal", "transmission_mask"],
+      "roughness_range": [0.32, 0.5],
+      "rules": ["fine translucent veins", "restrained blush", "subsurface/transmission handled in shader"]
+    },
+    {
+      "id": "landscape",
+      "name_cn": "远山借景",
+      "region": "jiangnan",
+      "status": "background_only",
+      "base_color": "textures/landscape.png",
+      "future_pbr": [],
+      "rules": ["background only", "never substitute for editable foreground architecture", "low contrast nocturnal depth"]
+    },
+    {
+      "id": "bamboo",
+      "name_cn": "湿竹青皮",
+      "region": "jiangnan",
+      "status": "planned",
+      "base_color": null,
+      "future_pbr": ["base_color", "roughness", "normal", "height", "ao"],
+      "roughness_range": [0.36, 0.72],
+      "rules": ["desaturated green", "visible nodes and fiber", "rain darkening without plastic gloss"]
+    },
+    {
+      "id": "mud_ground",
+      "name_cn": "雨后泥地",
+      "region": "jiangnan",
+      "status": "planned",
+      "base_color": null,
+      "future_pbr": ["base_color", "roughness", "normal", "height", "ao", "wetness_mask"],
+      "roughness_range": [0.22, 0.86],
+      "rules": ["micro puddles only in depressions", "foot traffic variation", "bamboo leaf debris sparse"]
+    },
+    {
+      "id": "cloth_banner",
+      "name_cn": "旧麻布酒旗",
+      "region": "jiangnan",
+      "status": "planned",
+      "base_color": null,
+      "future_pbr": ["base_color", "roughness", "normal", "opacity"],
+      "roughness_range": [0.62, 0.92],
+      "rules": ["coarse fiber", "sun and rain fading", "frayed edge mask separated from albedo"]
+    }
+  ]
+}

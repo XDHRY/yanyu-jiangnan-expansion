@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "assemblies": [
+    {
+      "task_id": "K01",
+      "name_cn": "商街连续铺面",
+      "assets": [
+        "A002",
+        "A005",
+        "A006",
+        "A036",
+        "A037",
+        "A039",
+        "A053",
+        "A057",
+        "A059",
+        "A085"
+      ],
+      "district": "D02",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K01.md"
+    },
+    {
+      "task_id": "K02",
+      "name_cn": "竹海客栈院落",
+      "assets": [
+        "A003",
+        "A009",
+        "A018",
+        "A043",
+        "A057",
+        "A060",
+        "A061",
+        "A062",
+        "A063",
+        "A074"
+      ],
+      "district": "D03",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K02.md"
+    },
+    {
+      "task_id": "K03",
+      "name_cn": "渔埠修船作业组",
+      "assets": [
+        "A010",
+        "A023",
+        "A043",
+        "A045",
+        "A047",
+        "A048",
+        "A050",
+        "A055",
+        "A068"
+      ],
+      "district": "D04",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K03.md"
+    },
+    {
+      "task_id": "K04",
+      "name_cn": "桥头候船节点",
+      "assets": [
+        "A041",
+        "A044",
+        "A050",
+        "A052",
+        "A058",
+        "A061",
+        "A073"
+      ],
+      "district": "D01",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K04.md"
+    },
+    {
+      "task_id": "K05",
+      "name_cn": "书院讲学院",
+      "assets": [
+        "A015",
+        "A016",
+        "A018",
+        "A035",
+        "A060",
+        "A061",
+        "A075",
+        "A083"
+      ],
+      "district": "D05",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K05.md"
+    },
+    {
+      "task_id": "K06",
+      "name_cn": "里巷共井生活组",
+      "assets": [
+        "A001",
+        "A004",
+        "A026",
+        "A034",
+        "A036",
+        "A037",
+        "A063",
+        "A065",
+        "A066",
+        "A072"
+      ],
+      "district": "D06",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K06.md"
+    },
+    {
+      "task_id": "K07",
+      "name_cn": "中央借景水院",
+      "assets": [
+        "A017",
+        "A018",
+        "A035",
+        "A038",
+        "A040",
+        "A060",
+        "A075",
+        "A080",
+        "A083",
+        "A088",
+        "A089"
+      ],
+      "district": "D07",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K07.md"
+    },
+    {
+      "task_id": "K08",
+      "name_cn": "手作生产院",
+      "assets": [
+        "A007",
+        "A011",
+        "A012",
+        "A055",
+        "A067",
+        "A069",
+        "A071",
+        "A087"
+      ],
+      "district": "D08",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K08.md"
+    },
+    {
+      "task_id": "K09",
+      "name_cn": "田庄茶圃组合",
+      "assets": [
+        "A022",
+        "A046",
+        "A049",
+        "A051",
+        "A081",
+        "A082",
+        "A085",
+        "A086"
+      ],
+      "district": "D09",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K09.md"
+    },
+    {
+      "task_id": "K10",
+      "name_cn": "古寺山门轴线",
+      "assets": [
+        "A013",
+        "A014",
+        "A026",
+        "A027",
+        "A031",
+        "A070",
+        "A076",
+        "A090",
+        "A091"
+      ],
+      "district": "D10",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K10.md"
+    },
+    {
+      "task_id": "K11",
+      "name_cn": "竹溪慢行路径",
+      "assets": [
+        "A024",
+        "A042",
+        "A051",
+        "A074",
+        "A077",
+        "A079",
+        "A084",
+        "A086",
+        "A089",
+        "A092"
+      ],
+      "district": "D11",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K11.md"
+    },
+    {
+      "task_id": "K12",
+      "name_cn": "湖心望楼远景组",
+      "assets": [
+        "A017",
+        "A018",
+        "A021",
+        "A038",
+        "A047",
+        "A058",
+        "A073",
+        "A078",
+        "A091",
+        "A094",
+        "A095",
+        "A096"
+      ],
+      "district": "D12",
+      "status": "planned",
+      "task_file": "tasks/assemblies/K12.md"
+    }
+  ]
+}

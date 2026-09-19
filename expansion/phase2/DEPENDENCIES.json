@@ -1,0 +1,2822 @@
+{
+  "schema_version": 2,
+  "nodes": [
+    {
+      "id": "P2-AD01",
+      "path": "architecture_detail/AD01_foundation_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A025"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD02",
+      "path": "architecture_detail/AD02_stair_cheek.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A026"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD03",
+      "path": "architecture_detail/AD03_column_plinth.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD01"
+      ],
+      "related_phase1": [
+        "A027"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD04",
+      "path": "architecture_detail/AD04_beam_end_joint.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD03"
+      ],
+      "related_phase1": [
+        "A028"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD05",
+      "path": "architecture_detail/AD05_purlin_support.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD04"
+      ],
+      "related_phase1": [
+        "A029"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD06",
+      "path": "architecture_detail/AD06_rafter_eaves.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD05"
+      ],
+      "related_phase1": [
+        "A029",
+        "A030"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD07",
+      "path": "architecture_detail/AD07_roof_ridge_cap.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD06"
+      ],
+      "related_phase1": [
+        "A030",
+        "A032"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD08",
+      "path": "architecture_detail/AD08_gable_verge.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD06"
+      ],
+      "related_phase1": [
+        "A030",
+        "A034"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD09",
+      "path": "architecture_detail/AD09_roof_valley.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD06"
+      ],
+      "related_phase1": [
+        "A031",
+        "A040"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD10",
+      "path": "architecture_detail/AD10_eave_drip_tiles.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD06"
+      ],
+      "related_phase1": [
+        "A032"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD11",
+      "path": "architecture_detail/AD11_roof_repair_patch.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD10"
+      ],
+      "related_phase1": [
+        "A032"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD12",
+      "path": "architecture_detail/AD12_wall_damp_plinth.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A033",
+        "A034"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD13",
+      "path": "architecture_detail/AD13_wall_cap_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A034"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD14",
+      "path": "architecture_detail/AD14_moon_gate_ring.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A035"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD15",
+      "path": "architecture_detail/AD15_lattice_panel.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A036"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD16",
+      "path": "architecture_detail/AD16_door_hardware.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD15"
+      ],
+      "related_phase1": [
+        "A036"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD17",
+      "path": "architecture_detail/AD17_window_stay.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD15"
+      ],
+      "related_phase1": [
+        "A037"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD18",
+      "path": "architecture_detail/AD18_railing_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A038"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD19",
+      "path": "architecture_detail/AD19_corridor_bench.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD18"
+      ],
+      "related_phase1": [
+        "A018",
+        "A038"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD20",
+      "path": "architecture_detail/AD20_corridor_level_change.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD18"
+      ],
+      "related_phase1": [
+        "A018",
+        "A040"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD21",
+      "path": "architecture_detail/AD21_balcony_drain.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A002",
+        "A003"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD22",
+      "path": "architecture_detail/AD22_threshold_transition.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A026",
+        "A036"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD23",
+      "path": "architecture_detail/AD23_eave_hanging_rail.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A039",
+        "A057",
+        "A059"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-AD24",
+      "path": "architecture_detail/AD24_roof_access_layers.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A003",
+        "A014",
+        "A021"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN01",
+      "path": "interiors/IN01_inn_lobby.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A003",
+        "A062"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN02",
+      "path": "interiors/IN02_guest_room.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN06"
+      ],
+      "related_phase1": [
+        "A003",
+        "A063"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN03",
+      "path": "interiors/IN03_private_tea_room.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A005",
+        "A060"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN04",
+      "path": "interiors/IN04_dining_hall.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A006",
+        "A060",
+        "A061"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN05",
+      "path": "interiors/IN05_prep_kitchen.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A009",
+        "A067"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN06",
+      "path": "interiors/IN06_inn_staircase.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD22"
+      ],
+      "related_phase1": [
+        "A003"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN07",
+      "path": "interiors/IN07_gallery_rest.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD20"
+      ],
+      "related_phase1": [
+        "A018",
+        "A061"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN08",
+      "path": "interiors/IN08_reading_room.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN09"
+      ],
+      "related_phase1": [
+        "A016",
+        "A060"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN09",
+      "path": "interiors/IN09_book_storage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A016"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN10",
+      "path": "interiors/IN10_lecture_seating.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A015"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN11",
+      "path": "interiors/IN11_writing_station.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A015",
+        "A060"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN12",
+      "path": "interiors/IN12_home_hearth_room.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A001",
+        "A067"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN13",
+      "path": "interiors/IN13_family_bedroom.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A004",
+        "A063"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN14",
+      "path": "interiors/IN14_entry_storage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD16"
+      ],
+      "related_phase1": [
+        "A001",
+        "A036"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN15",
+      "path": "interiors/IN15_window_daybed.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A004",
+        "A037"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN16",
+      "path": "interiors/IN16_apothecary_interior.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A008"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN17",
+      "path": "interiors/IN17_cloth_shop_interior.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN18",
+      "path": "interiors/IN18_tavern_storage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A006",
+        "A064"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN19",
+      "path": "interiors/IN19_warehouse_racks.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A010",
+        "A055"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN20",
+      "path": "interiors/IN20_boatyard_restroom.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A023"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN21",
+      "path": "interiors/IN21_temple_refectory.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A014"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN22",
+      "path": "interiors/IN22_meditation_cell.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A014"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN23",
+      "path": "interiors/IN23_tower_stairwell.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD24"
+      ],
+      "related_phase1": [
+        "A021"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-IN24",
+      "path": "interiors/IN24_interior_backfaces.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD15",
+        "P2-AD17"
+      ],
+      "related_phase1": [
+        "A001",
+        "A003",
+        "A004"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH01",
+      "path": "watercraft_hydrology/WH01_boat_frames.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A047"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH02",
+      "path": "watercraft_hydrology/WH02_boat_gunwale.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH01"
+      ],
+      "related_phase1": [
+        "A047"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH03",
+      "path": "watercraft_hydrology/WH03_boat_canopy_ribs.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH01"
+      ],
+      "related_phase1": [
+        "A047"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH04",
+      "path": "watercraft_hydrology/WH04_sculling_oar.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH01"
+      ],
+      "related_phase1": [
+        "A047",
+        "A048"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH05",
+      "path": "watercraft_hydrology/WH05_punting_pole.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A047",
+        "A049"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH06",
+      "path": "watercraft_hydrology/WH06_barge_hatch.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A048"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH07",
+      "path": "watercraft_hydrology/WH07_barge_loadout.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH06"
+      ],
+      "related_phase1": [
+        "A048",
+        "A055",
+        "A056"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH08",
+      "path": "watercraft_hydrology/WH08_boat_cradle.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A023",
+        "A045"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH09",
+      "path": "watercraft_hydrology/WH09_fender_mooring.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH02"
+      ],
+      "related_phase1": [
+        "A047",
+        "A050"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH10",
+      "path": "watercraft_hydrology/WH10_bridge_voussoirs.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A041"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH11",
+      "path": "watercraft_hydrology/WH11_bridge_landing.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH10"
+      ],
+      "related_phase1": [
+        "A041",
+        "A044"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH12",
+      "path": "watercraft_hydrology/WH12_bridge_drainage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH10"
+      ],
+      "related_phase1": [
+        "A041"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH13",
+      "path": "watercraft_hydrology/WH13_dock_watermarks.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH11"
+      ],
+      "related_phase1": [
+        "A043",
+        "A044"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH14",
+      "path": "watercraft_hydrology/WH14_washing_platform.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A043",
+        "A065"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH15",
+      "path": "watercraft_hydrology/WH15_canal_culvert.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A046",
+        "A087"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH16",
+      "path": "watercraft_hydrology/WH16_irrigation_junction.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH15"
+      ],
+      "related_phase1": [
+        "A046",
+        "A051",
+        "A082"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH17",
+      "path": "watercraft_hydrology/WH17_shallow_riverbed.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A084",
+        "A088"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-WH18",
+      "path": "watercraft_hydrology/WH18_boat_wake.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH17"
+      ],
+      "related_phase1": [
+        "A047",
+        "A094"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP01",
+      "path": "craft_production/CP01_carpenter_bench.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A011"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP02",
+      "path": "craft_production/CP02_lumber_rack.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A011"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP03",
+      "path": "craft_production/CP03_sawing_station.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A011"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP04",
+      "path": "craft_production/CP04_bamboo_splitting.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP05",
+      "path": "craft_production/CP05_basket_weaving.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP04"
+      ],
+      "related_phase1": [
+        "A054"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP06",
+      "path": "craft_production/CP06_loom_frame.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP07",
+      "path": "craft_production/CP07_loom_shuttle.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP06"
+      ],
+      "related_phase1": [
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP08",
+      "path": "craft_production/CP08_dye_vats.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP09",
+      "path": "craft_production/CP09_dye_drying_yard.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP08"
+      ],
+      "related_phase1": [
+        "A069"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP10",
+      "path": "craft_production/CP10_pottery_wheel.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP11"
+      ],
+      "related_phase1": [
+        "A012",
+        "A064"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP11",
+      "path": "craft_production/CP11_clay_preparation.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A012"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP12",
+      "path": "craft_production/CP12_greenware_racks.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP10"
+      ],
+      "related_phase1": [
+        "A012"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP13",
+      "path": "craft_production/CP13_kiln_loading.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP12"
+      ],
+      "related_phase1": [
+        "A012"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP14",
+      "path": "craft_production/CP14_pottery_sorting.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP13"
+      ],
+      "related_phase1": [
+        "A012",
+        "A064"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP15",
+      "path": "craft_production/CP15_papermaking_vat.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A015"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP16",
+      "path": "craft_production/CP16_paper_press.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP15"
+      ],
+      "related_phase1": [
+        "A015"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP17",
+      "path": "craft_production/CP17_woodblock_printing.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP16"
+      ],
+      "related_phase1": [
+        "A015",
+        "A016"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP18",
+      "path": "craft_production/CP18_umbrella_frame.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP19",
+      "path": "craft_production/CP19_umbrella_covering.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP18"
+      ],
+      "related_phase1": [
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP20",
+      "path": "craft_production/CP20_tea_withering.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A081"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP21",
+      "path": "craft_production/CP21_tea_roasting.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP20"
+      ],
+      "related_phase1": [
+        "A067",
+        "A081"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP22",
+      "path": "craft_production/CP22_rice_processing.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A022",
+        "A082"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP23",
+      "path": "craft_production/CP23_forge_repair.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A011",
+        "A071"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-CP24",
+      "path": "craft_production/CP24_rope_making.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A050"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL01",
+      "path": "daily_life/DL01_tea_service.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A060"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL02",
+      "path": "daily_life/DL02_breakfast_stall.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053",
+        "A067"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL03",
+      "path": "daily_life/DL03_vegetable_display.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053",
+        "A054"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL04",
+      "path": "daily_life/DL04_fishmonger_display.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL05",
+      "path": "daily_life/DL05_fruit_drygoods.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053",
+        "A054"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL06",
+      "path": "daily_life/DL06_market_balance.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053",
+        "A062"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL07",
+      "path": "daily_life/DL07_shoulder_pole.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP05"
+      ],
+      "related_phase1": [
+        "A054",
+        "A056"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL08",
+      "path": "daily_life/DL08_handcart_unload.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH07"
+      ],
+      "related_phase1": [
+        "A071",
+        "A055"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL09",
+      "path": "daily_life/DL09_rain_gear_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP18",
+        "P2-CP19"
+      ],
+      "related_phase1": [
+        "A003",
+        "A007"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL10",
+      "path": "daily_life/DL10_well_draw_water.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH14"
+      ],
+      "related_phase1": [
+        "A065",
+        "A066"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL11",
+      "path": "daily_life/DL11_laundry_yard.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A004",
+        "A065"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL12",
+      "path": "daily_life/DL12_firewood_storage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A009",
+        "A067"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL13",
+      "path": "daily_life/DL13_grain_drying_mat.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP22"
+      ],
+      "related_phase1": [
+        "A022",
+        "A082"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL14",
+      "path": "daily_life/DL14_herb_drying_trays.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP12"
+      ],
+      "related_phase1": [
+        "A008"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL15",
+      "path": "daily_life/DL15_cobbler_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL16",
+      "path": "daily_life/DL16_washstand.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A004"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL17",
+      "path": "daily_life/DL17_sewing_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A004",
+        "A060"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL18",
+      "path": "daily_life/DL18_board_game_corner.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN03"
+      ],
+      "related_phase1": [
+        "A060",
+        "A061"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL19",
+      "path": "daily_life/DL19_incense_table.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A014"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL20",
+      "path": "daily_life/DL20_sweeping_scene.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A072"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL21",
+      "path": "daily_life/DL21_net_mending.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP24"
+      ],
+      "related_phase1": [
+        "A068"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL22",
+      "path": "daily_life/DL22_ferry_luggage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A052",
+        "A055"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL23",
+      "path": "daily_life/DL23_market_packdown.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A053",
+        "A054"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-DL24",
+      "path": "daily_life/DL24_homecoming_threshold.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD16",
+        "P2-MW11"
+      ],
+      "related_phase1": [
+        "A001",
+        "A057"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE01",
+      "path": "vegetation_ecology/VE01_willow_branch_structure.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A073"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE02",
+      "path": "vegetation_ecology/VE02_willow_leaf_curtains.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE01"
+      ],
+      "related_phase1": [
+        "A073"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE03",
+      "path": "vegetation_ecology/VE03_bamboo_nodes.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE04",
+      "path": "vegetation_ecology/VE04_bamboo_cluster_layout.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE03"
+      ],
+      "related_phase1": [
+        "A074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE05",
+      "path": "vegetation_ecology/VE05_plum_branch_rhythm.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A075"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE06",
+      "path": "vegetation_ecology/VE06_plum_blossoms.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE05"
+      ],
+      "related_phase1": [
+        "A075"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE07",
+      "path": "vegetation_ecology/VE07_cypress_root_flare.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A076"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE08",
+      "path": "vegetation_ecology/VE08_cypress_foliage.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE07"
+      ],
+      "related_phase1": [
+        "A076"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE09",
+      "path": "vegetation_ecology/VE09_reed_depth_zones.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH17"
+      ],
+      "related_phase1": [
+        "A077"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE10",
+      "path": "vegetation_ecology/VE10_lotus_growth_states.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH17"
+      ],
+      "related_phase1": [
+        "A078"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE11",
+      "path": "vegetation_ecology/VE11_fern_banks.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A079"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE12",
+      "path": "vegetation_ecology/VE12_moss_microhabitats.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH17"
+      ],
+      "related_phase1": [
+        "A079",
+        "A083"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE13",
+      "path": "vegetation_ecology/VE13_trampled_field_grass.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A080",
+        "A082"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE14",
+      "path": "vegetation_ecology/VE14_tea_canopy_detail.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP20"
+      ],
+      "related_phase1": [
+        "A081"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE15",
+      "path": "vegetation_ecology/VE15_rice_growth_stages.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A082"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE16",
+      "path": "vegetation_ecology/VE16_roots_around_rocks.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE01"
+      ],
+      "related_phase1": [
+        "A084",
+        "A073"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE17",
+      "path": "vegetation_ecology/VE17_leaf_litter.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE02",
+        "P2-VE04"
+      ],
+      "related_phase1": [
+        "A073",
+        "A074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-VE18",
+      "path": "vegetation_ecology/VE18_vegetation_variants.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE01",
+        "P2-VE03",
+        "P2-VE05",
+        "P2-VE07"
+      ],
+      "related_phase1": [
+        "A073",
+        "A074",
+        "A075",
+        "A076"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW01",
+      "path": "materials_weathering/MW01_plaster_rain_mask.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD12"
+      ],
+      "related_phase1": [
+        "A034"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW02",
+      "path": "materials_weathering/MW02_brick_mortar_salts.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD12"
+      ],
+      "related_phase1": [
+        "A033"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW03",
+      "path": "materials_weathering/MW03_wood_grain_frames.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD04"
+      ],
+      "related_phase1": [
+        "A027",
+        "A028"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW04",
+      "path": "materials_weathering/MW04_tile_age_variation.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD11"
+      ],
+      "related_phase1": [
+        "A032"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW05",
+      "path": "materials_weathering/MW05_stone_foot_traffic.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A085"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW06",
+      "path": "materials_weathering/MW06_quay_wet_bands.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH13"
+      ],
+      "related_phase1": [
+        "A044"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW07",
+      "path": "materials_weathering/MW07_iron_contact_wear.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A050",
+        "A071"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW08",
+      "path": "materials_weathering/MW08_ceramic_glaze_edge.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP10"
+      ],
+      "related_phase1": [
+        "A064"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW09",
+      "path": "materials_weathering/MW09_linen_weave_fray.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP07"
+      ],
+      "related_phase1": [
+        "A056",
+        "A059"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW10",
+      "path": "materials_weathering/MW10_indigo_fade.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP09"
+      ],
+      "related_phase1": [
+        "A007",
+        "A069"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW11",
+      "path": "materials_weathering/MW11_paper_transmission.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD23"
+      ],
+      "related_phase1": [
+        "A057"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW12",
+      "path": "materials_weathering/MW12_bamboo_surface_age.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE03"
+      ],
+      "related_phase1": [
+        "A074"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW13",
+      "path": "materials_weathering/MW13_bark_scars.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE05"
+      ],
+      "related_phase1": [
+        "A073",
+        "A075"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW14",
+      "path": "materials_weathering/MW14_mud_footprints.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE13"
+      ],
+      "related_phase1": [
+        "A086"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW15",
+      "path": "materials_weathering/MW15_moss_decal_stack.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE12"
+      ],
+      "related_phase1": [
+        "A079"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW16",
+      "path": "materials_weathering/MW16_soot_deposition.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN05"
+      ],
+      "related_phase1": [
+        "A009",
+        "A012",
+        "A067"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW17",
+      "path": "materials_weathering/MW17_dust_cleaning.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "A060",
+        "A062",
+        "A066"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-MW18",
+      "path": "materials_weathering/MW18_repair_material_story.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD11",
+        "P2-AD12"
+      ],
+      "related_phase1": [
+        "A001",
+        "A034",
+        "A044"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI01",
+      "path": "scene_integration/SI01_proxy_replacement_map.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-SI02"
+      ],
+      "related_phase1": [
+        "S12",
+        "A001",
+        "A003"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI02",
+      "path": "scene_integration/SI02_factory_registry.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "S12"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI03",
+      "path": "scene_integration/SI03_district_loading.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-SI02"
+      ],
+      "related_phase1": [
+        "S12"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI04",
+      "path": "scene_integration/SI04_bridge_boundary_agreement.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH11"
+      ],
+      "related_phase1": [
+        "S03",
+        "A041"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI05",
+      "path": "scene_integration/SI05_frontage_access.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD22"
+      ],
+      "related_phase1": [
+        "S08",
+        "S09",
+        "A001",
+        "A002"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI06",
+      "path": "scene_integration/SI06_interior_level_contract.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN06",
+        "P2-IN23"
+      ],
+      "related_phase1": [
+        "S02",
+        "S08",
+        "A003"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI07",
+      "path": "scene_integration/SI07_rainwater_chain.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH15",
+        "P2-AD21"
+      ],
+      "related_phase1": [
+        "S01",
+        "S05",
+        "A087"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI08",
+      "path": "scene_integration/SI08_functional_clearance.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD16"
+      ],
+      "related_phase1": [
+        "S08",
+        "S09"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI09",
+      "path": "scene_integration/SI09_component_instancing.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "S06",
+        "A027",
+        "A032",
+        "A057"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI10",
+      "path": "scene_integration/SI10_hero_detail_switch.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE18"
+      ],
+      "related_phase1": [
+        "S06",
+        "S10"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI11",
+      "path": "scene_integration/SI11_wetness_binding.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-MW11"
+      ],
+      "related_phase1": [
+        "S04",
+        "S05"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI12",
+      "path": "scene_integration/SI12_asset_version_lock.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-SI02"
+      ],
+      "related_phase1": [
+        "S12"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI13",
+      "path": "scene_integration/SI13_camera_contact_sheet.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "S10",
+        "A096"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI14",
+      "path": "scene_integration/SI14_reference_asset_separation.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "S10"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI15",
+      "path": "scene_integration/SI15_legacy_anchor_survey.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "related_phase1": [
+        "S11"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI16",
+      "path": "scene_integration/SI16_portable_asset_delivery.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-SI12"
+      ],
+      "related_phase1": [
+        "S12"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI17",
+      "path": "scene_integration/SI17_coverage_map.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-SI01",
+        "P2-SI12"
+      ],
+      "related_phase1": [
+        "S12",
+        "S10"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-SI18",
+      "path": "scene_integration/SI18_task_handoff_report.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-SI12",
+        "P2-SI17"
+      ],
+      "related_phase1": [
+        "S12"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST01",
+      "path": "environment_storytelling/ST01_south_gate_morning.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-DL02",
+        "P2-WH11"
+      ],
+      "related_phase1": [
+        "D01",
+        "K01"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST02",
+      "path": "environment_storytelling/ST02_shop_street_shelter.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-DL09",
+        "P2-MW01"
+      ],
+      "related_phase1": [
+        "D02",
+        "K01"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST03",
+      "path": "environment_storytelling/ST03_inn_arrival_evening.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN01",
+        "P2-DL24"
+      ],
+      "related_phase1": [
+        "D03",
+        "K02"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST04",
+      "path": "environment_storytelling/ST04_boatyard_shift.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-WH08",
+        "P2-DL21"
+      ],
+      "related_phase1": [
+        "D04",
+        "K03"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST05",
+      "path": "environment_storytelling/ST05_academy_after_rain.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN08",
+        "P2-VE06"
+      ],
+      "related_phase1": [
+        "D05",
+        "K05"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST06",
+      "path": "environment_storytelling/ST06_residential_repairs.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-MW18",
+        "P2-DL10"
+      ],
+      "related_phase1": [
+        "D06",
+        "K06"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST07",
+      "path": "environment_storytelling/ST07_garden_borrowed_view.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-AD14",
+        "P2-VE05",
+        "P2-SI15"
+      ],
+      "related_phase1": [
+        "D07",
+        "K07"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST08",
+      "path": "environment_storytelling/ST08_workshop_closing.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP09",
+        "P2-CP13"
+      ],
+      "related_phase1": [
+        "D08",
+        "K08"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST09",
+      "path": "environment_storytelling/ST09_tea_farm_return.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-CP20",
+        "P2-VE14"
+      ],
+      "related_phase1": [
+        "D09",
+        "K09"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST10",
+      "path": "environment_storytelling/ST10_temple_pause.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-DL19",
+        "P2-VE07"
+      ],
+      "related_phase1": [
+        "D10",
+        "K10"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST11",
+      "path": "environment_storytelling/ST11_bamboo_creek_turn.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-VE04",
+        "P2-WH17"
+      ],
+      "related_phase1": [
+        "D11",
+        "K11"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-ST12",
+      "path": "environment_storytelling/ST12_lake_tower_depth.md",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04",
+        "P2-IN23",
+        "P2-WH18"
+      ],
+      "related_phase1": [
+        "D12",
+        "K12"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D01",
+      "path": "districts/D01.md",
+      "depends_on": [
+        "D01",
+        "P2-WH11",
+        "P2-WH14",
+        "P2-DL02",
+        "P2-DL07",
+        "P2-DL22",
+        "P2-ST01"
+      ],
+      "related_phase1": [
+        "D01"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D02",
+      "path": "districts/D02.md",
+      "depends_on": [
+        "D02",
+        "P2-AD15",
+        "P2-AD17",
+        "P2-IN03",
+        "P2-IN04",
+        "P2-IN16",
+        "P2-IN17",
+        "P2-ST02"
+      ],
+      "related_phase1": [
+        "D02"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D03",
+      "path": "districts/D03.md",
+      "depends_on": [
+        "D03",
+        "P2-IN01",
+        "P2-IN02",
+        "P2-IN05",
+        "P2-IN06",
+        "P2-AD21",
+        "P2-DL09",
+        "P2-DL24",
+        "P2-ST03"
+      ],
+      "related_phase1": [
+        "D03"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D04",
+      "path": "districts/D04.md",
+      "depends_on": [
+        "D04",
+        "P2-WH01",
+        "P2-WH03",
+        "P2-WH08",
+        "P2-WH09",
+        "P2-WH15",
+        "P2-CP02",
+        "P2-CP24",
+        "P2-DL21",
+        "P2-ST04"
+      ],
+      "related_phase1": [
+        "D04"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D05",
+      "path": "districts/D05.md",
+      "depends_on": [
+        "D05",
+        "P2-IN08",
+        "P2-IN09",
+        "P2-IN10",
+        "P2-IN11",
+        "P2-AD14",
+        "P2-VE05",
+        "P2-VE06",
+        "P2-ST05"
+      ],
+      "related_phase1": [
+        "D05"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D06",
+      "path": "districts/D06.md",
+      "depends_on": [
+        "D06",
+        "P2-IN12",
+        "P2-IN13",
+        "P2-IN14",
+        "P2-AD22",
+        "P2-DL10",
+        "P2-DL11",
+        "P2-MW18",
+        "P2-ST06"
+      ],
+      "related_phase1": [
+        "D06"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D07",
+      "path": "districts/D07.md",
+      "depends_on": [
+        "D07",
+        "P2-AD14",
+        "P2-AD19",
+        "P2-AD20",
+        "P2-VE05",
+        "P2-VE06",
+        "P2-MW15",
+        "P2-SI15",
+        "P2-ST07"
+      ],
+      "related_phase1": [
+        "D07"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D08",
+      "path": "districts/D08.md",
+      "depends_on": [
+        "D08",
+        "P2-CP01",
+        "P2-CP04",
+        "P2-CP06",
+        "P2-CP08",
+        "P2-CP10",
+        "P2-CP13",
+        "P2-CP15",
+        "P2-CP18",
+        "P2-SI07",
+        "P2-ST08"
+      ],
+      "related_phase1": [
+        "D08"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D09",
+      "path": "districts/D09.md",
+      "depends_on": [
+        "D09",
+        "P2-WH16",
+        "P2-VE13",
+        "P2-VE14",
+        "P2-VE15",
+        "P2-CP20",
+        "P2-CP21",
+        "P2-CP22",
+        "P2-DL13",
+        "P2-ST09"
+      ],
+      "related_phase1": [
+        "D09"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D10",
+      "path": "districts/D10.md",
+      "depends_on": [
+        "D10",
+        "P2-AD03",
+        "P2-AD05",
+        "P2-AD09",
+        "P2-IN21",
+        "P2-IN22",
+        "P2-VE07",
+        "P2-VE08",
+        "P2-DL19",
+        "P2-ST10"
+      ],
+      "related_phase1": [
+        "D10"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D11",
+      "path": "districts/D11.md",
+      "depends_on": [
+        "D11",
+        "P2-VE03",
+        "P2-VE04",
+        "P2-VE11",
+        "P2-VE17",
+        "P2-WH17",
+        "P2-MW14",
+        "P2-SI08",
+        "P2-ST11"
+      ],
+      "related_phase1": [
+        "D11"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "P2-D12",
+      "path": "districts/D12.md",
+      "depends_on": [
+        "D12",
+        "P2-IN23",
+        "P2-AD18",
+        "P2-WH18",
+        "P2-VE01",
+        "P2-VE02",
+        "P2-VE09",
+        "P2-VE10",
+        "P2-SI10",
+        "P2-ST12"
+      ],
+      "related_phase1": [
+        "D12"
+      ],
+      "status": "planned"
+    }
+  ],
+  "external_namespace": "phase1",
+  "external_index": "../catalog/task_graph.json",
+  "semantics": {
+    "depends_on": "required protocol or named phase2 prerequisite; planned does not imply complete",
+    "related_phase1": "host asset or design reference; verify minimum host inputs per task"
+  }
+}

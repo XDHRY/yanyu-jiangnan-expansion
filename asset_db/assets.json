@@ -1,0 +1,54 @@
+{
+  "schema_version": 2,
+  "region": "jiangnan_bamboo_inn",
+  "purpose": "Production asset registry for a grounded historical-wuxia Jiangnan environment.",
+  "status_values": ["planned", "blockout", "production", "validated"],
+  "assets": [
+    {"id":"JN_BLD_BASE_01","name_cn":"石基直段","category":"architecture","family":"foundation","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_BLD_STEP_01","name_cn":"石阶短段","category":"architecture","family":"foundation","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_COL_01","name_cn":"木柱标准段","category":"architecture","family":"timber_frame","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_BEAM_01","name_cn":"横梁标准段","category":"architecture","family":"timber_frame","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_WALL_01","name_cn":"木板墙直段","category":"architecture","family":"wall","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_DOOR_01","name_cn":"单扇木门","category":"architecture","family":"door_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_WIN_01","name_cn":"木格窗标准型","category":"architecture","family":"window_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_ROOF_TILE_01","name_cn":"灰瓦屋顶平段","category":"architecture","family":"roof_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_architecture_assets.py"},
+    {"id":"JN_PATH_STONE_01","name_cn":"石板路直段","category":"ground","family":"path_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_ground_assets.py"},
+    {"id":"JN_PATH_DIRT_01","name_cn":"泥地过渡段","category":"ground","family":"path_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_ground_assets.py"},
+    {"id":"JN_BAMBOO_A","name_cn":"高竹直立型","category":"vegetation","family":"bamboo_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_bamboo_asset.py"},
+    {"id":"JN_BAMBOO_B","name_cn":"微弯竹型","category":"vegetation","family":"bamboo_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_bamboo_asset.py"},
+    {"id":"JN_BAMBOO_CLUSTER_01","name_cn":"小型竹丛","category":"vegetation","family":"bamboo_cluster","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_bamboo_asset.py"},
+    {"id":"JN_PROP_LANTERN_01","name_cn":"标准灯笼","category":"prop","family":"hanging_system","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_PROP_SIGN_01","name_cn":"客栈招牌","category":"prop","family":"signage","priority":"P0","status":"blockout","parametric":false,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_PROP_TABLE_01","name_cn":"方桌","category":"prop","family":"furniture","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_PROP_BENCH_01","name_cn":"长凳","category":"prop","family":"furniture","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_PROP_WINE_JAR_01","name_cn":"酒坛","category":"prop","family":"utility_props","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_INT_COUNTER_01","name_cn":"客栈柜台","category":"interior","family":"inn_interior","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_INT_BED_01","name_cn":"木床榻","category":"interior","family":"inn_interior","priority":"P0","status":"blockout","parametric":true,"factory":"tools/generate_prop_assets.py"},
+    {"id":"JN_WATER_DOCK_01","name_cn":"青石水埠头","category":"waterside","family":"waterside_access","priority":"P0","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_MOONGATE_01","name_cn":"月洞门墙段","category":"architecture","family":"wall_gate","priority":"P0","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_BRIDGE_01","name_cn":"小型石拱桥","category":"architecture","family":"bridge_system","priority":"P0","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_CORRIDOR_01","name_cn":"临水穿廊","category":"architecture","family":"corridor_system","priority":"P0","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_BOAT_01","name_cn":"乌篷船","category":"prop","family":"watercraft","priority":"P0","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_WELL_01","name_cn":"青石井栏","category":"prop","family":"water_utility","priority":"P0","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_FLUME_01","name_cn":"竹制引水槽","category":"prop","family":"water_feature","priority":"P1","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"},
+    {"id":"JN_WATER_LAMPPOST_01","name_cn":"临水灯架","category":"prop","family":"lighting_prop","priority":"P1","status":"validated","parametric":true,"factory":"tools/generate_waterside_assets.py","pack":"generated_assets/JN_WatersideFactory.blend"}
+  ],
+  "generated_packs": [
+    {
+      "id": "JN_WATERSIDE_PACK_V1",
+      "blend": "generated_assets/JN_WatersideFactory.blend",
+      "preview": "generated_assets/waterside-preview.png",
+      "report": "generated_assets/waterside-report.json",
+      "asset_count": 8,
+      "blender": "4.5.14",
+      "validation": "headless_build_reopen_passed"
+    }
+  ],
+  "next_families": [
+    "market_stall_system",
+    "cloth_and_banner_system",
+    "kitchen_system",
+    "moss_and_decal_system",
+    "willow_and_shore_vegetation"
+  ]
+}

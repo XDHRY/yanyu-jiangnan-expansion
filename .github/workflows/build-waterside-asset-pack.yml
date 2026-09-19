@@ -1,0 +1,90 @@
+name: Build Jiangnan Waterside Asset Pack
+
+on:
+  push:
+    branches: ["ai/asset-pipeline-v1"]
+    paths:
+      - "tools/generate_waterside_assets.py"
+      - "tools/render_asset_preview.py"
+      - ".github/workflows/build-waterside-asset-pack.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  BLENDER_VERSION: "4.5.14"
+  BLENDER_DIR: ${{ github.workspace }}/.cache/blender
+
+concurrency:
+  group: waterside-pack-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o /tmp/blender.tar.xz
+          tar -xf /tmp/blender.tar.xz -C "$BLENDER_DIR" --strip-components=1
+
+      - name: Install headless OpenGL runtime
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri
+
+      - name: Build waterside asset pack
+        run: |
+          "$BLENDER_DIR/blender" -b --factory-startup --python-exit-code 1 \
+            --python tools/generate_waterside_assets.py -- \
+            --output generated_assets/JN_WatersideFactory.blend \
+            --report generated_assets/waterside-report.json
+
+      - name: Render catalog preview
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          EGL_PLATFORM: "surfaceless"
+        run: |
+          "$BLENDER_DIR/blender" -b generated_assets/JN_WatersideFactory.blend --python-exit-code 1 \
+            --python tools/render_asset_preview.py -- \
+            --resolution 720 --samples 8 \
+            --output generated_assets/waterside-preview.png
+
+      - name: Verify pack can reopen
+        run: |
+          "$BLENDER_DIR/blender" -b generated_assets/JN_WatersideFactory.blend --python-exit-code 1 --python-expr \
+            "import bpy; roots=[o for o in bpy.context.scene.objects if o.get('asset_id')]; assert len(roots)==8, len(roots); print('WATERSIDE_REOPEN_OK', len(roots))"
+
+      - name: Commit generated pack
+        run: |
+          set -euxo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add generated_assets/JN_WatersideFactory.blend generated_assets/waterside-report.json generated_assets/waterside-preview.png
+          if git diff --cached --quiet; then
+            echo "Asset pack already up to date"
+            exit 0
+          fi
+          git commit -m "build: generate Jiangnan waterside asset pack"
+          git fetch origin ai/asset-pipeline-v1
+          git rebase origin/ai/asset-pipeline-v1
+          git push origin HEAD:ai/asset-pipeline-v1

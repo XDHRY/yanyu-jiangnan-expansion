@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "nodes": [
+    "D01",
+    "D02",
+    "D03",
+    "D04",
+    "D05",
+    "D06",
+    "D07",
+    "D08",
+    "D09",
+    "D10",
+    "D11",
+    "D12"
+  ],
+  "edges": [
+    {
+      "id": "L_D01_D02",
+      "a": "D01",
+      "b": "D02",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        -180.0,
+        -180.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D01_D05",
+      "a": "D01",
+      "b": "D05",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        -270.0,
+        -90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D02_D03",
+      "a": "D02",
+      "b": "D03",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        0.0,
+        -180.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D02_D06",
+      "a": "D02",
+      "b": "D06",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        -90.0,
+        -90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D03_D04",
+      "a": "D03",
+      "b": "D04",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        180.0,
+        -180.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D03_D07",
+      "a": "D03",
+      "b": "D07",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        90.0,
+        -90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D04_D08",
+      "a": "D04",
+      "b": "D08",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        270.0,
+        -90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D05_D06",
+      "a": "D05",
+      "b": "D06",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        -180.0,
+        0.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D05_D09",
+      "a": "D05",
+      "b": "D09",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        -270.0,
+        90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D06_D07",
+      "a": "D06",
+      "b": "D07",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        0.0,
+        0.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D06_D10",
+      "a": "D06",
+      "b": "D10",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        -90.0,
+        90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D07_D08",
+      "a": "D07",
+      "b": "D08",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        180.0,
+        0.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D07_D11",
+      "a": "D07",
+      "b": "D11",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        90.0,
+        90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D08_D12",
+      "a": "D08",
+      "b": "D12",
+      "kind": "arch_bridge",
+      "span_m": 32,
+      "width_m": 6,
+      "center": [
+        270.0,
+        90.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D09_D10",
+      "a": "D09",
+      "b": "D10",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        -180.0,
+        180.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D10_D11",
+      "a": "D10",
+      "b": "D11",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        0.0,
+        180.0,
+        2
+      ],
+      "owner_task": "A041"
+    },
+    {
+      "id": "L_D11_D12",
+      "a": "D11",
+      "b": "D12",
+      "kind": "arch_bridge",
+      "span_m": 24,
+      "width_m": 6,
+      "center": [
+        180.0,
+        180.0,
+        2
+      ],
+      "owner_task": "A041"
+    }
+  ]
+}

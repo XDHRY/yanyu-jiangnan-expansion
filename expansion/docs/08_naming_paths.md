@@ -1,0 +1,9 @@
+# 命名、目录与版本
+
+新命名空间JNX。资产JNX_A001、实例JNX_D02_BLD_004、子对象JNX_D02_BLD_004__roof、连接点JNX_D02_BLD_004__SOCKET_entry。socket后缀稳定，别因中文标题变化而改接口。
+
+任务源文件只写入对应future子目录；任务产物放generated/任务ID/v001。新一轮结果写v002，不覆盖旧版本。本轮build_world要求输出目录尚不存在，是防止误覆盖的明确行为。
+
+代码和文件夹采用可读英文slug，中文描述写在Markdown与name_cn。固定字符串区分asset_id和instance_id；路径统一相对仓库根目录或相对版本目录并声明是哪种。库依赖不能引用开发机绝对路径。
+
+精细文件清单已经列在TASK_INDEX和各future分类README中；不需要预先创建96个空.py。实现者领取任务后新增真正可读的代码。

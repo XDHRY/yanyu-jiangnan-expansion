@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "project": "JNX_Expansion_v1",
+  "seed": 20260918,
+  "units": "metres",
+  "up_axis": "Z",
+  "bounds": [
+    -360,
+    -270,
+    360,
+    270
+  ],
+  "ground_z": 2.0,
+  "water_z": 0.0,
+  "status": "framework_unexecuted",
+  "districts": [
+    {
+      "id": "D01",
+      "name_cn": "南市水关",
+      "center": [
+        -270,
+        -180
+      ],
+      "building_count": 14,
+      "landmark": "hall",
+      "building_families": [
+        "shop",
+        "house"
+      ],
+      "dock_count": 2,
+      "stall_count": 8,
+      "tree_count": 16,
+      "brief": "南向入城门户，以低矮关房和转折集市打开第一印象；货担停在桥头侧袋，桥中保持通行；南岸看见船只抵达，北望书院方向形成安静的下一幕。"
+    },
+    {
+      "id": "D02",
+      "name_cn": "沿河商街",
+      "center": [
+        -90,
+        -180
+      ],
+      "building_count": 20,
+      "landmark": "hall",
+      "building_families": [
+        "shop",
+        "shop",
+        "house"
+      ],
+      "dock_count": 3,
+      "stall_count": 8,
+      "tree_count": 16,
+      "brief": "以杂货、布铺、茶肆和临河食摊形成连续商业界面；店面窄深，招幌高度错落；河边开口与店后装卸通道一一对应，暖光限于门洞和檐下。"
+    },
+    {
+      "id": "D03",
+      "name_cn": "竹海客栈",
+      "center": [
+        90,
+        -180
+      ],
+      "building_count": 12,
+      "landmark": "inn",
+      "building_families": [
+        "inn",
+        "house",
+        "pavilion"
+      ],
+      "dock_count": 2,
+      "stall_count": 4,
+      "tree_count": 36,
+      "brief": "一座三面围合的客栈成为停留核心；前院接待、侧院后厨、后侧竹径分开；靠河有卸货埠，二层回廊望向庭院，竹影只切碎局部立面。"
+    },
+    {
+      "id": "D04",
+      "name_cn": "船坞渔埠",
+      "center": [
+        270,
+        -180
+      ],
+      "building_count": 12,
+      "landmark": "warehouse",
+      "building_families": [
+        "warehouse",
+        "house"
+      ],
+      "dock_count": 3,
+      "stall_count": 6,
+      "tree_count": 12,
+      "brief": "用仓房、修船棚、晾网架与泊船形成生产岸线；下水坡道朝南，修船通道平行河岸；把渔具与货箱分成操作区和等待区，保留将来完整船坞的扩展面。"
+    },
+    {
+      "id": "D05",
+      "name_cn": "西园书院",
+      "center": [
+        -270,
+        0
+      ],
+      "building_count": 10,
+      "landmark": "academy",
+      "building_families": [
+        "house",
+        "pavilion"
+      ],
+      "dock_count": 1,
+      "stall_count": 2,
+      "tree_count": 20,
+      "brief": "以讲堂、藏书、抄写、宿舍构成层层内收的院落；外部公共路穿过前庭而不穿讲堂；粉墙留出借景窗口，庭院中景用石与梅控制视线。"
+    },
+    {
+      "id": "D06",
+      "name_cn": "粉墙里巷",
+      "center": [
+        -90,
+        0
+      ],
+      "building_count": 20,
+      "landmark": "courtyard",
+      "building_families": [
+        "house",
+        "house",
+        "shop"
+      ],
+      "dock_count": 1,
+      "stall_count": 4,
+      "tree_count": 12,
+      "brief": "连续民居之间用窄巷、晒台、共井和后门构成生活肌理；屋脊高低小幅变化，门槛和雨沟有统一落差；日常磨损集中在脚步、手扶和排水位置。"
+    },
+    {
+      "id": "D07",
+      "name_cn": "中央水院",
+      "center": [
+        90,
+        0
+      ],
+      "building_count": 8,
+      "landmark": "legacy_reserve",
+      "building_families": [
+        "pavilion",
+        "house"
+      ],
+      "dock_count": 1,
+      "stall_count": 0,
+      "tree_count": 24,
+      "brief": "保留旧庭院的视觉地位；本轮在北半区预留60×48米接入口，不运行旧脚本、不复制旧物体；以后通过只读链接测量旧场景包围盒、锚点和地坪后衔接。"
+    },
+    {
+      "id": "D08",
+      "name_cn": "手工作坊",
+      "center": [
+        270,
+        0
+      ],
+      "building_count": 16,
+      "landmark": "workshop",
+      "building_families": [
+        "warehouse",
+        "shop",
+        "house"
+      ],
+      "dock_count": 2,
+      "stall_count": 6,
+      "tree_count": 12,
+      "brief": "木作、染布、陶作分组布局；展示沿主路，卸货走侧埠，含水作业靠排水端；磨石、木屑、布匹不是均匀撒满，必须对应具体工位与搬运路线。"
+    },
+    {
+      "id": "D09",
+      "name_cn": "田庄茶圃",
+      "center": [
+        -270,
+        180
+      ],
+      "building_count": 8,
+      "landmark": "hall",
+      "building_families": [
+        "house",
+        "warehouse"
+      ],
+      "dock_count": 1,
+      "stall_count": 2,
+      "tree_count": 20,
+      "brief": "让城镇边缘过渡到田埂、菜地、茶行和农舍；首先保留可种植地块与沟渠接口；初版房屋仅占少量，后续按坡向种植而非全区铺同一绿毯。"
+    },
+    {
+      "id": "D10",
+      "name_cn": "山门古寺",
+      "center": [
+        -90,
+        180
+      ],
+      "building_count": 8,
+      "landmark": "temple",
+      "building_families": [
+        "pavilion",
+        "house"
+      ],
+      "dock_count": 1,
+      "stall_count": 0,
+      "tree_count": 28,
+      "brief": "山门、前庭、正殿、侧殿沿内收轴线组织；寺院尺度高于民居但仍以可使用构造为基础；古柏框住殿檐，香灰和铜器局部克制，远处留山形接口。"
+    },
+    {
+      "id": "D11",
+      "name_cn": "竹溪幽径",
+      "center": [
+        90,
+        180
+      ],
+      "building_count": 4,
+      "landmark": "pavilion",
+      "building_families": [
+        "pavilion",
+        "house"
+      ],
+      "dock_count": 1,
+      "stall_count": 0,
+      "tree_count": 60,
+      "brief": "把稀疏建筑放入竹林间隙；溪流、踏步、凉亭和停留石成为节奏点；保留主路6米骨架，细化时再从独立步径分叉，不让竹丛覆盖桥头和通行区。"
+    },
+    {
+      "id": "D12",
+      "name_cn": "湖心望楼",
+      "center": [
+        270,
+        180
+      ],
+      "building_count": 6,
+      "landmark": "tower",
+      "building_families": [
+        "pavilion",
+        "house"
+      ],
+      "dock_count": 2,
+      "stall_count": 2,
+      "tree_count": 20,
+      "brief": "三层望楼控制远处轮廓；岛岸、亭廊、芦苇和观景平台分层；湖面留白承担距离感，塔基与岸线接实；未来湖面扩大只向规划边界外新增。"
+    }
+  ],
+  "family_tasks": {
+    "house": "A001",
+    "shop": "A002",
+    "inn": "A003",
+    "warehouse": "A010",
+    "pavilion": "A017"
+  },
+  "legacy": {
+    "path": "Jiangnan.blend",
+    "mode": "reserved_only",
+    "script_must_not_run": "jiangnan.py"
+  },
+  "provenance": {
+    "repository": "XDHRY/yanyu-jiangnan",
+    "base_branch": "ai/asset-pipeline-v1",
+    "base_commit": "2a2063b1870dd95d8e47f591b4c9cb0e0b6d12eb"
+  }
+}

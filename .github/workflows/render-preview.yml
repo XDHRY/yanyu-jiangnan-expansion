@@ -1,0 +1,119 @@
+name: Remote Render Preview
+
+on:
+  workflow_dispatch:
+    inputs:
+      camera:
+        description: "Camera name without JN_ prefix"
+        required: true
+        default: "三分之四"
+        type: choice
+        options: ["三分之四", "正面", "顶视"]
+      weather:
+        description: "0 rain / 1 snow"
+        required: true
+        default: "0"
+        type: choice
+        options: ["0", "1"]
+      engine:
+        description: "Preview renderer"
+        required: true
+        default: "BLENDER_EEVEE_NEXT"
+        type: choice
+        options: ["BLENDER_EEVEE_NEXT", "CYCLES"]
+      resolution:
+        description: "Output width"
+        required: true
+        default: "960"
+        type: choice
+        options: ["640", "960", "1280", "1600"]
+      samples:
+        description: "Render samples"
+        required: true
+        default: "32"
+        type: choice
+        options: ["16", "32", "64", "96"]
+
+permissions:
+  contents: read
+
+env:
+  BLENDER_VERSION: "4.5.14"
+  BLENDER_DIR: ${{ github.workspace }}/.cache/blender
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o /tmp/blender.tar.xz
+          tar -xf /tmp/blender.tar.xz -C "$BLENDER_DIR" --strip-components=1
+
+      - name: Install headless OpenGL / EGL runtime
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 \
+            libgl1 \
+            libgl1-mesa-dri
+
+      - name: Rebuild current source scene
+        shell: bash
+        run: |
+          "$BLENDER_DIR/blender" -b --factory-startup \
+            --python tools/headless_rebuild.py -- \
+            --source jiangnan.py \
+            --stage 5 \
+            --output remote_render/Jiangnan-rebuilt.blend \
+            --report remote_render/rebuild-report.json
+
+      - name: Validate scene before render
+        shell: bash
+        run: |
+          "$BLENDER_DIR/blender" -b remote_render/Jiangnan-rebuilt.blend \
+            --python tools/ci_validate.py -- \
+            --output remote_render/validation.json
+
+      - name: Render requested preview
+        shell: bash
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          EGL_PLATFORM: "surfaceless"
+        run: |
+          "$BLENDER_DIR/blender" -b remote_render/Jiangnan-rebuilt.blend \
+            --python tools/render_preview.py -- \
+            --camera "${{ inputs.camera }}" \
+            --weather "${{ inputs.weather }}" \
+            --engine "${{ inputs.engine }}" \
+            --resolution "${{ inputs.resolution }}" \
+            --samples "${{ inputs.samples }}" \
+            --output remote_render/preview.png
+
+      - name: Upload preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jiangnan-${{ inputs.camera }}-weather-${{ inputs.weather }}-${{ github.run_id }}
+          path: remote_render/
+          if-no-files-found: warn
+          retention-days: 30

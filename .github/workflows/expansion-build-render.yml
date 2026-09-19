@@ -1,0 +1,199 @@
+name: Expansion Build and Render
+
+# The expansion package (expansion/) is independent of the legacy jiangnan.py
+# pipeline, so it gets its own workflow. Geometry is built once and uploaded;
+# the four cameras then render in parallel, because Cycles here is CPU-only
+# with a volume scatter and a single runner rendering all four serially runs
+# past the job timeout.
+
+on:
+  push:
+    branches: [main, "impl/**", "ai/**"]
+    paths:
+      - "expansion/**"
+      - ".github/workflows/expansion-build-render.yml"
+  pull_request:
+    paths:
+      - "expansion/**"
+      - ".github/workflows/expansion-build-render.yml"
+  workflow_dispatch:
+    inputs:
+      samples:
+        description: "Cycles samples per camera"
+        required: true
+        default: "96"
+        type: choice
+        options: ["16", "32", "64", "96", "160"]
+      resolution:
+        description: "Output width x height"
+        required: true
+        default: "1280x720"
+        type: choice
+        options: ["960x540", "1280x720", "1920x1080"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: expansion-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  BLENDER_VERSION: "4.5.14"
+  BLENDER_DIR: ${{ github.workspace }}/.cache/blender
+  SAMPLES: ${{ inputs.samples || '96' }}
+  RESOLUTION: ${{ inputs.resolution || '1280x720' }}
+
+jobs:
+  # Catches syntax errors and contract breaks in ~30s, before any job spends
+  # eight minutes downloading Blender.
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile every expansion module
+        run: |
+          set -euxo pipefail
+          python -m compileall -q expansion/scripts
+
+      - name: Build geometry without Blender
+        run: |
+          set -euxo pipefail
+          python expansion/scripts/build_world.py \
+            --format obj --stage detail --out ci_artifacts/obj
+
+      - name: Check the scene contract
+        run: python expansion/scripts/check_scene.py ci_artifacts/obj/scene_manifest.json
+
+      - name: Upload manifest
+        uses: actions/upload-artifact@v4
+        with:
+          name: expansion-manifest-${{ github.sha }}
+          path: ci_artifacts/obj/scene_manifest.json
+          retention-days: 14
+
+  build:
+    needs: contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o /tmp/blender.tar.xz
+          tar -xf /tmp/blender.tar.xz -C "$BLENDER_DIR" --strip-components=1
+
+      - name: Install headless OpenGL / EGL runtime
+        run: |
+          set -euxo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 libgl1 libgl1-mesa-dri libxi6 libxxf86vm1 libxfixes3 libxrender1
+
+      - name: Build the detail scene
+        run: |
+          set -euxo pipefail
+          "$BLENDER_DIR/blender" -b --factory-startup --python-exit-code 1 \
+            --python expansion/scripts/build_world.py -- \
+            --format blend --stage detail --out remote_render
+
+      - name: Check the scene contract
+        run: python expansion/scripts/check_scene.py remote_render/scene_manifest.json
+
+      - name: Upload built scene
+        uses: actions/upload-artifact@v4
+        with:
+          name: expansion-blend-${{ github.sha }}
+          path: |
+            remote_render/JNX_Expansion.blend
+            remote_render/scene_manifest.json
+          retention-days: 14
+
+  # Four parallel Cycles renders cost roughly 160-240 runner-minutes per run,
+  # against 2000 free private-repo minutes a month. Feature pushes get the
+  # contract and build checks only; full renders are asked for explicitly.
+  render:
+    needs: build
+    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        camera: [JNX_Overview, JNX_Canal_Hero, JNX_Water_Level, JNX_Lane]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o /tmp/blender.tar.xz
+          tar -xf /tmp/blender.tar.xz -C "$BLENDER_DIR" --strip-components=1
+
+      - name: Install headless OpenGL / EGL runtime
+        run: |
+          set -euxo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 libgl1 libgl1-mesa-dri libxi6 libxxf86vm1 libxfixes3 libxrender1
+
+      - name: Download built scene
+        uses: actions/download-artifact@v4
+        with:
+          name: expansion-blend-${{ github.sha }}
+          path: remote_render
+
+      - name: Render ${{ matrix.camera }}
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          EGL_PLATFORM: "surfaceless"
+        run: |
+          set -euxo pipefail
+          WIDTH="${RESOLUTION%x*}"
+          HEIGHT="${RESOLUTION#*x}"
+          "$BLENDER_DIR/blender" -b --python-exit-code 1 \
+            --python expansion/scripts/render_shots.py -- \
+            --blend remote_render/JNX_Expansion.blend \
+            --out shots \
+            --only "${{ matrix.camera }}" \
+            --samples "$SAMPLES" \
+            --resolution "$WIDTH" "$HEIGHT"
+
+      - name: Upload ${{ matrix.camera }}
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shot-${{ matrix.camera }}-${{ github.sha }}
+          path: shots/
+          if-no-files-found: error
+          retention-days: 30

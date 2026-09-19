@@ -1,0 +1,25 @@
+# `blender_io.py` · Blender文件适配
+
+对应已新增文件：[scripts/blender_io.py](../../scripts/blender_io.py)。本轮只提供初版框架，未运行Blender验收。
+
+## 这个Python文件利用什么，实现什么
+
+它使用Blender 4.5 bpy、mathutils.Vector。主要入口是`write_blend(builder, folder, preview=False)`。将纯Python图转成新Scene、分区Collection、Empty根、socket、共享Mesh、材质与相机。
+
+实现方法：用bpy.data.*创建数据，from_pydata写网格，libraries.write仅写新场景依赖；默认不渲染，preview开关为下一阶段保留。
+
+## 后续模型接手提示词
+
+阅读该文件和空间/资产契约，保留当前公共入口。先解释输入字段如何进入当前算法，再根据你领取的任务补足局部能力。保持生成结果可追踪到task_id和instance_id，不在本文件中写死具体区域的所有精细资产，不把同一个生成函数复制到别处。
+
+若增加几何类型，先决定其局部坐标、面朝向、材质槽和数据格式，再增加调用。若增加参数，给默认值、允许范围、失败提示和旧输入如何处理；不要让缺参造成随机隐式结果。文件import应保持无副作用；只有明确调用入口时才生成或输出。
+
+## 当前已表达与尚未覆盖
+
+本轮尚未在Blender执行。没有asset-browser标记、完整材质、导出引擎设置；相机仅作总览预设。
+
+这里的“实现”指文件中已有算法表达，不等于已经运行成功或达到成片质量。后续模型必须在实际运行后回填执行环境、命令、生成物位置和遇到的限制。
+
+## 上下游咬合
+
+config提供规格；layout提供实例位置；kernel统一几何/命名；各生成模块只追加自己的图；blender_io只承担写入Blender；build_world控制调用顺序和输出目录。需要新共享功能时增加独立扩建模块并在模块说明中登记；不得悄悄让多个文件同时拥有同一资产的生成责任。

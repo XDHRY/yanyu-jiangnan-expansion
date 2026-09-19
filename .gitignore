@@ -18,3 +18,15 @@ __pycache__/
 
 # 本地重建时的默认输出（以防 output_dir 指向仓库外约定目录）
 render_output/
+
+# GitHub Actions / headless Blender 运行产物
+.cache/
+ci_artifacts/
+remote_render/
+
+# 由旧 deliver() 可能写到仓库根目录的统计文件；权威记录放 validation/ 或 CI artifact
+/scene_statistics.json
+
+# 扩展包构建产物（OBJ/blend/清单由 CI 重建，不入库）
+build/
+_out/

@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "project": "yanyu-jiangnan",
+  "policy": {
+    "base_color": "AI generation is allowed only as a material scan: flat neutral illumination, no baked shadows/highlights, seamless, full bleed.",
+    "derived_channels": "Roughness/normal/height/AO may use automated placeholders for iteration, but production maps require physical review and material-specific correction.",
+    "review": "Every generated material must be tested at near/mid/far distance in Blender under dry and rain lighting before production status."
+  },
+  "jobs": [
+    {
+      "id": "TX_JN_BAMBOO_001",
+      "material": "bamboo",
+      "priority": "P0",
+      "output": "textures/pbr/bamboo/bamboo_basecolor.png",
+      "real_world_span_cm": 35,
+      "status": "queued",
+      "prompt": "Use case: photorealistic-natural. Asset type: production seamless base-color material scan for living mature Jiangnan bamboo culms in a grounded historical-wuxia Blender environment. Square straight-on orthographic macro material scan covering approximately 35 cm of real bamboo skin, desaturated deep celadon to muted olive-green epidermis, extremely fine vertical fibers, faint pale bloom, subtle age speckling, restrained darker rain-stained variation, one or two soft horizontal node-zone traces that remain tile-friendly and do not form a complete cylindrical stalk. Natural biological irregularity, refined and quiet, never tropical neon green. Flat neutral diffuse cross-polarized illumination, no directional shadow, no glossy highlight baked in, no perspective, no cylindrical object silhouette. Seamlessly tileable on all four sides, full bleed material only. No leaves, scenery, text, frame, labels, grid or watermark. High resolution."
+    },
+    {
+      "id": "TX_JN_MUD_001",
+      "material": "mud_ground",
+      "priority": "P0",
+      "output": "textures/pbr/mud_ground/mud_ground_basecolor.png",
+      "real_world_span_cm": 180,
+      "status": "queued",
+      "prompt": "Use case: photorealistic-natural. Asset type: seamless production base-color texture for rain-darkened compacted earth on a Jiangnan mountain inn path. Square orthographic top-down material scan covering about 1.8 meters of ground. Muted charcoal-brown and cool umber packed soil, subtle granular silt, tiny embedded gray pebbles, sparse decomposing bamboo leaf fragments, faint irregular footprints and cart scuffs dissolved into the surface rather than distinct repeating prints. Damp tonal variation but NO visible puddle reflections or specular highlights baked into color. Historically ordinary rural path, understated and physically believable. Flat diffuse cross-polarized illumination, no cast shadows, no perspective, no horizon. Seamlessly tileable on all four sides, full bleed ground material only. No objects, borders, text, grid or watermark. High resolution."
+    },
+    {
+      "id": "TX_JN_CLOTH_001",
+      "material": "cloth_banner",
+      "priority": "P0",
+      "output": "textures/pbr/cloth_banner/cloth_banner_basecolor.png",
+      "real_world_span_cm": 60,
+      "status": "queued",
+      "prompt": "Use case: photorealistic-natural. Asset type: seamless production base-color texture for an old Jiangnan inn hemp-cotton banner. Square straight-on orthographic textile material scan covering roughly 60 cm. Coarse handwoven natural fibers, dark desaturated wine-red dye faded unevenly by years of rain and sun, restrained brown-gray contamination in fiber recesses, tiny repaired threads and subtle abrasion, no printed characters or symbols. Historic utilitarian cloth, not silk, not ceremonial brocade, not saturated crimson. Flat neutral diffuse illumination with no folds, no cast shadows, no sheen baked in. Seamlessly tileable on all four sides, full bleed textile only. No object silhouette, scenery, lettering, border, grid or watermark. High resolution."
+    },
+    {
+      "id": "TX_JN_STONE_PBR_001",
+      "material": "stone",
+      "priority": "P0",
+      "output": "textures/pbr/stone/",
+      "status": "needs_channel_authoring",
+      "channels": {
+        "base_color_source": "textures/stone.png",
+        "roughness_target": "dry 0.55-0.78; rain-exposed 0.28-0.48 via wetness mask",
+        "normal_target": "fine limestone pitting plus restrained erosion; no inflated rock noise",
+        "height_target_mm": "0.5-8.0",
+        "ao_target": "micro crevices only; do not bake scene-scale shadow",
+        "wetness_mask": "favor upward-facing shallow depressions and drainage paths, not uniform black/white"
+      }
+    },
+    {
+      "id": "TX_JN_CLAY_PBR_001",
+      "material": "clay",
+      "priority": "P0",
+      "output": "textures/pbr/clay/",
+      "status": "needs_channel_authoring",
+      "channels": {
+        "base_color_source": "textures/clay.png",
+        "roughness_target": "dry 0.48-0.62; wet 0.24-0.42",
+        "normal_target": "fine firing pits and mineral grain only; roof-tile geometry remains actual 3D",
+        "height_target_mm": "0.15-2.5",
+        "ao_target": "microstructure only"
+      }
+    },
+    {
+      "id": "TX_JN_WOOD_PBR_001",
+      "material": "wood",
+      "priority": "P0",
+      "output": "textures/pbr/wood/",
+      "status": "needs_channel_authoring",
+      "channels": {
+        "base_color_source": "textures/wood.png",
+        "roughness_target": "0.38-0.72 with lower roughness at hand/contact wear zones",
+        "normal_target": "long directional grain and restrained checking",
+        "height_target_mm": "0.2-4.0",
+        "ao_target": "cracks/recesses only"
+      }
+    },
+    {
+      "id": "TX_JN_PLASTER_PBR_001",
+      "material": "plaster",
+      "priority": "P0",
+      "output": "textures/pbr/plaster/",
+      "status": "needs_channel_authoring",
+      "channels": {
+        "base_color_source": "textures/plaster.png",
+        "roughness_target": "0.68-0.92",
+        "normal_target": "fine chalk and hairline cracks, very low amplitude",
+        "height_target_mm": "0.2-2.0",
+        "ao_target": "hairline cracks only"
+      }
+    },
+    {
+      "id": "TX_JN_BARK_PBR_001",
+      "material": "bark",
+      "priority": "P0",
+      "output": "textures/pbr/bark/",
+      "status": "needs_channel_authoring",
+      "channels": {
+        "base_color_source": "textures/bark.png",
+        "roughness_target": "0.68-0.90",
+        "normal_target": "directional fissures, preserve twisted age lines",
+        "height_target_mm": "1-12",
+        "ao_target": "deep fissures without flattening the base color"
+      }
+    }
+  ]
+}

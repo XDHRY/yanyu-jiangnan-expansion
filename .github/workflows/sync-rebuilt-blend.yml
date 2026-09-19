@@ -1,0 +1,92 @@
+name: Sync Rebuilt Jiangnan Blend
+
+on:
+  push:
+    branches: ["ai/asset-pipeline-v1"]
+    paths:
+      - "jiangnan.py"
+      - "textures/**"
+      - "tools/headless_rebuild.py"
+      - "tools/ci_validate.py"
+      - "tools/repair_jiangnan_source.py"
+      - ".github/workflows/sync-rebuilt-blend.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  BLENDER_VERSION: "4.5.14"
+  BLENDER_DIR: ${{ github.workspace }}/.cache/blender
+
+concurrency:
+  group: sync-jiangnan-blend-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify source repairs are already landed
+        run: python tools/repair_jiangnan_source.py --check
+
+      - name: Cache Blender
+        id: cache-blender
+        uses: actions/cache@v4
+        with:
+          path: .cache/blender
+          key: blender-${{ runner.os }}-${{ env.BLENDER_VERSION }}
+
+      - name: Download Blender
+        if: steps.cache-blender.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p "$BLENDER_DIR"
+          curl --fail --location --retry 3 \
+            "https://download.blender.org/release/Blender4.5/blender-${BLENDER_VERSION}-linux-x64.tar.xz" \
+            -o /tmp/blender.tar.xz
+          tar -xf /tmp/blender.tar.xz -C "$BLENDER_DIR" --strip-components=1
+
+      - name: Rebuild committed blend from authoritative source
+        shell: bash
+        run: |
+          set -euxo pipefail
+          "$BLENDER_DIR/blender" -b --factory-startup --python-exit-code 1 \
+            --python tools/headless_rebuild.py -- \
+            --source jiangnan.py \
+            --stage 5 \
+            --output Jiangnan.blend \
+            --report /tmp/rebuild-report.json
+          git restore -- Jiangnan.blend1 || true
+
+      - name: Strictly validate rebuilt blend before commit
+        shell: bash
+        run: |
+          set -euxo pipefail
+          "$BLENDER_DIR/blender" -b Jiangnan.blend --python-exit-code 1 \
+            --python tools/ci_validate.py -- \
+            --output /tmp/synced-validation.json
+
+      - name: Commit synchronized binary scene if changed
+        shell: bash
+        run: |
+          set -euxo pipefail
+          if git diff --quiet -- Jiangnan.blend; then
+            echo "Jiangnan.blend already matches authoritative source"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Jiangnan.blend
+          git commit -m "build: sync Jiangnan.blend with generator source"
+          # Other AI work may have advanced the branch while Blender was rebuilding.
+          # Rebase this single binary-sync commit onto the newest remote head before push.
+          git fetch origin ai/asset-pipeline-v1
+          git rebase origin/ai/asset-pipeline-v1
+          git push origin HEAD:ai/asset-pipeline-v1

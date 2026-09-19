@@ -1,0 +1,1694 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "id": "S01",
+      "type": "system",
+      "depends_on": [
+        "S02",
+        "S03"
+      ],
+      "path": "tasks/systems/S01_water_network.md",
+      "status": "planned"
+    },
+    {
+      "id": "S02",
+      "type": "system",
+      "depends_on": [],
+      "path": "tasks/systems/S02_coordinates.md",
+      "status": "planned"
+    },
+    {
+      "id": "S03",
+      "type": "system",
+      "depends_on": [
+        "S02"
+      ],
+      "path": "tasks/systems/S03_sockets.md",
+      "status": "planned"
+    },
+    {
+      "id": "S04",
+      "type": "system",
+      "depends_on": [
+        "S02"
+      ],
+      "path": "tasks/systems/S04_material_registry.md",
+      "status": "planned"
+    },
+    {
+      "id": "S05",
+      "type": "system",
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/systems/S05_weather_hooks.md",
+      "status": "planned"
+    },
+    {
+      "id": "S06",
+      "type": "system",
+      "depends_on": [
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/systems/S06_lod_instancing.md",
+      "status": "planned"
+    },
+    {
+      "id": "S07",
+      "type": "system",
+      "depends_on": [
+        "S04"
+      ],
+      "path": "tasks/systems/S07_uv_textures.md",
+      "status": "planned"
+    },
+    {
+      "id": "S08",
+      "type": "system",
+      "depends_on": [
+        "S02",
+        "S03"
+      ],
+      "path": "tasks/systems/S08_collision_navigation.md",
+      "status": "planned"
+    },
+    {
+      "id": "S09",
+      "type": "system",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S08"
+      ],
+      "path": "tasks/systems/S09_spatial_placement.md",
+      "status": "planned"
+    },
+    {
+      "id": "S10",
+      "type": "system",
+      "depends_on": [
+        "S09"
+      ],
+      "path": "tasks/systems/S10_camera_review.md",
+      "status": "planned"
+    },
+    {
+      "id": "S11",
+      "type": "system",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S09"
+      ],
+      "path": "tasks/systems/S11_legacy_adapter.md",
+      "status": "planned"
+    },
+    {
+      "id": "S12",
+      "type": "system",
+      "depends_on": [
+        "S01",
+        "S03",
+        "S04",
+        "S06",
+        "S08",
+        "S09",
+        "S10",
+        "S11"
+      ],
+      "path": "tasks/systems/S12_assembly_handoff.md",
+      "status": "planned"
+    },
+    {
+      "id": "A001",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A001.md",
+      "status": "planned"
+    },
+    {
+      "id": "A002",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A002.md",
+      "status": "planned"
+    },
+    {
+      "id": "A003",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A003.md",
+      "status": "planned"
+    },
+    {
+      "id": "A004",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A004.md",
+      "status": "planned"
+    },
+    {
+      "id": "A005",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A005.md",
+      "status": "planned"
+    },
+    {
+      "id": "A006",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A006.md",
+      "status": "planned"
+    },
+    {
+      "id": "A007",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A007.md",
+      "status": "planned"
+    },
+    {
+      "id": "A008",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A008.md",
+      "status": "planned"
+    },
+    {
+      "id": "A009",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A009.md",
+      "status": "planned"
+    },
+    {
+      "id": "A010",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A010.md",
+      "status": "planned"
+    },
+    {
+      "id": "A011",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A011.md",
+      "status": "planned"
+    },
+    {
+      "id": "A012",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A012.md",
+      "status": "planned"
+    },
+    {
+      "id": "A013",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A013.md",
+      "status": "planned"
+    },
+    {
+      "id": "A014",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A014.md",
+      "status": "planned"
+    },
+    {
+      "id": "A015",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A015.md",
+      "status": "planned"
+    },
+    {
+      "id": "A016",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A016.md",
+      "status": "planned"
+    },
+    {
+      "id": "A017",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A017.md",
+      "status": "planned"
+    },
+    {
+      "id": "A018",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A018.md",
+      "status": "planned"
+    },
+    {
+      "id": "A019",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A019.md",
+      "status": "planned"
+    },
+    {
+      "id": "A020",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A020.md",
+      "status": "planned"
+    },
+    {
+      "id": "A021",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A021.md",
+      "status": "planned"
+    },
+    {
+      "id": "A022",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A022.md",
+      "status": "planned"
+    },
+    {
+      "id": "A023",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A023.md",
+      "status": "planned"
+    },
+    {
+      "id": "A024",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A024.md",
+      "status": "planned"
+    },
+    {
+      "id": "A025",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A025.md",
+      "status": "planned"
+    },
+    {
+      "id": "A026",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A026.md",
+      "status": "planned"
+    },
+    {
+      "id": "A027",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A027.md",
+      "status": "planned"
+    },
+    {
+      "id": "A028",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A028.md",
+      "status": "planned"
+    },
+    {
+      "id": "A029",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A029.md",
+      "status": "planned"
+    },
+    {
+      "id": "A030",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A030.md",
+      "status": "planned"
+    },
+    {
+      "id": "A031",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A031.md",
+      "status": "planned"
+    },
+    {
+      "id": "A032",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A032.md",
+      "status": "planned"
+    },
+    {
+      "id": "A033",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A033.md",
+      "status": "planned"
+    },
+    {
+      "id": "A034",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A034.md",
+      "status": "planned"
+    },
+    {
+      "id": "A035",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A035.md",
+      "status": "planned"
+    },
+    {
+      "id": "A036",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A036.md",
+      "status": "planned"
+    },
+    {
+      "id": "A037",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A037.md",
+      "status": "planned"
+    },
+    {
+      "id": "A038",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A038.md",
+      "status": "planned"
+    },
+    {
+      "id": "A039",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A039.md",
+      "status": "planned"
+    },
+    {
+      "id": "A040",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A040.md",
+      "status": "planned"
+    },
+    {
+      "id": "A041",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A041.md",
+      "status": "planned"
+    },
+    {
+      "id": "A042",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A042.md",
+      "status": "planned"
+    },
+    {
+      "id": "A043",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A043.md",
+      "status": "planned"
+    },
+    {
+      "id": "A044",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A044.md",
+      "status": "planned"
+    },
+    {
+      "id": "A045",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A045.md",
+      "status": "planned"
+    },
+    {
+      "id": "A046",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A046.md",
+      "status": "planned"
+    },
+    {
+      "id": "A047",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A047.md",
+      "status": "planned"
+    },
+    {
+      "id": "A048",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A048.md",
+      "status": "planned"
+    },
+    {
+      "id": "A049",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A049.md",
+      "status": "planned"
+    },
+    {
+      "id": "A050",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A050.md",
+      "status": "planned"
+    },
+    {
+      "id": "A051",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A051.md",
+      "status": "planned"
+    },
+    {
+      "id": "A052",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A052.md",
+      "status": "planned"
+    },
+    {
+      "id": "A053",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A053.md",
+      "status": "planned"
+    },
+    {
+      "id": "A054",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A054.md",
+      "status": "planned"
+    },
+    {
+      "id": "A055",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A055.md",
+      "status": "planned"
+    },
+    {
+      "id": "A056",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A056.md",
+      "status": "planned"
+    },
+    {
+      "id": "A057",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A057.md",
+      "status": "planned"
+    },
+    {
+      "id": "A058",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A058.md",
+      "status": "planned"
+    },
+    {
+      "id": "A059",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A059.md",
+      "status": "planned"
+    },
+    {
+      "id": "A060",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A060.md",
+      "status": "planned"
+    },
+    {
+      "id": "A061",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A061.md",
+      "status": "planned"
+    },
+    {
+      "id": "A062",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A062.md",
+      "status": "planned"
+    },
+    {
+      "id": "A063",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A063.md",
+      "status": "planned"
+    },
+    {
+      "id": "A064",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A064.md",
+      "status": "planned"
+    },
+    {
+      "id": "A065",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A065.md",
+      "status": "planned"
+    },
+    {
+      "id": "A066",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A066.md",
+      "status": "planned"
+    },
+    {
+      "id": "A067",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A067.md",
+      "status": "planned"
+    },
+    {
+      "id": "A068",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A068.md",
+      "status": "planned"
+    },
+    {
+      "id": "A069",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A069.md",
+      "status": "planned"
+    },
+    {
+      "id": "A070",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A070.md",
+      "status": "planned"
+    },
+    {
+      "id": "A071",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A071.md",
+      "status": "planned"
+    },
+    {
+      "id": "A072",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A072.md",
+      "status": "planned"
+    },
+    {
+      "id": "A073",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A073.md",
+      "status": "planned"
+    },
+    {
+      "id": "A074",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A074.md",
+      "status": "planned"
+    },
+    {
+      "id": "A075",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A075.md",
+      "status": "planned"
+    },
+    {
+      "id": "A076",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A076.md",
+      "status": "planned"
+    },
+    {
+      "id": "A077",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A077.md",
+      "status": "planned"
+    },
+    {
+      "id": "A078",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A078.md",
+      "status": "planned"
+    },
+    {
+      "id": "A079",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A079.md",
+      "status": "planned"
+    },
+    {
+      "id": "A080",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A080.md",
+      "status": "planned"
+    },
+    {
+      "id": "A081",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A081.md",
+      "status": "planned"
+    },
+    {
+      "id": "A082",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A082.md",
+      "status": "planned"
+    },
+    {
+      "id": "A083",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A083.md",
+      "status": "planned"
+    },
+    {
+      "id": "A084",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A084.md",
+      "status": "planned"
+    },
+    {
+      "id": "A085",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A085.md",
+      "status": "planned"
+    },
+    {
+      "id": "A086",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A086.md",
+      "status": "planned"
+    },
+    {
+      "id": "A087",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A087.md",
+      "status": "planned"
+    },
+    {
+      "id": "A088",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A088.md",
+      "status": "planned"
+    },
+    {
+      "id": "A089",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A089.md",
+      "status": "planned"
+    },
+    {
+      "id": "A090",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A090.md",
+      "status": "planned"
+    },
+    {
+      "id": "A091",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A091.md",
+      "status": "planned"
+    },
+    {
+      "id": "A092",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A092.md",
+      "status": "planned"
+    },
+    {
+      "id": "A093",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A093.md",
+      "status": "planned"
+    },
+    {
+      "id": "A094",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A094.md",
+      "status": "planned"
+    },
+    {
+      "id": "A095",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A095.md",
+      "status": "planned"
+    },
+    {
+      "id": "A096",
+      "type": "asset",
+      "depends_on": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "path": "tasks/assets/A096.md",
+      "status": "planned"
+    },
+    {
+      "id": "M01",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M01_lime_plaster.md",
+      "status": "planned"
+    },
+    {
+      "id": "M02",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M02_grey_brick.md",
+      "status": "planned"
+    },
+    {
+      "id": "M03",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M03_roof_clay.md",
+      "status": "planned"
+    },
+    {
+      "id": "M04",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M04_aged_timber.md",
+      "status": "planned"
+    },
+    {
+      "id": "M05",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M05_paving_stone.md",
+      "status": "planned"
+    },
+    {
+      "id": "M06",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M06_quay_stone.md",
+      "status": "planned"
+    },
+    {
+      "id": "M07",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M07_bamboo_skin.md",
+      "status": "planned"
+    },
+    {
+      "id": "M08",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M08_plum_bark.md",
+      "status": "planned"
+    },
+    {
+      "id": "M09",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M09_undyed_cloth.md",
+      "status": "planned"
+    },
+    {
+      "id": "M10",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M10_indigo_cloth.md",
+      "status": "planned"
+    },
+    {
+      "id": "M11",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M11_lantern_paper.md",
+      "status": "planned"
+    },
+    {
+      "id": "M12",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M12_rough_ceramic.md",
+      "status": "planned"
+    },
+    {
+      "id": "M13",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M13_forged_iron.md",
+      "status": "planned"
+    },
+    {
+      "id": "M14",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M14_mud_soil.md",
+      "status": "planned"
+    },
+    {
+      "id": "M15",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M15_moss_lichen.md",
+      "status": "planned"
+    },
+    {
+      "id": "M16",
+      "type": "material",
+      "depends_on": [
+        "S04",
+        "S07"
+      ],
+      "path": "tasks/materials/M16_leaf_atlas.md",
+      "status": "planned"
+    },
+    {
+      "id": "K01",
+      "type": "assembly",
+      "depends_on": [
+        "A002",
+        "A005",
+        "A006",
+        "A036",
+        "A037",
+        "A039",
+        "A053",
+        "A057",
+        "A059",
+        "A085",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K01.md",
+      "status": "planned"
+    },
+    {
+      "id": "K02",
+      "type": "assembly",
+      "depends_on": [
+        "A003",
+        "A009",
+        "A018",
+        "A043",
+        "A057",
+        "A060",
+        "A061",
+        "A062",
+        "A063",
+        "A074",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K02.md",
+      "status": "planned"
+    },
+    {
+      "id": "K03",
+      "type": "assembly",
+      "depends_on": [
+        "A010",
+        "A023",
+        "A043",
+        "A045",
+        "A047",
+        "A048",
+        "A050",
+        "A055",
+        "A068",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K03.md",
+      "status": "planned"
+    },
+    {
+      "id": "K04",
+      "type": "assembly",
+      "depends_on": [
+        "A041",
+        "A044",
+        "A050",
+        "A052",
+        "A058",
+        "A061",
+        "A073",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K04.md",
+      "status": "planned"
+    },
+    {
+      "id": "K05",
+      "type": "assembly",
+      "depends_on": [
+        "A015",
+        "A016",
+        "A018",
+        "A035",
+        "A060",
+        "A061",
+        "A075",
+        "A083",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K05.md",
+      "status": "planned"
+    },
+    {
+      "id": "K06",
+      "type": "assembly",
+      "depends_on": [
+        "A001",
+        "A004",
+        "A026",
+        "A034",
+        "A036",
+        "A037",
+        "A063",
+        "A065",
+        "A066",
+        "A072",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K06.md",
+      "status": "planned"
+    },
+    {
+      "id": "K07",
+      "type": "assembly",
+      "depends_on": [
+        "A017",
+        "A018",
+        "A035",
+        "A038",
+        "A040",
+        "A060",
+        "A075",
+        "A080",
+        "A083",
+        "A088",
+        "A089",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K07.md",
+      "status": "planned"
+    },
+    {
+      "id": "K08",
+      "type": "assembly",
+      "depends_on": [
+        "A007",
+        "A011",
+        "A012",
+        "A055",
+        "A067",
+        "A069",
+        "A071",
+        "A087",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K08.md",
+      "status": "planned"
+    },
+    {
+      "id": "K09",
+      "type": "assembly",
+      "depends_on": [
+        "A022",
+        "A046",
+        "A049",
+        "A051",
+        "A081",
+        "A082",
+        "A085",
+        "A086",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K09.md",
+      "status": "planned"
+    },
+    {
+      "id": "K10",
+      "type": "assembly",
+      "depends_on": [
+        "A013",
+        "A014",
+        "A026",
+        "A027",
+        "A031",
+        "A070",
+        "A076",
+        "A090",
+        "A091",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K10.md",
+      "status": "planned"
+    },
+    {
+      "id": "K11",
+      "type": "assembly",
+      "depends_on": [
+        "A024",
+        "A042",
+        "A051",
+        "A074",
+        "A077",
+        "A079",
+        "A084",
+        "A086",
+        "A089",
+        "A092",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K11.md",
+      "status": "planned"
+    },
+    {
+      "id": "K12",
+      "type": "assembly",
+      "depends_on": [
+        "A017",
+        "A018",
+        "A021",
+        "A038",
+        "A047",
+        "A058",
+        "A073",
+        "A078",
+        "A091",
+        "A094",
+        "A095",
+        "A096",
+        "S09"
+      ],
+      "path": "tasks/assemblies/K12.md",
+      "status": "planned"
+    },
+    {
+      "id": "D01",
+      "type": "district",
+      "depends_on": [
+        "K01",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D01.md",
+      "status": "planned"
+    },
+    {
+      "id": "D02",
+      "type": "district",
+      "depends_on": [
+        "K02",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D02.md",
+      "status": "planned"
+    },
+    {
+      "id": "D03",
+      "type": "district",
+      "depends_on": [
+        "K03",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D03.md",
+      "status": "planned"
+    },
+    {
+      "id": "D04",
+      "type": "district",
+      "depends_on": [
+        "K04",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D04.md",
+      "status": "planned"
+    },
+    {
+      "id": "D05",
+      "type": "district",
+      "depends_on": [
+        "K05",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D05.md",
+      "status": "planned"
+    },
+    {
+      "id": "D06",
+      "type": "district",
+      "depends_on": [
+        "K06",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D06.md",
+      "status": "planned"
+    },
+    {
+      "id": "D07",
+      "type": "district",
+      "depends_on": [
+        "K07",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D07.md",
+      "status": "planned"
+    },
+    {
+      "id": "D08",
+      "type": "district",
+      "depends_on": [
+        "K08",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D08.md",
+      "status": "planned"
+    },
+    {
+      "id": "D09",
+      "type": "district",
+      "depends_on": [
+        "K09",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D09.md",
+      "status": "planned"
+    },
+    {
+      "id": "D10",
+      "type": "district",
+      "depends_on": [
+        "K10",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D10.md",
+      "status": "planned"
+    },
+    {
+      "id": "D11",
+      "type": "district",
+      "depends_on": [
+        "K11",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D11.md",
+      "status": "planned"
+    },
+    {
+      "id": "D12",
+      "type": "district",
+      "depends_on": [
+        "K12",
+        "S01",
+        "S08"
+      ],
+      "path": "tasks/districts/D12.md",
+      "status": "planned"
+    }
+  ]
+}

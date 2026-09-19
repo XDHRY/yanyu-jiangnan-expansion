@@ -1,0 +1,60 @@
+{
+  "scene": "JN_Waterside_Factory",
+  "asset_count": 8,
+  "expected_asset_count": 8,
+  "assets": [
+    {
+      "asset_id": "JN_WATER_DOCK_01",
+      "name_cn": "青石水埠头",
+      "category": "waterside_access",
+      "child_objects": 8
+    },
+    {
+      "asset_id": "JN_WATER_MOONGATE_01",
+      "name_cn": "月洞门墙段",
+      "category": "wall_gate",
+      "child_objects": 120
+    },
+    {
+      "asset_id": "JN_WATER_BRIDGE_01",
+      "name_cn": "小型石拱桥",
+      "category": "bridge",
+      "child_objects": 32
+    },
+    {
+      "asset_id": "JN_WATER_CORRIDOR_01",
+      "name_cn": "临水穿廊",
+      "category": "corridor",
+      "child_objects": 13
+    },
+    {
+      "asset_id": "JN_WATER_BOAT_01",
+      "name_cn": "乌篷船",
+      "category": "boat",
+      "child_objects": 7
+    },
+    {
+      "asset_id": "JN_WATER_WELL_01",
+      "name_cn": "青石井栏",
+      "category": "well",
+      "child_objects": 19
+    },
+    {
+      "asset_id": "JN_WATER_FLUME_01",
+      "name_cn": "竹制引水槽",
+      "category": "water_feature",
+      "child_objects": 13
+    },
+    {
+      "asset_id": "JN_WATER_LAMPPOST_01",
+      "name_cn": "临水灯架",
+      "category": "lighting_prop",
+      "child_objects": 4
+    }
+  ],
+  "objects": 224,
+  "mesh_objects": 216,
+  "materials": 12,
+  "status": "midpoly_blockout",
+  "rebuild_contract": "deterministic_geometry_no_llm_required"
+}

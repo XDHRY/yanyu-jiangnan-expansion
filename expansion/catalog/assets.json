@@ -1,0 +1,3298 @@
+{
+  "schema_version": 1,
+  "status": "task_specs_not_finished_assets",
+  "assets": [
+    {
+      "task_id": "A001",
+      "asset_id": "JNX_A001",
+      "name_cn": "临河民居",
+      "slug": "waterside_house",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        12.8,
+        10.0,
+        8.0
+      ],
+      "districts": [
+        "D02",
+        "D06"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/architecture/waterside_house.py",
+      "task_file": "tasks/assets/A001.md",
+      "form": "一至二层窄面宽民居，石基托木构，正门朝巷，临水后墙减少大开窗",
+      "method": "按开间生成柱网，墙体分片留洞，屋面按横向屋脊分左右坡",
+      "connections": "正门entry接巷道，后门service接卸货小径，檐口drip_line接雨滴系统",
+      "acceptance": "门洞实际贯通，台阶不埋地，墙面不能穿出屋顶",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A002",
+      "asset_id": "JNX_A002",
+      "name_cn": "商铺排屋",
+      "slug": "shop_front",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        12.8,
+        10.0,
+        9.0
+      ],
+      "districts": [
+        "D01",
+        "D02",
+        "D08"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/architecture/shop_front.py",
+      "task_file": "tasks/assets/A002.md",
+      "form": "底层敞铺、二层居住，拆板门与檐下货台界定交易边界",
+      "method": "先生成承重框架，再以独立门扇和可替换铺面填入，左右山墙共用拼缝",
+      "connections": "shop_left和shop_right接相邻店铺，sign接招牌，wares接陈列架",
+      "acceptance": "铺门可开，门前保留1.8米站立带，招牌不遮二层窗",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A003",
+      "asset_id": "JNX_A003",
+      "name_cn": "竹海客栈",
+      "slug": "bamboo_inn",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        64.0,
+        50.0,
+        12.0
+      ],
+      "districts": [
+        "D03"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/architecture/bamboo_inn.py",
+      "task_file": "tasks/assets/A003.md",
+      "form": "前店后院与两翼客房围合，前院接待后侧服务，局部两层回廊",
+      "method": "主楼、厢房、门厅分别组装，先输出房间矩形和楼梯预留体积",
+      "connections": "forecourt接街，kitchen接后厨，dock_route接水埠，guest_route接客房",
+      "acceptance": "客人和卸货动线分开，楼梯上下平台接通，后院可通达",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A004",
+      "asset_id": "JNX_A004",
+      "name_cn": "书香宅院",
+      "slug": "scholar_house",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        48.0,
+        36.0,
+        9.0
+      ],
+      "districts": [
+        "D05",
+        "D06"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/scholar_house.py",
+      "task_file": "tasks/assets/A004.md",
+      "form": "三面围院与书斋组合，院中留水缸和一株梅的观景位置",
+      "method": "用院落边界先定位正房和厢房，再生成廊道而非向实心方盒打洞",
+      "connections": "court接庭院铺地，study接书斋，moon_gate接侧园",
+      "acceptance": "庭院为真实空地，房檐不互穿，侧门保留转身空间",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A005",
+      "asset_id": "JNX_A005",
+      "name_cn": "沿街茶肆",
+      "slug": "tea_house",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        16.0,
+        12.0,
+        9.0
+      ],
+      "districts": [
+        "D02",
+        "D05"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/tea_house.py",
+      "task_file": "tasks/assets/A005.md",
+      "form": "面街可开启格门，窗边低茶案，二层挑出尺度克制",
+      "method": "按3.2米开间排列门窗，分别输出茶客区、柜台区和后水房",
+      "connections": "service_counter接柜台，seating接茶案，water接后勤",
+      "acceptance": "茶案椅子不封主门，檐柱真实落地，窗下视线可透",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A006",
+      "asset_id": "JNX_A006",
+      "name_cn": "巷口酒楼",
+      "slug": "wine_tavern",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        22.0,
+        16.0,
+        12.0
+      ],
+      "districts": [
+        "D02"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/wine_tavern.py",
+      "task_file": "tasks/assets/A006.md",
+      "form": "两层转角酒楼形成路口地标，出檐与酒旗建立识别",
+      "method": "用两条立面共享转角柱，室内楼板和楼梯分集合",
+      "connections": "corner_entry接广场，banner接酒旗，barrel_store接酒窖",
+      "acceptance": "转角入口不夹死，二层地板有厚度，酒旗远离屋瓦",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A007",
+      "asset_id": "JNX_A007",
+      "name_cn": "布行染坊",
+      "slug": "cloth_shop",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        18.0,
+        14.0,
+        8.0
+      ],
+      "districts": [
+        "D02",
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/cloth_shop.py",
+      "task_file": "tasks/assets/A007.md",
+      "form": "前店陈列布卷，后院安排染缸和高晾架，湿区单独排水",
+      "method": "把零售立面和染坊生产院作为两个组件并以通廊相接",
+      "connections": "drying接晾布架，drain接污水沟，delivery接货道",
+      "acceptance": "布匹不会穿屋檐，染缸周边有作业环带，污水不直接跨人行路",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A008",
+      "asset_id": "JNX_A008",
+      "name_cn": "沿河药铺",
+      "slug": "apothecary",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        12.8,
+        12.0,
+        8.0
+      ],
+      "districts": [
+        "D02",
+        "D06"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/apothecary.py",
+      "task_file": "tasks/assets/A008.md",
+      "form": "窄深药铺，柜台背面药柜，侧后方晒药与煎药空间",
+      "method": "用参数化小抽屉阵列构成药柜近景母体，远景转为简化面",
+      "connections": "counter接药柜，drying接晒药盘，sign接竖匾",
+      "acceptance": "抽屉数量有层级预算，不以贴图伪装需要打开的柜门",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A009",
+      "asset_id": "JNX_A009",
+      "name_cn": "客栈后厨",
+      "slug": "inn_kitchen",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        16.0,
+        12.0,
+        7.0
+      ],
+      "districts": [
+        "D03"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/inn_kitchen.py",
+      "task_file": "tasks/assets/A009.md",
+      "form": "灶间、备菜、柴房、洗涤分带，烟道避开上层客房",
+      "method": "先生成灶体和烟道走向，再围墙与屋顶开孔",
+      "connections": "stove接炉灶，flue接烟，clean_water接供水，dirty_water接排水",
+      "acceptance": "灶口有厚度，烟道穿屋面处有收口，明火远离堆布",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A010",
+      "asset_id": "JNX_A010",
+      "name_cn": "河运仓房",
+      "slug": "riverside_warehouse",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        22.0,
+        16.0,
+        8.0
+      ],
+      "districts": [
+        "D04",
+        "D08",
+        "D09"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/architecture/riverside_warehouse.py",
+      "task_file": "tasks/assets/A010.md",
+      "form": "厚实石基、防潮木地板、大开口装卸门和少量高窗",
+      "method": "用重复柱架支撑较大跨屋顶，内部保留货架通道",
+      "connections": "loading接坡道，racks接货架，mooring接岸线运输",
+      "acceptance": "装卸门高宽能通过货车，地板高于岸线，柱列不堵通道",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A011",
+      "asset_id": "JNX_A011",
+      "name_cn": "木作工棚",
+      "slug": "carpenter_workshop",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        20.0,
+        14.0,
+        7.0
+      ],
+      "districts": [
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/carpenter_workshop.py",
+      "task_file": "tasks/assets/A011.md",
+      "form": "半敞开木作棚，长木料架和工作台顺向摆放",
+      "method": "先按最长木料确定净空，柱与檐口按工作区四周生成",
+      "connections": "bench接刨台，lumber接料架，dust接木屑区域",
+      "acceptance": "长料能进出，工具挂板面向工位，碎屑不淹没脚道",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A012",
+      "asset_id": "JNX_A012",
+      "name_cn": "窑场棚屋",
+      "slug": "kiln_shed",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        22.0,
+        18.0,
+        9.0
+      ],
+      "districts": [
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/kiln_shed.py",
+      "task_file": "tasks/assets/A012.md",
+      "form": "土窑、待烧坯架和冷却区相互独立，烟囱决定远景轮廓",
+      "method": "窑体用截面旋转形成空腔，棚顶留烟囱孔，分离耐火材与木构",
+      "connections": "kiln_mouth接窑门，flue接烟囱，drying接坯架",
+      "acceptance": "窑口可见内部，木柱不嵌入高温窑壁，烧成物流可读",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A013",
+      "asset_id": "JNX_A013",
+      "name_cn": "山门",
+      "slug": "temple_gate",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        24.0,
+        12.0,
+        12.0
+      ],
+      "districts": [
+        "D10"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/temple_gate.py",
+      "task_file": "tasks/assets/A013.md",
+      "form": "三开间山门，中央通行两侧封护，屋面重但不夸张飞翘",
+      "method": "按中轴与开间生成石台、柱列和门洞，门扇独立枢轴",
+      "connections": "axis_south接入寺路，axis_north接前庭，lintel接匾额",
+      "acceptance": "中门净空明确，门扇旋转无穿柱，台阶宽度与洞口对应",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A014",
+      "asset_id": "JNX_A014",
+      "name_cn": "寺院正殿",
+      "slug": "main_hall",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        32.0,
+        24.0,
+        15.0
+      ],
+      "districts": [
+        "D10"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/main_hall.py",
+      "task_file": "tasks/assets/A014.md",
+      "form": "高台大殿与前廊组成礼仪重心，构件尺度统一",
+      "method": "先输出台基和柱网，再安排梁架、屋面、殿内占位，不在本任务做雕像",
+      "connections": "axis接前庭，side_service接维护通道，roof接瓦作",
+      "acceptance": "殿外廊连续，落柱有基础，后续内景有足够净高",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A015",
+      "asset_id": "JNX_A015",
+      "name_cn": "讲堂",
+      "slug": "lecture_hall",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        28.0,
+        16.0,
+        9.0
+      ],
+      "districts": [
+        "D05"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/lecture_hall.py",
+      "task_file": "tasks/assets/A015.md",
+      "form": "宽面低檐讲堂，面院格扇连开，讲席保持克制",
+      "method": "沿开间重复柱与格扇，讲台和座席是可替换子组件",
+      "connections": "court接庭院，teaching接讲台，seats接坐具",
+      "acceptance": "主要视线不被柱列完全遮断，门窗可辨识内外侧",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A016",
+      "asset_id": "JNX_A016",
+      "name_cn": "藏书楼",
+      "slug": "library_house",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        24.0,
+        16.0,
+        12.0
+      ],
+      "districts": [
+        "D05"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/library_house.py",
+      "task_file": "tasks/assets/A016.md",
+      "form": "两层藏书建筑，下层阅览上层书架，檐下防潮",
+      "method": "楼梯预留、楼板与书架荷载意向由体量表达，纸窗独立材质",
+      "connections": "stairs接楼梯，shelves接书架，reading接书案",
+      "acceptance": "上层可进入，书架底部抬高，外檐排水避开窗台",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A017",
+      "asset_id": "JNX_A017",
+      "name_cn": "临水亭",
+      "slug": "water_pavilion",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        10.0,
+        10.0,
+        8.0
+      ],
+      "districts": [
+        "D03",
+        "D07",
+        "D11",
+        "D12"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/architecture/water_pavilion.py",
+      "task_file": "tasks/assets/A017.md",
+      "form": "开放柱廊与可坐栏板，屋檐投影定义停留空间",
+      "method": "柱圈加梁圈，屋顶分坡建模，石台和临水护栏独立",
+      "connections": "entry接步道，view接观景轴，seat接美人靠",
+      "acceptance": "亭内不封成实墙，柱间通透，入口侧不放完整栏杆",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A018",
+      "asset_id": "JNX_A018",
+      "name_cn": "沿岸曲廊",
+      "slug": "covered_corridor",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        24.0,
+        3.2,
+        4.8
+      ],
+      "districts": [
+        "D05",
+        "D07",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/covered_corridor.py",
+      "task_file": "tasks/assets/A018.md",
+      "form": "廊道沿池岸折转，长短节拍交替，内侧望水",
+      "method": "曲线采样生成柱位和梁段，每段屋顶独立，转角增加收口件",
+      "connections": "start和end接廊段，corner接转角，drip接外檐",
+      "acceptance": "折角梁连续，柱脚不落水中，地坪落差有台阶或坡道",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A019",
+      "asset_id": "JNX_A019",
+      "name_cn": "街角戏台",
+      "slug": "opera_stage",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        20.0,
+        14.0,
+        10.0
+      ],
+      "districts": [
+        "D01",
+        "D02"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/opera_stage.py",
+      "task_file": "tasks/assets/A019.md",
+      "form": "面向公共小广场的抬高戏台，后台有侧门",
+      "method": "台基与台口先搭出，侧幕后退形成表演与通行两个层次",
+      "connections": "audience接广场，backstage接后台，banner接布幔",
+      "acceptance": "观众区不占公共主路，后台可从侧面进入",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A020",
+      "asset_id": "JNX_A020",
+      "name_cn": "水关门楼",
+      "slug": "water_gate",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        26.0,
+        16.0,
+        15.0
+      ],
+      "districts": [
+        "D01"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/water_gate.py",
+      "task_file": "tasks/assets/A020.md",
+      "form": "门楼压住入城水口，两侧岸门与中央过水关系清楚",
+      "method": "用左右实体墩与上部门楼组合，过水孔作为真实空域保留",
+      "connections": "canal_axis接水道，bank_walk接岸路，watch接上层",
+      "acceptance": "水面不被实心底板封堵，人行与航道均能连续",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A021",
+      "asset_id": "JNX_A021",
+      "name_cn": "石基望楼",
+      "slug": "watch_tower",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        24.0,
+        20.0,
+        20.0
+      ],
+      "districts": [
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/watch_tower.py",
+      "task_file": "tasks/assets/A021.md",
+      "form": "三层逐级收分的望楼，层间出檐，底层入口面向主路",
+      "method": "各层体块、柱列和屋檐分组，内部楼梯先用占位体约束",
+      "connections": "base_entry接岛路，stairs接楼梯，lookout接观景层",
+      "acceptance": "上层落在承重范围内，檐间净距足够，塔身不漂浮",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A022",
+      "asset_id": "JNX_A022",
+      "name_cn": "茶田农舍",
+      "slug": "farm_house",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        14.0,
+        10.0,
+        7.0
+      ],
+      "districts": [
+        "D09"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/farm_house.py",
+      "task_file": "tasks/assets/A022.md",
+      "form": "低檐农舍和储具侧棚，门前保留劳作场地",
+      "method": "少量开间组合单层体量，檐下另挂工具架，不套用城市店铺立面",
+      "connections": "yard接晒场，field接田埂，storage接农具",
+      "acceptance": "屋檐下可站人，庭前有工具转身空间，田埂接口不悬空",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A023",
+      "asset_id": "JNX_A023",
+      "name_cn": "修船长棚",
+      "slug": "boat_shed",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        30.0,
+        16.0,
+        10.0
+      ],
+      "districts": [
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/boat_shed.py",
+      "task_file": "tasks/assets/A023.md",
+      "form": "长向通透的修船棚，中央船架、侧面料架、南侧下水方向",
+      "method": "柱排沿船身两侧布置，顶梁避开吊装轴线，前后少封墙",
+      "connections": "slipway接下水坡，cradle接船架，timber接料架",
+      "acceptance": "整船可从棚口移出，柱子不穿船壳，地面坡向与水岸一致",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A024",
+      "asset_id": "JNX_A024",
+      "name_cn": "竹林山居",
+      "slug": "bamboo_retreat",
+      "category": "architecture",
+      "dimensions_nominal_m": [
+        16.0,
+        12.0,
+        8.0
+      ],
+      "districts": [
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/architecture/bamboo_retreat.py",
+      "task_file": "tasks/assets/A024.md",
+      "form": "少量木屋依竹林开口朝溪，台基适应小落差",
+      "method": "用可调柱脚高度支撑平台，楼体保持水平，外部阶梯顺地",
+      "connections": "trail接竹径，creek_view接溪景，deck接露台",
+      "acceptance": "台基脚接地，主入口可达，竹叶不能完全堵住窗和门",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A025",
+      "asset_id": "JNX_A025",
+      "name_cn": "石台基",
+      "slug": "stone_foundation",
+      "category": "components",
+      "dimensions_nominal_m": [
+        3.2,
+        1.2,
+        0.6
+      ],
+      "districts": [
+        "D01",
+        "D03",
+        "D10"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/stone_foundation.py",
+      "task_file": "tasks/assets/A025.md",
+      "form": "阶石、压顶和粗砌基身分层，接地边略厚重",
+      "method": "以3.2米直段为母件，角件和端帽单独输出",
+      "connections": "left和right接直段，top接柱脚，bottom接地形",
+      "acceptance": "拼缝平齐，角件不重叠，顶面法线朝上",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A026",
+      "asset_id": "JNX_A026",
+      "name_cn": "踏步组",
+      "slug": "stone_steps",
+      "category": "components",
+      "dimensions_nominal_m": [
+        2.8,
+        2.4,
+        1.2
+      ],
+      "districts": [
+        "D01",
+        "D07",
+        "D10"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/stone_steps.py",
+      "task_file": "tasks/assets/A026.md",
+      "form": "整石踏步与侧帮，最高踏步接台基而非悬空",
+      "method": "根据总高和级数算每级尺寸，输出左右护帮可开关",
+      "connections": "bottom接路面，top接入口地坪",
+      "acceptance": "总升高精确等于目标高差，踏步面不反坡",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A027",
+      "asset_id": "JNX_A027",
+      "name_cn": "柱础木柱",
+      "slug": "column_base",
+      "category": "components",
+      "dimensions_nominal_m": [
+        0.65,
+        0.65,
+        3.8
+      ],
+      "districts": [
+        "D03",
+        "D05",
+        "D10"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/column_base.py",
+      "task_file": "tasks/assets/A027.md",
+      "form": "圆石础上立木柱，柱脚离开积水接触区",
+      "method": "石础旋转体加木柱渐缩体，柱顶承梁位置显式标记",
+      "connections": "foot接基础，beam接梁底",
+      "acceptance": "石础与柱同轴，木柱底部不穿石础，重复开间可整齐对位",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A028",
+      "asset_id": "JNX_A028",
+      "name_cn": "穿枋横梁",
+      "slug": "timber_beam",
+      "category": "components",
+      "dimensions_nominal_m": [
+        3.4,
+        0.32,
+        0.42
+      ],
+      "districts": [
+        "D03",
+        "D05",
+        "D08"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/timber_beam.py",
+      "task_file": "tasks/assets/A028.md",
+      "form": "长纹理沿受力方向，梁端留榫意向但不虚构复杂制式",
+      "method": "沿局部X轴拉伸梁体，两端预留可替换连接件",
+      "connections": "end_a和end_b接柱槽，top接檩条",
+      "acceptance": "纹理方向正确，梁端与柱连接不凭空悬挂",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A029",
+      "asset_id": "JNX_A029",
+      "name_cn": "檩椽屋架",
+      "slug": "rafter_frame",
+      "category": "components",
+      "dimensions_nominal_m": [
+        6.4,
+        8.0,
+        3.0
+      ],
+      "districts": [
+        "D03",
+        "D10"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/rafter_frame.py",
+      "task_file": "tasks/assets/A029.md",
+      "form": "纵向檩条与坡面椽子分出清楚的层次",
+      "method": "由屋面坡线派生椽距，不手工散放；生成屋顶局部坐标",
+      "connections": "beam_support接横梁，tile_base接瓦面",
+      "acceptance": "椽子在瓦下，端部不穿过滴水瓦，左右坡收脊",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A030",
+      "asset_id": "JNX_A030",
+      "name_cn": "双坡屋面",
+      "slug": "gable_roof",
+      "category": "components",
+      "dimensions_nominal_m": [
+        14.4,
+        11.6,
+        3.0
+      ],
+      "districts": [
+        "D02",
+        "D06"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/gable_roof.py",
+      "task_file": "tasks/assets/A030.md",
+      "form": "简洁黛瓦双坡，檐口小幅起翘，屋脊连续",
+      "method": "用截面曲线放样成有厚度的屋面壳，分出脊、坡、檐",
+      "connections": "eave_s接南檐，eave_n接北檐，ridge接脊瓦",
+      "acceptance": "坡面能排水，檐下看不到反面破洞，脊线无缝",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A031",
+      "asset_id": "JNX_A031",
+      "name_cn": "歇山屋面",
+      "slug": "hip_gable_roof",
+      "category": "components",
+      "dimensions_nominal_m": [
+        26.0,
+        18.0,
+        7.0
+      ],
+      "districts": [
+        "D10",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/components/hip_gable_roof.py",
+      "task_file": "tasks/assets/A031.md",
+      "form": "四坡与山花转折要读得清，出檐克制",
+      "method": "参数化控制正脊、垂脊和戗脊交点，先几何解算再铺瓦",
+      "connections": "ring_beam接周圈梁，ridge_set接瓦饰",
+      "acceptance": "四角收口无自交，屋顶重心与柱网对应",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A032",
+      "asset_id": "JNX_A032",
+      "name_cn": "瓦垄与滴水",
+      "slug": "tile_course",
+      "category": "components",
+      "dimensions_nominal_m": [
+        3.2,
+        1.6,
+        0.18
+      ],
+      "districts": [
+        "D02",
+        "D07"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/tile_course.py",
+      "task_file": "tasks/assets/A032.md",
+      "form": "板瓦筒瓦层叠与滴水瓦端部建立近景层次",
+      "method": "以少量真实瓦母体实例化，远景烘成法线，保留覆压方向",
+      "connections": "roof_surface接屋坡，drip_line接雨滴",
+      "acceptance": "雨水路径顺坡，瓦片覆压不倒置，同排间距稳定",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A033",
+      "asset_id": "JNX_A033",
+      "name_cn": "灰砖墙段",
+      "slug": "grey_brick_wall",
+      "category": "components",
+      "dimensions_nominal_m": [
+        3.2,
+        0.32,
+        3.0
+      ],
+      "districts": [
+        "D01",
+        "D06",
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/components/grey_brick_wall.py",
+      "task_file": "tasks/assets/A033.md",
+      "form": "灰砖墙脚较深，湿痕随高度减弱，砖缝方向可信",
+      "method": "几何仅做近景边角，主体由UV与PBR表达细砖缝",
+      "connections": "left和right接墙段，base接石基",
+      "acceptance": "阴阳角砖缝合理，不把光照阴影烘进底色",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A034",
+      "asset_id": "JNX_A034",
+      "name_cn": "粉墙段",
+      "slug": "lime_wall",
+      "category": "components",
+      "dimensions_nominal_m": [
+        3.2,
+        0.28,
+        3.0
+      ],
+      "districts": [
+        "D05",
+        "D06",
+        "D07"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/lime_wall.py",
+      "task_file": "tasks/assets/A034.md",
+      "form": "冷暖轻微变化的石灰墙，上洁下潮，露砖少量",
+      "method": "直段与转角分开，顶端单独瓦帽，污渍采用高度和遮蔽遮罩",
+      "connections": "side接转角，cap接瓦帽，opening接洞口",
+      "acceptance": "墙两侧厚度真实，墙头封闭，污迹不均匀平铺",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A035",
+      "asset_id": "JNX_A035",
+      "name_cn": "月洞门",
+      "slug": "moon_gate",
+      "category": "components",
+      "dimensions_nominal_m": [
+        4.8,
+        0.45,
+        3.8
+      ],
+      "districts": [
+        "D05",
+        "D07"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/moon_gate.py",
+      "task_file": "tasks/assets/A035.md",
+      "form": "圆洞贯通、地面可走，环口石条与两侧墙连贯",
+      "method": "显式环带网格加左右墙体拼接，避免用圆贴图冒充洞口",
+      "connections": "passage接步道，wall_left和wall_right接墙段",
+      "acceptance": "洞内无遮挡，环口法线正确，门槛不形成过高绊脚石",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A036",
+      "asset_id": "JNX_A036",
+      "name_cn": "格扇门",
+      "slug": "lattice_door",
+      "category": "components",
+      "dimensions_nominal_m": [
+        2.4,
+        0.18,
+        2.8
+      ],
+      "districts": [
+        "D03",
+        "D05"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/components/lattice_door.py",
+      "task_file": "tasks/assets/A036.md",
+      "form": "门框、裙板、格心和纸面分层，左右扇可独立旋转",
+      "method": "按格栅图案生成细条，纸面用内缩双面平面，枢轴落铰链侧",
+      "connections": "hinge_left和hinge_right接门框，handle接门环",
+      "acceptance": "门扇打开不穿柱，背面纸面仍存在，格条不超出框",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A037",
+      "asset_id": "JNX_A037",
+      "name_cn": "支摘窗",
+      "slug": "shutter_window",
+      "category": "components",
+      "dimensions_nominal_m": [
+        1.6,
+        0.24,
+        1.8
+      ],
+      "districts": [
+        "D02",
+        "D06"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/components/shutter_window.py",
+      "task_file": "tasks/assets/A037.md",
+      "form": "上支下摘的可读结构，窗台承雨，纸木反差克制",
+      "method": "窗框、上扇、下板分对象，输出开合状态参数",
+      "connections": "wall_opening接墙孔，hinge接窗框，sill接滴水",
+      "acceptance": "开窗方向统一，窗台外倾，纸面不浮在框外",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A038",
+      "asset_id": "JNX_A038",
+      "name_cn": "临水栏杆",
+      "slug": "water_railing",
+      "category": "components",
+      "dimensions_nominal_m": [
+        3.2,
+        0.18,
+        1.05
+      ],
+      "districts": [
+        "D04",
+        "D07",
+        "D12"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/components/water_railing.py",
+      "task_file": "tasks/assets/A038.md",
+      "form": "柱、横枋和可坐靠背有明确厚度，入口段可空出",
+      "method": "直段、端头、转角单独母件，按折线放置",
+      "connections": "start和end接栏段，foot接廊地",
+      "acceptance": "栏杆连续，端头封口，通行口真实留空",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A039",
+      "asset_id": "JNX_A039",
+      "name_cn": "门额招牌框",
+      "slug": "sign_frame",
+      "category": "components",
+      "dimensions_nominal_m": [
+        2.6,
+        0.22,
+        0.75
+      ],
+      "districts": [
+        "D01",
+        "D02"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/components/sign_frame.py",
+      "task_file": "tasks/assets/A039.md",
+      "form": "木框与匾心分开，默认留白，题字后续由可编辑文字制作",
+      "method": "边框分四条，匾心独立UV，悬挂点为两个空对象",
+      "connections": "hang_l和hang_r接梁，text_plane接字面",
+      "acceptance": "图像生成不承担正确汉字，字面不能反向",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A040",
+      "asset_id": "JNX_A040",
+      "name_cn": "连廊转角",
+      "slug": "corridor_corner",
+      "category": "components",
+      "dimensions_nominal_m": [
+        6.4,
+        6.4,
+        5.0
+      ],
+      "districts": [
+        "D03",
+        "D05",
+        "D07"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/components/corridor_corner.py",
+      "task_file": "tasks/assets/A040.md",
+      "form": "直角转廊的屋面谷线、梁交叉和柱位清晰",
+      "method": "由两条廊段求交，显式构造转角补面和排水谷",
+      "connections": "in和out接廊段，valley接雨水",
+      "acceptance": "转角不重复放柱，谷线能排水，地坪连续",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A041",
+      "asset_id": "JNX_A041",
+      "name_cn": "跨渠石拱桥",
+      "slug": "canal_arch_bridge",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        32.0,
+        6.0,
+        6.0
+      ],
+      "districts": [
+        "D01",
+        "D02",
+        "D07",
+        "D10"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/waterfront/canal_arch_bridge.py",
+      "task_file": "tasks/assets/A041.md",
+      "form": "桥面缓拱，端部落岸，中跨让船通过",
+      "method": "按桥轴线采样拱线并挤出闭合桥壳，拱券与栏杆独立",
+      "connections": "road_a和road_b接岸路，channel接航道",
+      "acceptance": "两端与路面同高，中跨下方不封实心墙，中心线可连续行走",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A042",
+      "asset_id": "JNX_A042",
+      "name_cn": "木梁小桥",
+      "slug": "timber_bridge",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        12.0,
+        3.2,
+        3.0
+      ],
+      "districts": [
+        "D09",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/timber_bridge.py",
+      "task_file": "tasks/assets/A042.md",
+      "form": "短跨木桥，两道主梁承桥板，岸边支座避开冲刷",
+      "method": "主梁沿跨度方向生成，桥板按宽度铺设，栏杆可开关",
+      "connections": "bank_a和bank_b接溪岸，deck接步径",
+      "acceptance": "板缝不大到露脚，梁支点接岸，桥面不穿水",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A043",
+      "asset_id": "JNX_A043",
+      "name_cn": "青石水埠",
+      "slug": "stone_dock",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        4.0,
+        5.0,
+        3.0
+      ],
+      "districts": [
+        "D01",
+        "D02",
+        "D03",
+        "D04"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/waterfront/stone_dock.py",
+      "task_file": "tasks/assets/A043.md",
+      "form": "台阶从岸顶逐级下降到近水面，系缆柱在上平台侧边",
+      "method": "由岸高与水高计算踏步，侧挡墙和末级潮湿带单独建",
+      "connections": "land接岸路，moor接船，waterline接湿痕",
+      "acceptance": "台阶可从岸上走到水边，末级不突然悬高，系缆柱不堵路",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A044",
+      "asset_id": "JNX_A044",
+      "name_cn": "石砌驳岸",
+      "slug": "stone_quay",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        8.0,
+        2.5,
+        3.0
+      ],
+      "districts": [
+        "D01",
+        "D04",
+        "D07"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/waterfront/stone_quay.py",
+      "task_file": "tasks/assets/A044.md",
+      "form": "竖向砌石挡水，上部压顶接步道，苔痕随水线分布",
+      "method": "直段、转角和码头缺口分母件，用河岸折线布置",
+      "connections": "bank_start和bank_end接岸段，top接地坪",
+      "acceptance": "河面与岸墙交线稳定，不见背面空洞，岸顶没有台阶裂缝",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A045",
+      "asset_id": "JNX_A045",
+      "name_cn": "下水坡道",
+      "slug": "slipway",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        10.0,
+        24.0,
+        3.0
+      ],
+      "districts": [
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/slipway.py",
+      "task_file": "tasks/assets/A045.md",
+      "form": "修船棚向河道延伸的缓坡，有导向木轨和潮湿石面",
+      "method": "坡面沿纵轴连续生成，水下段延伸到设计水深，导轨独立",
+      "connections": "shed接船棚，water接航道，cradle接船架",
+      "acceptance": "船体沿轨道能前后移动，坡下不撞对岸，坡面无断层",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A046",
+      "asset_id": "JNX_A046",
+      "name_cn": "简式水闸",
+      "slug": "sluice_gate",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        10.0,
+        6.0,
+        6.0
+      ],
+      "districts": [
+        "D09",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/sluice_gate.py",
+      "task_file": "tasks/assets/A046.md",
+      "form": "两侧石墩夹木闸板，上方提梁，旁留检修步道",
+      "method": "门槽与闸板分对象，闸板只沿Z移动，水位由外部控制",
+      "connections": "inlet接上游，outlet接下游，operator接提梁",
+      "acceptance": "闸板插入槽内，提起后有通水空域，检修平台可达",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A047",
+      "asset_id": "JNX_A047",
+      "name_cn": "乌篷船",
+      "slug": "awning_boat",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        6.0,
+        2.4,
+        2.6
+      ],
+      "districts": [
+        "D02",
+        "D03",
+        "D04"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/waterfront/awning_boat.py",
+      "task_file": "tasks/assets/A047.md",
+      "form": "尖首收艉、低舷木船，弧形乌篷有支架，舱口可见",
+      "method": "多横截面放样船壳，内外壳有厚度，篷体与桨独立",
+      "connections": "moor_bow接系缆，seat接坐板，cargo接货舱",
+      "acceptance": "船壳闭合且不灌水，水线不没过舷，篷架不穿船板",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A048",
+      "asset_id": "JNX_A048",
+      "name_cn": "平底货船",
+      "slug": "cargo_barge",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        12.0,
+        3.4,
+        3.0
+      ],
+      "districts": [
+        "D01",
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/cargo_barge.py",
+      "task_file": "tasks/assets/A048.md",
+      "form": "宽平货舱、低舷和两端作业位，货物系固有位置",
+      "method": "沿截面生成船体，甲板留舱口，货物保持独立实例",
+      "connections": "load_area接货物，tow接牵引绳，moor接码头",
+      "acceptance": "满载轮廓仍低于操作视线，绳索不穿货箱",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A049",
+      "asset_id": "JNX_A049",
+      "name_cn": "竹木小筏",
+      "slug": "bamboo_raft",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        5.0,
+        2.4,
+        0.7
+      ],
+      "districts": [
+        "D09",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/bamboo_raft.py",
+      "task_file": "tasks/assets/A049.md",
+      "form": "并排竹木构成轻筏，横绑带和撑篙表达用途",
+      "method": "竹竿按实际半径并列，长度少量差异，绑绳走外轮廓",
+      "connections": "pole接撑篙，moor接岸点",
+      "acceptance": "筏面支撑一致，竹筒无无故尖锥，绑绳穿绕方向清楚",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A050",
+      "asset_id": "JNX_A050",
+      "name_cn": "系缆柱组",
+      "slug": "mooring_bollard",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        2.8,
+        0.8,
+        1.0
+      ],
+      "districts": [
+        "D01",
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/mooring_bollard.py",
+      "task_file": "tasks/assets/A050.md",
+      "form": "石柱和木桩两型，顶端磨损来自绳索反复摩擦",
+      "method": "柱体旋转或挤出，磨损带由可控遮罩指定",
+      "connections": "rope接绳索，foot接岸顶",
+      "acceptance": "绳索锚点高于水，柱脚埋入岸体而不是漂在表面",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A051",
+      "asset_id": "JNX_A051",
+      "name_cn": "引水竹槽",
+      "slug": "bamboo_flume",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        8.0,
+        0.5,
+        2.5
+      ],
+      "districts": [
+        "D03",
+        "D09",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/bamboo_flume.py",
+      "task_file": "tasks/assets/A051.md",
+      "form": "半剖竹槽逐段下倾，交接处搭接，终点落入石槽",
+      "method": "以半圆截面扫掠中线，支架高度从槽底反推",
+      "connections": "inlet接水源，outlet接接水槽，support接支架",
+      "acceptance": "纵向坡度持续向下，接缝不逆搭，槽底不漏出断面",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A052",
+      "asset_id": "JNX_A052",
+      "name_cn": "桥头候船棚",
+      "slug": "ferry_shelter",
+      "category": "waterfront",
+      "dimensions_nominal_m": [
+        8.0,
+        5.0,
+        5.0
+      ],
+      "districts": [
+        "D01",
+        "D04",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/waterfront/ferry_shelter.py",
+      "task_file": "tasks/assets/A052.md",
+      "form": "靠桥头侧面的小候船棚，座凳面向水而入口朝路",
+      "method": "开放柱架加单独屋顶，围栏只封危险边",
+      "connections": "road接候船口，dock接台阶，seat接长凳",
+      "acceptance": "候船人不占桥面，视线能看见靠船点，檐柱不落在台阶中",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A053",
+      "asset_id": "JNX_A053",
+      "name_cn": "街市摊架",
+      "slug": "market_stall",
+      "category": "props",
+      "dimensions_nominal_m": [
+        3.7,
+        2.4,
+        3.0
+      ],
+      "districts": [
+        "D01",
+        "D02",
+        "D08"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/props/market_stall.py",
+      "task_file": "tasks/assets/A053.md",
+      "form": "木架支布篷，货台前低后高，四角绳索支撑明确",
+      "method": "桌架、篷杆、布面独立，布面网格允许轻微下垂",
+      "connections": "wares接商品，awning接篷布，queue接排队带",
+      "acceptance": "摊位脚不跨排水沟，布篷不穿行人头部空间",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A054",
+      "asset_id": "JNX_A054",
+      "name_cn": "竹编货篮",
+      "slug": "woven_basket",
+      "category": "props",
+      "dimensions_nominal_m": [
+        0.7,
+        0.7,
+        0.6
+      ],
+      "districts": [
+        "D01",
+        "D04",
+        "D09"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/woven_basket.py",
+      "task_file": "tasks/assets/A054.md",
+      "form": "口沿加固、篮壁渐收，编织密度随镜头分级",
+      "method": "近景少量真编织带，普通距离用法线和透明度控制",
+      "connections": "handle接提梁，contents接果蔬",
+      "acceptance": "空篮能看到内腔，篮底封闭，编织不会产生摩尔纹主导画面",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A055",
+      "asset_id": "JNX_A055",
+      "name_cn": "叠放木箱",
+      "slug": "wooden_crate",
+      "category": "props",
+      "dimensions_nominal_m": [
+        1.2,
+        0.8,
+        0.8
+      ],
+      "districts": [
+        "D01",
+        "D04",
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/wooden_crate.py",
+      "task_file": "tasks/assets/A055.md",
+      "form": "木板箱配横档，边角压伤，堆叠方向受受力限制",
+      "method": "面板分组，重复钉件实例化，变体控制盖板状态",
+      "connections": "stack_top和stack_bottom接堆叠，label接货签",
+      "acceptance": "箱体有底，盖板可分离，叠放重心不越支撑面",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A056",
+      "asset_id": "JNX_A056",
+      "name_cn": "麻布货包",
+      "slug": "cloth_sack",
+      "category": "props",
+      "dimensions_nominal_m": [
+        0.7,
+        0.5,
+        0.9
+      ],
+      "districts": [
+        "D01",
+        "D02",
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/cloth_sack.py",
+      "task_file": "tasks/assets/A056.md",
+      "form": "装粮后的鼓胀布袋，收口绳结与落地压扁关系可读",
+      "method": "低模椭圆截面变形并保留口部拓扑，褶皱靠法线分层",
+      "connections": "tie接绳结，stack接其他货包",
+      "acceptance": "底部落地不尖，布纹不拉伸成条带，收口不无故开洞",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A057",
+      "asset_id": "JNX_A057",
+      "name_cn": "檐下灯笼",
+      "slug": "paper_lantern",
+      "category": "props",
+      "dimensions_nominal_m": [
+        0.6,
+        0.6,
+        0.85
+      ],
+      "districts": [
+        "D02",
+        "D03",
+        "D07"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/props/paper_lantern.py",
+      "task_file": "tasks/assets/A057.md",
+      "form": "纸罩、骨架、上下盖和吊环分开，光色温暖但克制",
+      "method": "旋转体生成纸罩，骨架实例化，发光强度外部注入",
+      "connections": "hang接檐下钩，light接灯光，tassel接短穗",
+      "acceptance": "灯光不穿厚木盖，纸面有厚度意向，悬挂方向随重力",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A058",
+      "asset_id": "JNX_A058",
+      "name_cn": "临河灯架",
+      "slug": "riverside_lamp",
+      "category": "props",
+      "dimensions_nominal_m": [
+        1.2,
+        0.5,
+        3.6
+      ],
+      "districts": [
+        "D04",
+        "D07",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/riverside_lamp.py",
+      "task_file": "tasks/assets/A058.md",
+      "form": "立柱横臂承灯，铁钩及斜撑表达承重",
+      "method": "圆柱立杆、横臂和斜撑独立，灯笼通过接口引用",
+      "connections": "foot接岸面，hang接灯笼",
+      "acceptance": "灯架不占道路中线，横臂支撑成立，灯笼离栏杆有间距",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A059",
+      "asset_id": "JNX_A059",
+      "name_cn": "客栈酒旗",
+      "slug": "inn_banner",
+      "category": "props",
+      "dimensions_nominal_m": [
+        1.5,
+        0.1,
+        2.5
+      ],
+      "districts": [
+        "D02",
+        "D03"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/inn_banner.py",
+      "task_file": "tasks/assets/A059.md",
+      "form": "竖幅粗布、木横杆、边缘磨损，字样留可编辑层",
+      "method": "布面规则网格配固定边权重，初版可静态垂挂",
+      "connections": "pole接旗杆，text接字面，wind接后续风场",
+      "acceptance": "固定边不随风漂走，背面颜色合理，文字方向正确",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A060",
+      "asset_id": "JNX_A060",
+      "name_cn": "木茶案",
+      "slug": "tea_table",
+      "category": "props",
+      "dimensions_nominal_m": [
+        1.4,
+        0.8,
+        0.75
+      ],
+      "districts": [
+        "D03",
+        "D05",
+        "D07"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/tea_table.py",
+      "task_file": "tasks/assets/A060.md",
+      "form": "低调木案，桌面、牙板、四足与横撑分层",
+      "method": "按高度和面宽参数化，木纹沿各自构件长轴",
+      "connections": "top接茶具，seat_front接坐具",
+      "acceptance": "四足共面，桌面有厚度，茶杯放置不悬空",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A061",
+      "asset_id": "JNX_A061",
+      "name_cn": "长条凳",
+      "slug": "wood_bench",
+      "category": "props",
+      "dimensions_nominal_m": [
+        1.8,
+        0.4,
+        0.46
+      ],
+      "districts": [
+        "D01",
+        "D03",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/wood_bench.py",
+      "task_file": "tasks/assets/A061.md",
+      "form": "长板与两副支脚组合，踏磨主要在上缘",
+      "method": "分离座板和撑脚，允许端头轻度不齐但不影响落地",
+      "connections": "seat接人物，ground接地坪",
+      "acceptance": "四点稳定支撑，座面高度可用，底部撑材不穿脚道",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A062",
+      "asset_id": "JNX_A062",
+      "name_cn": "客栈柜台",
+      "slug": "inn_counter",
+      "category": "props",
+      "dimensions_nominal_m": [
+        3.2,
+        0.75,
+        1.1
+      ],
+      "districts": [
+        "D02",
+        "D03"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/inn_counter.py",
+      "task_file": "tasks/assets/A062.md",
+      "form": "前板整洁、后侧有收纳，交易台面轻度磨亮",
+      "method": "外框与抽屉门板分对象，背面不是封死的墙",
+      "connections": "service接掌柜位，front接客人，top接账簿",
+      "acceptance": "背面操作位可站人，门板能打开，台面无不合理镜面",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A063",
+      "asset_id": "JNX_A063",
+      "name_cn": "木床榻",
+      "slug": "wood_bed",
+      "category": "props",
+      "dimensions_nominal_m": [
+        2.2,
+        1.4,
+        1.1
+      ],
+      "districts": [
+        "D03",
+        "D06"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/wood_bed.py",
+      "task_file": "tasks/assets/A063.md",
+      "form": "床框、床板和薄铺盖分组，床下留低矮储物空间",
+      "method": "木构按床长生成，铺盖使用可替换低模布面",
+      "connections": "sleep接铺盖，storage接床下物品",
+      "acceptance": "床板不穿床框，四足落地，被褥保持真实厚度",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A064",
+      "asset_id": "JNX_A064",
+      "name_cn": "陶酒坛",
+      "slug": "wine_jar",
+      "category": "props",
+      "dimensions_nominal_m": [
+        0.65,
+        0.65,
+        0.85
+      ],
+      "districts": [
+        "D02",
+        "D03",
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/wine_jar.py",
+      "task_file": "tasks/assets/A064.md",
+      "form": "鼓腹小口、厚唇与粗陶底足，可选布封或木盖",
+      "method": "旋转剖面输出内外壁，釉面和粗陶区域分别赋材质",
+      "connections": "lid接封口，contents接液面",
+      "acceptance": "开口可见壁厚，封盖贴合唇口，材质不似塑料",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A065",
+      "asset_id": "JNX_A065",
+      "name_cn": "供水木桶",
+      "slug": "water_bucket",
+      "category": "props",
+      "dimensions_nominal_m": [
+        0.5,
+        0.5,
+        0.6
+      ],
+      "districts": [
+        "D03",
+        "D06",
+        "D09"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/water_bucket.py",
+      "task_file": "tasks/assets/A065.md",
+      "form": "竖木条围桶，铁箍压住接缝，活动提梁",
+      "method": "木片绕环实例化，桶底独立，箍环保留真实厚度",
+      "connections": "handle接提梁，water接水面，rope接井绳",
+      "acceptance": "提梁能转，桶内腔存在，水面不穿桶壁",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A066",
+      "asset_id": "JNX_A066",
+      "name_cn": "石井井栏",
+      "slug": "stone_well",
+      "category": "props",
+      "dimensions_nominal_m": [
+        2.4,
+        2.4,
+        2.8
+      ],
+      "districts": [
+        "D05",
+        "D06"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/stone_well.py",
+      "task_file": "tasks/assets/A066.md",
+      "form": "环形井栏围真实井口，上方可选辘轳架",
+      "method": "环段组成井圈，中心保留空孔，下接深色井筒",
+      "connections": "ground接院地，rope接汲水绳，bucket接桶",
+      "acceptance": "井口不封平板，井绳有下降空间，井圈顶面可扶靠",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A067",
+      "asset_id": "JNX_A067",
+      "name_cn": "灶台锅具",
+      "slug": "kitchen_stove",
+      "category": "props",
+      "dimensions_nominal_m": [
+        2.6,
+        1.6,
+        1.3
+      ],
+      "districts": [
+        "D03",
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/kitchen_stove.py",
+      "task_file": "tasks/assets/A067.md",
+      "form": "灶口、锅口、烟道与操作台有具体对应",
+      "method": "灶体分段围出火腔，锅具旋转体与灶口尺寸匹配",
+      "connections": "fire接火腔，pot接锅，flue接烟道",
+      "acceptance": "锅底进入灶口但不穿底，灶门可见内部，烟道连接正确",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A068",
+      "asset_id": "JNX_A068",
+      "name_cn": "河岸晾网架",
+      "slug": "fishing_net_rack",
+      "category": "props",
+      "dimensions_nominal_m": [
+        6.0,
+        1.2,
+        3.2
+      ],
+      "districts": [
+        "D04"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/fishing_net_rack.py",
+      "task_file": "tasks/assets/A068.md",
+      "form": "两至三根支杆挂湿网，网面有重力垂度",
+      "method": "网绳曲线按低密度网格生成，远景透明贴图替代",
+      "connections": "net_top接横杆，weights接坠子",
+      "acceptance": "网的四边均有合理自由或固定状态，网不整片悬空",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A069",
+      "asset_id": "JNX_A069",
+      "name_cn": "晒布架",
+      "slug": "cloth_drying_rack",
+      "category": "props",
+      "dimensions_nominal_m": [
+        8.0,
+        2.4,
+        4.2
+      ],
+      "districts": [
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/cloth_drying_rack.py",
+      "task_file": "tasks/assets/A069.md",
+      "form": "高架挂长布，布尾离地，通道穿过下方时有净空",
+      "method": "杆架和布面分对象，布的悬挂边作为固定顶点组",
+      "connections": "cloth接横杆，wind接后续风系统",
+      "acceptance": "布长度服从净空，支腿不穿院墙，布帘不覆盖装卸口",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A070",
+      "asset_id": "JNX_A070",
+      "name_cn": "匾额文字层",
+      "slug": "editable_sign_text",
+      "category": "props",
+      "dimensions_nominal_m": [
+        2.0,
+        0.05,
+        0.5
+      ],
+      "districts": [
+        "D01",
+        "D03",
+        "D10"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/editable_sign_text.py",
+      "task_file": "tasks/assets/A070.md",
+      "form": "题字可单独替换，字面不过度金亮，保留空白边",
+      "method": "以Blender文本或矢量曲线输出，记录字体路径和授权来源",
+      "connections": "board接匾心，baseline接排字基线",
+      "acceptance": "汉字正确，正反向一致，不把AI乱码当完成",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A071",
+      "asset_id": "JNX_A071",
+      "name_cn": "手推木车",
+      "slug": "wood_handcart",
+      "category": "props",
+      "dimensions_nominal_m": [
+        2.8,
+        1.2,
+        1.1
+      ],
+      "districts": [
+        "D01",
+        "D04",
+        "D08"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/wood_handcart.py",
+      "task_file": "tasks/assets/A071.md",
+      "form": "车轮、车轴、把手与载物台对应承重，便于推行",
+      "method": "轴线驱动车轮，货台在轮轴上方，车把与底架相接",
+      "connections": "cargo接货物，hands接把手，axle接轮",
+      "acceptance": "左右轮同轴，轮底触地，把手不穿货物",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A072",
+      "asset_id": "JNX_A072",
+      "name_cn": "竹制扫帚",
+      "slug": "bamboo_broom",
+      "category": "props",
+      "dimensions_nominal_m": [
+        0.5,
+        0.25,
+        1.5
+      ],
+      "districts": [
+        "D03",
+        "D05",
+        "D06"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/props/bamboo_broom.py",
+      "task_file": "tasks/assets/A072.md",
+      "form": "细柄束枝与绑带，常倚墙放置，枝端使用后散开",
+      "method": "柄用圆柱，扫枝曲线成束，绑带位于受力处",
+      "connections": "grip接手握位，lean接墙面",
+      "acceptance": "扫枝数量有LOD预算，倚靠有接触点，柄不穿墙",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A073",
+      "asset_id": "JNX_A073",
+      "name_cn": "岸边垂柳",
+      "slug": "willow_tree",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        7.0,
+        7.0,
+        10.0
+      ],
+      "districts": [
+        "D02",
+        "D07",
+        "D12"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/nature/willow_tree.py",
+      "task_file": "tasks/assets/A073.md",
+      "form": "主干略弯，一级枝承重，垂枝向水面，冠下留行走空间",
+      "method": "先骨架后枝条再叶簇，按枝龄分半径，叶卡集中枝端",
+      "connections": "root接地，shade接投影区，wind接枝权重",
+      "acceptance": "主枝连续，树根入土，树冠不完全挡住桥头",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A074",
+      "asset_id": "JNX_A074",
+      "name_cn": "竹丛母体",
+      "slug": "bamboo_cluster",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        5.0,
+        5.0,
+        9.0
+      ],
+      "districts": [
+        "D03",
+        "D11"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/nature/bamboo_cluster.py",
+      "task_file": "tasks/assets/A074.md",
+      "form": "新老竹混生，节间清楚，叶片簇生于分枝而非黏满主干",
+      "method": "节段堆叠与渐缩、曲线弯曲、枝叶实例分级",
+      "connections": "ground接土坡，wind接竹梢，clearance接步径",
+      "acceptance": "竹节间距合理，叶片双面，竹丛底部留枯叶而不封路",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A075",
+      "asset_id": "JNX_A075",
+      "name_cn": "古梅",
+      "slug": "old_plum",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        6.0,
+        5.0,
+        6.0
+      ],
+      "districts": [
+        "D05",
+        "D07"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/old_plum.py",
+      "task_file": "tasks/assets/A075.md",
+      "form": "偏冠斜枝与少量花，枝干有年龄层次，保持旧庭院气质",
+      "method": "曲线骨架控制主要姿态，近枝独立芽点，花量由密度参数控制",
+      "connections": "root接土，flower接芽位，wind接细枝",
+      "acceptance": "枝径逐级变细，花不长在主干中部，主姿态远景可读",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A076",
+      "asset_id": "JNX_A076",
+      "name_cn": "寺前古柏",
+      "slug": "cypress_tree",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        7.0,
+        7.0,
+        13.0
+      ],
+      "districts": [
+        "D10"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/cypress_tree.py",
+      "task_file": "tasks/assets/A076.md",
+      "form": "扭转主干与深色团簇叶，成为殿檐旁的竖向参照",
+      "method": "先生成分叉主干，再用团簇体积或叶卡覆盖枝端",
+      "connections": "root接台地，wind接末端",
+      "acceptance": "分叉不突然断裂，树冠不吞没山门，近景树皮方向沿干",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A077",
+      "asset_id": "JNX_A077",
+      "name_cn": "溪边芦苇",
+      "slug": "reeds_patch",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        3.0,
+        3.0,
+        2.5
+      ],
+      "districts": [
+        "D04",
+        "D11",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/reeds_patch.py",
+      "task_file": "tasks/assets/A077.md",
+      "form": "高低错落的芦苇只长于浅水边，穗和叶有不同方向",
+      "method": "种子控制群落密度，依据水深和岸距散布，茎和穗分母体",
+      "connections": "shore_mask接岸线，wind接顶梢",
+      "acceptance": "不长在深水中央，根部贴岸，叶片不全朝同一镜头",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A078",
+      "asset_id": "JNX_A078",
+      "name_cn": "池中荷叶",
+      "slug": "lotus_patch",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        4.0,
+        4.0,
+        1.5
+      ],
+      "districts": [
+        "D07",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/lotus_patch.py",
+      "task_file": "tasks/assets/A078.md",
+      "form": "荷叶高度不齐、叶缘微卷，稀疏花与枯梗穿插",
+      "method": "叶盘径向网格，叶梗曲线从水面下接出，花另做资产",
+      "connections": "water接水面，stem接叶柄",
+      "acceptance": "叶片不悬离叶梗，水面无遮挡满铺，枯荣比例受参数控制",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A079",
+      "asset_id": "JNX_A079",
+      "name_cn": "苔藓斑块",
+      "slug": "moss_patch",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        2.0,
+        2.0,
+        0.05
+      ],
+      "districts": [
+        "D05",
+        "D07",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/moss_patch.py",
+      "task_file": "tasks/assets/A079.md",
+      "form": "阴面、石缝和水线附近聚集，覆盖量受光照与湿度限制",
+      "method": "贴花或低矮壳层，生成局部遮罩，近景叶状细节仅少量",
+      "connections": "surface接石木表面，wet_mask接湿度",
+      "acceptance": "不把苔藓均匀铺满太阳直晒区域，贴花边缘不成方形",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A080",
+      "asset_id": "JNX_A080",
+      "name_cn": "河滩草丛",
+      "slug": "bank_grass",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        2.0,
+        2.0,
+        0.7
+      ],
+      "districts": [
+        "D09",
+        "D11"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/bank_grass.py",
+      "task_file": "tasks/assets/A080.md",
+      "form": "草叶沿岸坡生长，踩踏路中稀疏，边缘有枯黄层次",
+      "method": "少量草束母体按地形法线旋转，避让通行与水深遮罩",
+      "connections": "terrain接地，trample接路径遮罩",
+      "acceptance": "草根不悬空，叶片不全同高，足迹带确实变稀",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A081",
+      "asset_id": "JNX_A081",
+      "name_cn": "茶树行",
+      "slug": "tea_row",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        12.0,
+        2.0,
+        1.4
+      ],
+      "districts": [
+        "D09"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/tea_row.py",
+      "task_file": "tasks/assets/A081.md",
+      "form": "低矮修剪茶丛成行，行间留采摘路径，随坡微弯",
+      "method": "用行中心线实例化灌木簇，按间距与坡向约束",
+      "connections": "row_start和row_end接茶行，path接采摘沟",
+      "acceptance": "行距能通人，不跨排水沟，坡面根系落地",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A082",
+      "asset_id": "JNX_A082",
+      "name_cn": "水稻田块",
+      "slug": "rice_paddy",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        18.0,
+        12.0,
+        1.2
+      ],
+      "districts": [
+        "D09"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/rice_paddy.py",
+      "task_file": "tasks/assets/A082.md",
+      "form": "浅水田面、窄田埂和成簇稻株，水路接入明确",
+      "method": "田块边界先挤出田埂，再布浅水与稻株实例",
+      "connections": "inlet接沟渠，outlet接下游，ridge接田埂",
+      "acceptance": "田水不高过埂，入口出水可辨认，株间保留空隙",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A083",
+      "asset_id": "JNX_A083",
+      "name_cn": "太湖石",
+      "slug": "scholar_rock",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        3.0,
+        2.5,
+        4.0
+      ],
+      "districts": [
+        "D05",
+        "D07"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/scholar_rock.py",
+      "task_file": "tasks/assets/A083.md",
+      "form": "瘦透漏皱的赏石需要真实孔洞，底部支撑有分量",
+      "method": "先轮廓雕塑再显式开洞或体素布尔，最后控制网格密度",
+      "connections": "foot接石座，view_front接主要观赏面",
+      "acceptance": "孔洞贯通，底部不悬，法线一致，轮廓不似融化塑料",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A084",
+      "asset_id": "JNX_A084",
+      "name_cn": "岸边乱石组",
+      "slug": "shore_rocks",
+      "category": "nature",
+      "dimensions_nominal_m": [
+        6.0,
+        4.0,
+        2.0
+      ],
+      "districts": [
+        "D09",
+        "D11",
+        "D12"
+      ],
+      "priority": "P1",
+      "status": "planned",
+      "source": "future/nature/shore_rocks.py",
+      "task_file": "tasks/assets/A084.md",
+      "form": "大中小石按坡脚和水流组织，部分埋入泥土",
+      "method": "少量岩石母体做旋转缩放变体，保留尺度层级",
+      "connections": "terrain接岸坡，waterline接潮痕",
+      "acceptance": "不均匀撒点，石间空隙自然，石头不漂在水面上",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A085",
+      "asset_id": "JNX_A085",
+      "name_cn": "青石铺路",
+      "slug": "stone_paving",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        6.0,
+        6.0,
+        0.18
+      ],
+      "districts": [
+        "D01",
+        "D02",
+        "D06"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/environment/stone_paving.py",
+      "task_file": "tasks/assets/A085.md",
+      "form": "不规则长石板，有排水坡和局部磨光，缝里偶有苔",
+      "method": "按路段方向生成板块或可平铺材质，路口另做转接",
+      "connections": "edge接路肩，drain接沟盖，road_axis接动线",
+      "acceptance": "石板方向随路，拐角不突然断纹，积水低于门槛",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A086",
+      "asset_id": "JNX_A086",
+      "name_cn": "泥地过渡",
+      "slug": "mud_transition",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        6.0,
+        6.0,
+        0.3
+      ],
+      "districts": [
+        "D09",
+        "D11"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/mud_transition.py",
+      "task_file": "tasks/assets/A086.md",
+      "form": "石路到泥地逐渐稀疏，湿脚印仅出现在常走处",
+      "method": "顶点色混合地面材质，边界碎石分密度散布",
+      "connections": "stone_edge接铺路，soil_edge接田地",
+      "acceptance": "过渡无硬方边，脚印尺度正常，不把干泥做成镜面",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A087",
+      "asset_id": "JNX_A087",
+      "name_cn": "院内排水沟",
+      "slug": "courtyard_drain",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        8.0,
+        0.4,
+        0.5
+      ],
+      "districts": [
+        "D03",
+        "D06",
+        "D08"
+      ],
+      "priority": "P0",
+      "status": "planned",
+      "source": "future/environment/courtyard_drain.py",
+      "task_file": "tasks/assets/A087.md",
+      "form": "浅沟沿屋檐与院边汇水，转角有检查口",
+      "method": "沟底坡度连续，沟壁和盖板分离，端点记录标高",
+      "connections": "inlet接檐下水，outlet接总渠",
+      "acceptance": "流水路径单调下降，沟盖不高于路面，不能穿过实心墙基",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A088",
+      "asset_id": "JNX_A088",
+      "name_cn": "园林池岸",
+      "slug": "pond_edge",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        12.0,
+        3.0,
+        2.0
+      ],
+      "districts": [
+        "D05",
+        "D07"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/pond_edge.py",
+      "task_file": "tasks/assets/A088.md",
+      "form": "石岸有曲折与大小石，水位高于池底低于步道",
+      "method": "池岸曲线生成挡水壳，压顶石与植物带分开",
+      "connections": "water接池水，walk接步道，rock接赏石",
+      "acceptance": "水面不露出池岸外，池岸有厚度，步道边不悬空",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A089",
+      "asset_id": "JNX_A089",
+      "name_cn": "汀步石组",
+      "slug": "stepping_stones",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        12.0,
+        2.0,
+        0.6
+      ],
+      "districts": [
+        "D07",
+        "D11"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/stepping_stones.py",
+      "task_file": "tasks/assets/A089.md",
+      "form": "跨浅水的汀步有稳重落脚面，间距可走，略有错落",
+      "method": "沿曲线分布石块，按步长约束距离，顶面标高统一小幅变化",
+      "connections": "start和end接两岸，water接水位",
+      "acceptance": "石块间距不过大，顶面不在水下，石体延伸到池底",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A090",
+      "asset_id": "JNX_A090",
+      "name_cn": "坡地台阶",
+      "slug": "hillside_stairs",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        4.0,
+        18.0,
+        8.0
+      ],
+      "districts": [
+        "D10",
+        "D11"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/hillside_stairs.py",
+      "task_file": "tasks/assets/A090.md",
+      "form": "顺坡折转的石阶带平台，坡脚坡顶有缓冲",
+      "method": "按高程线分段求级数，每段末端加入平台",
+      "connections": "bottom接低路，top接高路，landing接岔道",
+      "acceptance": "级高均匀，平台真实可站人，台阶不直接插入山石",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A091",
+      "asset_id": "JNX_A091",
+      "name_cn": "山林远景",
+      "slug": "distant_hills",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        720.0,
+        180.0,
+        140.0
+      ],
+      "districts": [
+        "D10",
+        "D11",
+        "D12"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/distant_hills.py",
+      "task_file": "tasks/assets/A091.md",
+      "form": "低山层叠承接城镇天际线，不抢近景主体",
+      "method": "多组低模高度场叠置，材质与雾按距离退隐",
+      "connections": "horizon接相机范围，terrain_edge接扩展边界",
+      "acceptance": "仅声明远景用途，不冒充完整可游玩山体",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A092",
+      "asset_id": "JNX_A092",
+      "name_cn": "低雾体积",
+      "slug": "ground_mist",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        180.0,
+        160.0,
+        12.0
+      ],
+      "districts": [
+        "D07",
+        "D11",
+        "D12"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/ground_mist.py",
+      "task_file": "tasks/assets/A092.md",
+      "form": "贴水薄雾和林间断续雾层，保持桥和门口可读",
+      "method": "体积盒或几何节点分区，密度以高度和噪声控制",
+      "connections": "water_height接水位，camera_range接机位，wind接方向",
+      "acceptance": "雾不把全景压成白片，近景轮廓仍可辨，关闭后几何存在",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A093",
+      "asset_id": "JNX_A093",
+      "name_cn": "檐下雨线",
+      "slug": "eaves_rain",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        14.0,
+        1.0,
+        6.0
+      ],
+      "districts": [
+        "D02",
+        "D03",
+        "D07"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/eaves_rain.py",
+      "task_file": "tasks/assets/A093.md",
+      "form": "雨滴从滴水瓦下落，主雨和屋檐水线密度不同",
+      "method": "从檐口曲线采样发射点，实例化细雨线并记录seed",
+      "connections": "emit接屋檐，hit接地面，weather接总控",
+      "acceptance": "没有晴天常亮雨线，雨不穿过上层屋顶才出现",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A094",
+      "asset_id": "JNX_A094",
+      "name_cn": "水面涟漪",
+      "slug": "water_ripples",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        12.0,
+        12.0,
+        0.05
+      ],
+      "districts": [
+        "D04",
+        "D07",
+        "D12"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/water_ripples.py",
+      "task_file": "tasks/assets/A094.md",
+      "form": "雨点小圈与船行长波分尺度，强度低于建筑反射",
+      "method": "法线材质或稀疏扩散环实例，事件输入决定位置",
+      "connections": "water_surface接水平面，rain_hits接雨，wake接船",
+      "acceptance": "环不离开水面，不所有涟漪同步扩散，不使池水像沸腾",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A095",
+      "asset_id": "JNX_A095",
+      "name_cn": "夜景光组",
+      "slug": "night_lighting",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        180.0,
+        160.0,
+        30.0
+      ],
+      "districts": [
+        "D02",
+        "D03",
+        "D07",
+        "D10"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/night_lighting.py",
+      "task_file": "tasks/assets/A095.md",
+      "form": "冷月塑形，暖灯限定在人能停留的区域，建筑层次可读",
+      "method": "区域光与灯笼点光分级布置，参数控制亮度而非全局乱调曝光",
+      "connections": "lantern_socket接灯笼，moon_direction接主光，camera接构图",
+      "acceptance": "光源有出处，暗部保留层次，不用大片橙光涂满白墙",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    },
+    {
+      "task_id": "A096",
+      "asset_id": "JNX_A096",
+      "name_cn": "镜头路线",
+      "slug": "camera_route",
+      "category": "environment",
+      "dimensions_nominal_m": [
+        720.0,
+        540.0,
+        80.0
+      ],
+      "districts": [
+        "D01",
+        "D03",
+        "D07",
+        "D12"
+      ],
+      "priority": "P2",
+      "status": "planned",
+      "source": "future/environment/camera_route.py",
+      "task_file": "tasks/assets/A096.md",
+      "form": "从入城、过桥、进店、入园到望楼形成可分段观看的路线",
+      "method": "曲线控制相机路径与独立注视目标，先静态机位再动画",
+      "connections": "route_nodes接地区入口，look_targets接地标",
+      "acceptance": "路径不穿墙，镜头高度变化可解释，远近景切换服务空间理解",
+      "dependencies": [
+        "S02",
+        "S03",
+        "S04"
+      ],
+      "variants": [
+        "intact_damp",
+        "used_damp",
+        "repaired_damp"
+      ]
+    }
+  ]
+}

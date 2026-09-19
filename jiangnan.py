@@ -86,7 +86,10 @@ def start():
         if c.name.startswith(PREFIX):bpy.data.collections.remove(c)
     for m in list(bpy.data.materials):
         if m.name.startswith(PREFIX) and m.users==0:bpy.data.materials.remove(m)
-    S=bpy.data.scenes.new(SCENE);bpy.context.window.scene=S
+    if bpy.app.background:
+        S=bpy.context.scene;S.name=SCENE
+    else:
+        S=bpy.data.scenes.new(SCENE);bpy.context.window.scene=S
     C={}
     for key,label in [('court','01_庭院_墙瓦月门'),('water','02_水石_汀步'),('tree','03_梅树_可动花枝'),('dew','04_露珠'),('rain','05_夜雨'),('snow','06_落雪'),('cover','07_薄雪覆盖'),('sky','08_云月远山'),('light','09_冷月暖灯'),('camera','10_验证相机'),('control','00_总控')]:
         c=bpy.data.collections.new(PREFIX+label);S.collection.children.link(c);C[key]=c
@@ -527,8 +530,8 @@ def art_upgrade():
             for i in range(65):
                 a=-1.05+2.1*i/64;v.append((65*sin(a),65*cos(a),-10+j*43));uvs.append((i/64,j))
                 if j and i:a0=i-1;f.append((a0,a0+1,a0+66,a0+65))
-        o=mesh('远山环幕_生成贴图',v,f,m,C['sky']);uv=o.data.uv_layers.new(name='远山全景UV')
-        for loop in o.data.loops:uv.data[loop.index].uv=uvs[loop.vertex_index]
+        o=mesh('远山环幕_生成贴图',v,f,m,C['sky']);uv_layer=o.data.uv_layers.new(name='远山全景UV')
+        for loop in o.data.loops:uv_layer.data[loop.index].uv=uvs[loop.vertex_index]
     # Layered lighting: reduce frontal flattening, preserve readable penumbrae.
     bpy.data.objects[PREFIX+'天光_暗部细节'].data.energy=850
     bpy.data.objects[PREFIX+'月光_主塑形'].data.energy=2200

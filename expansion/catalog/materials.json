@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "materials": [
+    {
+      "task_id": "M01",
+      "name_cn": "旧粉墙",
+      "slug": "lime_plaster",
+      "slot": "plaster",
+      "description": "偏冷米白石灰面，细微粉化和发丝裂纹，保持大面积洁净，潮痕留给遮罩",
+      "coverage": "2×2米",
+      "response": "粗糙度0.75–0.95，受潮可降至0.55–0.7",
+      "status": "planned",
+      "task_file": "tasks/materials/M01_lime_plaster.md"
+    },
+    {
+      "task_id": "M02",
+      "name_cn": "青灰砖",
+      "slug": "grey_brick",
+      "slot": "stone",
+      "description": "低饱和青灰砖与细窄灰缝，砖长约24厘米，不规则程度克制",
+      "coverage": "2×2米",
+      "response": "粗糙度0.7–0.9；砖缝凹陷尺度约5–12毫米",
+      "status": "planned",
+      "task_file": "tasks/materials/M02_grey_brick.md"
+    },
+    {
+      "task_id": "M03",
+      "name_cn": "黛瓦胎土",
+      "slug": "roof_clay",
+      "slot": "tile",
+      "description": "黛青灰烧陶连续材质，仅颗粒与旧化，无额外瓦片轮廓",
+      "coverage": "1×1米",
+      "response": "粗糙度0.6–0.85，湿润区域0.35–0.55",
+      "status": "planned",
+      "task_file": "tasks/materials/M03_roof_clay.md"
+    },
+    {
+      "task_id": "M04",
+      "name_cn": "老木柱梁",
+      "slug": "aged_timber",
+      "slot": "timber",
+      "description": "去饱和深褐木材，长纹纵向，手摸磨光和端面裂纹另做局部遮罩",
+      "coverage": "1×2米",
+      "response": "粗糙度0.5–0.85，避免全表面漆亮",
+      "status": "planned",
+      "task_file": "tasks/materials/M04_aged_timber.md"
+    },
+    {
+      "task_id": "M05",
+      "name_cn": "湿青石",
+      "slug": "paving_stone",
+      "slot": "stone",
+      "description": "灰绿石材细颗粒、浅矿物脉、磨平区与小坑，底色平光",
+      "coverage": "2×2米",
+      "response": "粗糙度干0.65–0.85、湿0.25–0.5",
+      "status": "planned",
+      "task_file": "tasks/materials/M05_paving_stone.md"
+    },
+    {
+      "task_id": "M06",
+      "name_cn": "驳岸粗石",
+      "slug": "quay_stone",
+      "slot": "stone",
+      "description": "灰色粗砌石颗粒，有方向不强的风蚀小坑，潮线单独叠加",
+      "coverage": "2×2米",
+      "response": "粗糙度0.7–0.95，块缝高度由几何或高度图提供",
+      "status": "planned",
+      "task_file": "tasks/materials/M06_quay_stone.md"
+    },
+    {
+      "task_id": "M07",
+      "name_cn": "竹皮",
+      "slug": "bamboo_skin",
+      "slot": "bamboo",
+      "description": "灰绿竹皮纵向细纹，浅蜡感，不在贴图里重复画竹节",
+      "coverage": "0.5×2米",
+      "response": "粗糙度0.45–0.75，竹节由几何控制",
+      "status": "planned",
+      "task_file": "tasks/materials/M07_bamboo_skin.md"
+    },
+    {
+      "task_id": "M08",
+      "name_cn": "梅树皮",
+      "slug": "plum_bark",
+      "slot": "timber",
+      "description": "深灰褐裂皮、纵向扭转裂隙、稀少灰绿地衣，避免黑色硬阴影",
+      "coverage": "1×2米",
+      "response": "粗糙度0.8–0.98，近景裂隙用法线高度",
+      "status": "planned",
+      "task_file": "tasks/materials/M08_plum_bark.md"
+    },
+    {
+      "task_id": "M09",
+      "name_cn": "粗麻布",
+      "slug": "undyed_cloth",
+      "slot": "cloth",
+      "description": "自然灰米色麻织物，经纬清晰但不夸大，边缘毛丝独立",
+      "coverage": "1×1米",
+      "response": "粗糙度0.85–1.0，透光按布厚控制",
+      "status": "planned",
+      "task_file": "tasks/materials/M09_undyed_cloth.md"
+    },
+    {
+      "task_id": "M10",
+      "name_cn": "靛蓝布",
+      "slug": "indigo_cloth",
+      "slot": "cloth",
+      "description": "低饱和靛蓝棉麻，缓慢色差、稀疏磨白，无预制褶皱阴影",
+      "coverage": "1×1米",
+      "response": "粗糙度0.8–0.98，染色不均由遮罩控制",
+      "status": "planned",
+      "task_file": "tasks/materials/M10_indigo_cloth.md"
+    },
+    {
+      "task_id": "M11",
+      "name_cn": "灯笼纸",
+      "slug": "lantern_paper",
+      "slot": "paper",
+      "description": "暖米白纤维纸，薄厚轻微不匀，没有画好的灯火高亮",
+      "coverage": "0.5×0.5米",
+      "response": "透光与发光分离，白天保持纸材质",
+      "status": "planned",
+      "task_file": "tasks/materials/M11_lantern_paper.md"
+    },
+    {
+      "task_id": "M12",
+      "name_cn": "粗陶",
+      "slug": "rough_ceramic",
+      "slot": "ceramic",
+      "description": "褐灰陶胎细砂点、微小烧结孔，局部釉色由单独材质槽处理",
+      "coverage": "1×1米",
+      "response": "粗糙度0.55–0.85，口沿釉面0.2–0.4",
+      "status": "planned",
+      "task_file": "tasks/materials/M12_rough_ceramic.md"
+    },
+    {
+      "task_id": "M13",
+      "name_cn": "旧锻铁",
+      "slug": "forged_iron",
+      "slot": "iron",
+      "description": "深灰铁、轻锤痕、局部暗锈，无整体鲜橙锈层",
+      "coverage": "1×1米",
+      "response": "金属度清洁铁1、锈层0；粗糙度0.45–0.85",
+      "status": "planned",
+      "task_file": "tasks/materials/M13_forged_iron.md"
+    },
+    {
+      "task_id": "M14",
+      "name_cn": "河岸湿土",
+      "slug": "mud_soil",
+      "slot": "earth",
+      "description": "棕灰黏土、小砂砾、微量有机质，积水与脚印另外叠加",
+      "coverage": "2×2米",
+      "response": "干土0.85–1.0，湿土0.45–0.7，水膜独立",
+      "status": "planned",
+      "task_file": "tasks/materials/M14_mud_soil.md"
+    },
+    {
+      "task_id": "M15",
+      "name_cn": "苔藓地衣",
+      "slug": "moss_lichen",
+      "slot": "leaf",
+      "description": "灰绿与暗橄榄苔藓斑块，边缘破碎，有透明遮罩",
+      "coverage": "1×1米",
+      "response": "粗糙度0.9左右，贴花深度避免共面闪烁",
+      "status": "planned",
+      "task_file": "tasks/materials/M15_moss_lichen.md"
+    },
+    {
+      "task_id": "M16",
+      "name_cn": "植被叶卡",
+      "slug": "leaf_atlas",
+      "slot": "leaf",
+      "description": "柳叶、竹叶或梅叶每种单独图集，均匀平光、真实叶脉、边缘清楚",
+      "coverage": "单叶按实物厘米尺度",
+      "response": "底色+透明度；正反面粗糙度可不同",
+      "status": "planned",
+      "task_file": "tasks/materials/M16_leaf_atlas.md"
+    }
+  ]
+}
