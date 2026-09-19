@@ -1428,11 +1428,11 @@ def _hero_district(builder, config):
 
 
 def _dense_focus(builder, district, fallback):
-    """Weighted centroid of lived-in assets, not the planning-grid centre.
+    """Local density peak of lived-in assets, not an averaged planning centre.
 
-    The config centre often falls on a broad court or road. Review cameras should
-    aim at where shops, houses and stalls actually accumulate, otherwise a dense
-    district can still render as an empty square.
+    A weighted centroid can land in the empty court between two busy rows. Pick
+    the actual asset whose neighbourhood carries the most lived-in weight, then
+    average only that local cluster.
     """
     weights = {
         "inn": 4.0, "shop": 3.0, "stall": 2.2, "house": 1.5,
@@ -1442,13 +1442,54 @@ def _dense_focus(builder, district, fallback):
     for spec in builder.roots.values():
         if spec["district"] != district or spec["family"] not in weights:
             continue
-        w = weights[spec["family"]]
-        pts.append((spec["location"][0], spec["location"][1], w))
+        pts.append((spec["location"][0], spec["location"][1], weights[spec["family"]]))
     if not pts:
         return fallback
-    total = sum(p[2] for p in pts) or 1.0
-    return (sum(p[0] * p[2] for p in pts) / total,
-            sum(p[1] * p[2] for p in pts) / total)
+    radius = 58.0
+    best = max(
+        pts,
+        key=lambda p: sum(q[2] for q in pts if math.hypot(q[0]-p[0], q[1]-p[1]) <= radius)
+    )
+    local = [q for q in pts if math.hypot(q[0]-best[0], q[1]-best[1]) <= radius]
+    total = sum(q[2] for q in local) or 1.0
+    return (sum(q[0]*q[2] for q in local)/total,
+            sum(q[1]*q[2] for q in local)/total)
+
+
+def _building_footprints(builder, district):
+    """Conservative XY envelopes for hollow building roots.
+
+    Mesh collision alone misses a camera sitting *inside* a room because there
+    is no solid polygon at the eye point. These root-level envelopes reject that
+    failure mode before rendering.
+    """
+    families = {"shop", "inn", "house", "warehouse", "hall", "pavilion"}
+    grouped = {}
+    for item in builder.objects:
+        root = builder.roots[item["root"]]
+        if root["district"] != district or root["family"] not in families:
+            continue
+        rx, ry, _ = root["location"]
+        ra = root["rotation"]
+        ox, oy, _ = item["location"]
+        ca, sa = math.cos(ra), math.sin(ra)
+        wx = rx + ox*ca - oy*sa
+        wy = ry + ox*sa + oy*ca
+        ta = ra + item["rotation"]
+        ct, st = math.cos(ta), math.sin(ta)
+        box = grouped.setdefault(item["root"], [1e18, 1e18, -1e18, -1e18])
+        for vx, vy, _ in builder.meshes[item["mesh"]].vertices:
+            px = wx + vx*ct - vy*st
+            py = wy + vx*st + vy*ct
+            box[0] = min(box[0], px); box[1] = min(box[1], py)
+            box[2] = max(box[2], px); box[3] = max(box[3], py)
+    return [tuple(v) for v in grouped.values() if v[0] < v[2] and v[1] < v[3]]
+
+
+def _inside_footprint(footprints, point, margin=1.5):
+    x, y = point[0], point[1]
+    return any(x0-margin <= x <= x1+margin and y0-margin <= y <= y1+margin
+               for x0, y0, x1, y1 in footprints)
 
 
 def _channels(config):
@@ -1588,6 +1629,7 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
                 return True
         return False
 
+    footprints = _building_footprints(builder, hero_id)
     candidates = []
     for spec in builder.roots.values():
         if spec["district"] != hero_id or spec["family"] not in ("shop", "inn"):
@@ -1617,7 +1659,7 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
         for stand, drift in ((13.0, 11.0), (13.0, -11.0), (16.0, 14.0),
                              (16.0, -14.0), (20.0, 10.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
-            if _blocked(boxes, eye):
+            if _blocked(boxes, eye) or _inside_footprint(footprints, eye):
                 continue
             # Look down the row instead of square-on at one shop. The former
             # composition turned a temporary stall into the whole frame and
