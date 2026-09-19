@@ -18,9 +18,9 @@ concurrency:
 env:
   BLENDER_VERSION: "4.5.14"
   BLENDER_DIR: ${{ github.workspace }}/.cache/blender
-  WIDTH: "2560"
-  HEIGHT: "1440"
-  SAMPLES: "320"
+  WIDTH: "1920"
+  HEIGHT: "1080"
+  SAMPLES: "128"
 
 jobs:
   build:
@@ -70,6 +70,7 @@ jobs:
     timeout-minutes: 240
     strategy:
       fail-fast: false
+      max-parallel: 4
       matrix:
         shot: [1,2,3,4,5,6,7,8,9,10,11,12]
     steps:
@@ -143,7 +144,7 @@ jobs:
           lines=[
             "# 烟雨江南扩建 · Final 12-View Gallery",
             "",
-            "> Cycles final gallery · 2560×1440 · 320 samples · 16-bit PNG · latest detail scene",
+            "> Cycles final gallery · 1920×1080 · 128 samples · 16-bit PNG · latest detail scene",
             "",
           ]
           for i,p in enumerate(files,1):
