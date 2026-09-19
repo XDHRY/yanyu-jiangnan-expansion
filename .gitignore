@@ -22,6 +22,7 @@ render_output/
 # GitHub Actions / headless Blender 运行产物
 .cache/
 ci_artifacts/
+ci_shots/
 remote_render/
 
 # 由旧 deliver() 可能写到仓库根目录的统计文件；权威记录放 validation/ 或 CI artifact

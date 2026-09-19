@@ -1518,6 +1518,28 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     eye_h = 3.6
     look_h = 2.6
     mx, my = _moon_from_xy(mood)
+    # Emissive lantern paper saturates whatever else is in the frame, so the
+    # test is whether a lantern falls inside the lens rather than how far away
+    # it is: at 12 m a lantern still held p99 at 232, over the gate's 230.
+    # 40 mm on a 36 mm sensor is ~48.5 deg across, so the frame half-angle with
+    # margin is 30 deg.
+    lanterns = [(s["location"][0], s["location"][1], s["location"][2])
+                for s in builder.roots.values() if s["family"] == "lantern"]
+    frame_half_angle = math.radians(30.0)
+
+    def lantern_in_frame(eye, target):
+        vx, vy, vz = (target[0] - eye[0], target[1] - eye[1], target[2] - eye[2])
+        vn = math.sqrt(vx * vx + vy * vy + vz * vz) or 1.0
+        vx, vy, vz = vx / vn, vy / vn, vz / vn
+        for lx, ly, lz in lanterns:
+            dx, dy, dz = lx - eye[0], ly - eye[1], lz - eye[2]
+            dn = math.sqrt(dx * dx + dy * dy + dz * dz) or 1.0
+            cos = (dx * vx + dy * vy + dz * vz) / dn
+            if cos <= 0.0:
+                continue
+            if math.acos(max(-1.0, min(1.0, cos))) < frame_half_angle:
+                return True
+        return False
 
     candidates = []
     for spec in builder.roots.values():
@@ -1533,17 +1555,23 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
         candidates.append((lit, x, y, fx, fy, tx, ty))
     candidates.sort(reverse=True)
 
+    fallback = None
     for lit, x, y, fx, fy, tx, ty in candidates:
         # Stand back far enough to frame the whole bay, and step sideways so the
         # row recedes instead of filling the lens with one flat wall.
-        for stand, drift in ((12.0, 5.5), (12.0, -5.5), (14.0, 0.0)):
+        for stand, drift in ((12.0, 5.5), (12.0, -5.5), (14.0, 0.0),
+                             (9.0, 7.0), (16.0, 3.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
             if _blocked(boxes, eye):
                 continue
             target = (x + fx * 0.4, y + fy * 0.4, look_h)
-            return dict(name="JNX_Lane", lens=40.0, district=hero_id,
+            shot = dict(name="JNX_Lane", lens=40.0, district=hero_id,
                         location=eye, target=target, dof_distance=11.0, fstop=3.2)
-    return None
+            if not lantern_in_frame(eye, target):
+                return shot
+            if fallback is None:
+                fallback = shot
+    return fallback
 
 
 def _clear_shots(builder, shots):
