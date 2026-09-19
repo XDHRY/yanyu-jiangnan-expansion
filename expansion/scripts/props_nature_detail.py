@@ -176,8 +176,10 @@ def build(b, config, plan):
                     b.cylinder(r, f"post_{xx}_{yy}", 0.05, canopy_h,
                                (xx, yy, 0), "timber", 6)
             av, af = g.arched_awning(stall_w + 0.20, stall_d + 0.18,
-                                     stream.uniform(0.22, 0.34), ribs=4)
-            b.mesh(r, "awning", av, af, "cloth", (0, 0, canopy_h))
+                                     stream.uniform(0.10, 0.18), ribs=4)
+            # Name intentionally avoids the "awning" material variant so market
+            # covers use weathered hemp rather than saturated indigo banner dye.
+            b.mesh(r, "hemp_cover", av, af, "cloth", (0, 0, canopy_h))
 
             # Layered small-scale clutter makes the market read as inhabited
             # without introducing expensive unique meshes.
