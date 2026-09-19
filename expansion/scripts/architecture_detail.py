@@ -125,6 +125,11 @@ def _upper_gallery(b, root, prefix, width, depth, stream):
     verts, faces = g.railing(width + 0.7, 0.92, max(4, int(width / 1.3)))
     b.mesh(root, prefix + "gallery_rail", verts, faces, "timber",
            (0, -depth / 2 - 1.05, z + 0.12))
+    # 美人靠: the outward-curving bench that makes a canal gallery read as lived-in.
+    bv, bf = g.beauty_lean(width + 0.4, height=0.78, curve=0.18,
+                           posts=max(4, int(width / 1.5)))
+    b.mesh(root, prefix + "gallery_lean", bv, bf, "timber",
+           (0, -depth / 2 - 0.95, z + 0.12))
     for i in range(3):
         x = -width / 2 + i * width / 2
         b.cylinder(root, prefix + f"gallery_brace_{i}", 0.07, 0.95,
@@ -168,6 +173,25 @@ def _roof(b, root, prefix, width, depth, height, stream, hip=False, gable=True):
             cv, cf = g.eaves_chime()
             b.mesh(root, prefix + f"eave_chime_{c_sx}_{c_sy}", cv, cf, "iron",
                    (c_sx * chime_w, c_sy * chime_d, chime_z))
+
+    # Chiwen / 鸱吻 sit on the actual ridge ends, not the floating eave corners.
+    if hip:
+        beast_x = max(0.0, (width - depth) / 2.0) + 0.32
+        beast_z = z + rise + 0.12
+        beast_s = 0.88
+    else:
+        beast_x = width / 2.0 + flare * 0.45 + 0.18
+        beast_z = z + rise + lift * 0.45 + 0.18
+        beast_s = 0.72
+    for sx in (-1, 1):
+        bv, bf = g.ridge_beast(scale=beast_s)
+        b.mesh(root, prefix + f"chiwen_{sx}", bv, bf, "ceramic",
+               (sx * beast_x, 0.0, beast_z), 0.0 if sx > 0 else math.pi)
+
+    # Carved hanging fascia under the street-side eave beam (挂落).
+    fv, ff = g.hanging_fascia(width * 0.92, height=0.46, cols=max(4, int(width / 1.4)))
+    b.mesh(root, prefix + "fascia", fv, ff, "timber",
+           (0.0, -(depth / 2 - 0.22), FFL + 0.17 + height + 0.10))
 
 
 def _entry_steps(b, root, prefix, depth, stream):

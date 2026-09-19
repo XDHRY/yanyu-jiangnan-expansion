@@ -313,25 +313,54 @@ def _plaster(graph):
     damp_tint.outputs[0].default_value = (0.26, 0.28, 0.26, 1.0)
     graph.link(damp_tint, "Color", damp_colour, "B")
 
+    # Rain streaks / 雨泪痕: compress Z so the noise elongates into vertical
+    # rivulets. Strongest on the rain-washed mid wall, faintest under the eave.
+    streak_map = graph.add("ShaderNodeMapping", column=-3, row=-5.2)
+    graph.value(streak_map, "Scale", (11.0, 11.0, 0.18))
+    graph.link(graph.world_vector(), "Position", streak_map, "Vector")
+    streaks = graph.add("ShaderNodeTexNoise", column=-2, row=-5.2)
+    graph.value(streaks, "Scale", 1.4)
+    graph.value(streaks, "Detail", 8.0)
+    graph.value(streaks, "Roughness", 0.52)
+    graph.link(streak_map, "Vector", streaks, "Vector")
+    streak_mask = _map_range(graph, 0.62, 0.86, 0.0, 1.0, column=-1, row=-5.2)
+    graph.link(streaks, "Fac", streak_mask, "Value")
+    height_window = _map_range(graph, 1.8, 5.5, 0.82, 0.08, column=-1, row=-6.4)
+    graph.link(split, "Z", height_window, "Value")
+    streak_amt = _math(graph, "MULTIPLY", column=0, row=-5.6)
+    graph.link(streak_mask, "Result", streak_amt, 0)
+    graph.link(height_window, "Result", streak_amt, 1)
+    streak_colour = _mix_rgb(graph, column=2, row=-0.4)
+    graph.link(streak_amt, "Value", streak_colour, "Factor")
+    graph.link(damp_colour, "Result", streak_colour, "A")
+    streak_tint = graph.add("ShaderNodeRGB", column=1, row=-1.6)
+    streak_tint.outputs[0].default_value = (0.18, 0.20, 0.19, 1.0)
+    graph.link(streak_tint, "Color", streak_colour, "B")
+
     tex = _triplanar_albedo(graph, "plaster", scale=0.35, column=2, row=2.4)
     if tex:
         mix_tex = _mix_rgb(graph, column=3, row=1.0)
         graph.value(mix_tex, "Factor", 0.75)
         mix_tex.blend_type = "MULTIPLY"
-        graph.link(damp_colour, "Result", mix_tex, "A")
+        graph.link(streak_colour, "Result", mix_tex, "A")
         graph.link(tex, "Color", mix_tex, "B")
         graph.link(mix_tex, "Result", bsdf, "Base Color")
     else:
-        graph.link(damp_colour, "Result", bsdf, "Base Color")
+        graph.link(streak_colour, "Result", bsdf, "Base Color")
 
     rough = _map_range(graph, 0.0, 1.0, 0.94, 0.72, column=2, row=-2.0)
     graph.link(stain, "Fac", rough, "Value")
     graph.link(rough, "Result", bsdf, "Roughness")
 
     bump = graph.add("ShaderNodeBump", column=3, row=-3.0)
-    graph.value(bump, "Strength", 0.22)
-    graph.value(bump, "Distance", 0.02)
-    graph.link(stain, "Fac", bump, "Height")
+    graph.value(bump, "Strength", 0.28)
+    graph.value(bump, "Distance", 0.018)
+    streak_bump = _math(graph, "MULTIPLY", b=0.55, column=2, row=-4.0)
+    graph.link(streaks, "Fac", streak_bump, 0)
+    bump_mix = _math(graph, "ADD", column=2, row=-3.2)
+    graph.link(stain, "Fac", bump_mix, 0)
+    graph.link(streak_bump, "Value", bump_mix, 1)
+    graph.link(bump_mix, "Value", bump, "Height")
     graph.link(bump, "Normal", bsdf, "Normal")
     return bsdf
 
@@ -506,24 +535,47 @@ def _brick(graph):
     ], column=-1, row=1.0)
     graph.link(coarse, "Fac", tone, "Fac")
 
+    # Mortar joints as real brick courses, not just noise grain.
+    brick_map = graph.add("ShaderNodeMapping", column=-3, row=-0.6)
+    graph.value(brick_map, "Scale", (1.15, 1.15, 0.62))
+    graph.link(graph.world_vector(), "Position", brick_map, "Vector")
+    brick = graph.add("ShaderNodeTexBrick", column=-2, row=-0.6)
+    graph.value(brick, "Scale", 3.4)
+    graph.value(brick, "Mortar Size", 0.022)
+    graph.value(brick, "Mortar Smooth", 0.06)
+    brick.inputs["Color1"].default_value = (0.34, 0.36, 0.34, 1.0)
+    brick.inputs["Color2"].default_value = (0.26, 0.28, 0.27, 1.0)
+    brick.inputs["Mortar"].default_value = (0.12, 0.13, 0.12, 1.0)
+    graph.link(brick_map, "Vector", brick, "Vector")
+    brick_mix = _mix_rgb(graph, column=0, row=0.2)
+    graph.value(brick_mix, "Factor", 0.55)
+    brick_mix.blend_type = "MULTIPLY"
+    graph.link(tone, "Color", brick_mix, "A")
+    graph.link(brick, "Color", brick_mix, "B")
+
     tex = _triplanar_albedo(graph, "stone", scale=0.55, column=0, row=2.0)
     if tex:
         mix_tex = _mix_rgb(graph, column=1, row=1.0)
-        graph.value(mix_tex, "Factor", 0.68)
+        graph.value(mix_tex, "Factor", 0.62)
         mix_tex.blend_type = "MULTIPLY"
-        graph.link(tone, "Color", mix_tex, "A")
+        graph.link(brick_mix, "Result", mix_tex, "A")
         graph.link(tex, "Color", mix_tex, "B")
         graph.link(mix_tex, "Result", bsdf, "Base Color")
     else:
-        graph.link(tone, "Color", bsdf, "Base Color")
+        graph.link(brick_mix, "Result", bsdf, "Base Color")
     wet = _apply_wetness(graph, bsdf, dry_z=3.2, max_wet=0.55)
     rough = _map_range(graph, 0.0, 1.0, 0.86, 0.30, column=2, row=-2.4)
     graph.link(wet, "Value", rough, "Value")
     graph.link(rough, "Result", bsdf, "Roughness")
     bump = graph.add("ShaderNodeBump", column=3, row=-3.4)
-    graph.value(bump, "Strength", 0.34)
-    graph.value(bump, "Distance", 0.014)
-    graph.link(fine, "Fac", bump, "Height")
+    graph.value(bump, "Strength", 0.42)
+    graph.value(bump, "Distance", 0.016)
+    mortar_h = _math(graph, "MULTIPLY", b=0.7, column=2, row=-4.2)
+    graph.link(brick, "Fac", mortar_h, 0)
+    bump_mix = _math(graph, "ADD", column=2, row=-3.6)
+    graph.link(fine, "Fac", bump_mix, 0)
+    graph.link(mortar_h, "Value", bump_mix, 1)
+    graph.link(bump_mix, "Value", bump, "Height")
     graph.link(bump, "Normal", bsdf, "Normal")
     return bsdf
 

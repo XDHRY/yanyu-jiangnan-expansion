@@ -766,3 +766,138 @@ def lily_pad_cluster(radius=0.45, count=6, stream=None):
         for i in range(1, n):
             faces.append((base, base + i, base + i + 1))
     return verts, faces
+
+
+def _box_mesh(vertices, faces, x0, x1, y0, y1, z0, z1):
+    """Append an axis-aligned box; winding matches kernel.box()."""
+    base = len(vertices)
+    vertices.extend([
+        (x0, y0, z0), (x1, y0, z0), (x1, y1, z0), (x0, y1, z0),
+        (x0, y0, z1), (x1, y0, z1), (x1, y1, z1), (x0, y1, z1),
+    ])
+    faces.extend(tuple(base + i for i in f) for f in
+                 ((3, 2, 1, 0), (4, 5, 6, 7), (0, 1, 5, 4),
+                  (1, 2, 6, 5), (2, 3, 7, 6), (3, 0, 4, 7)))
+
+
+def segmented_arch_voussoir(rad, width, brick_depth=0.22, n_bricks=40, mortar=0.016):
+    """Circular brick ring: discrete voussoirs with recessed mortar gaps.
+
+    Local origin at the aperture centre; the ring lives in XZ, Y is the wall
+    thickness. Each wedge is inset on the radial faces so the joint reads at
+    street distance instead of a smooth torus.
+    """
+    vertices, faces = [], []
+    half = width / 2
+    mid_r = rad + brick_depth * 0.5
+    sector = TAU / n_bricks
+    mortar_ang = mortar / max(mid_r, 1e-4)
+    for i in range(n_bricks):
+        a0 = i * sector + mortar_ang * 0.5
+        a1 = (i + 1) * sector - mortar_ang * 0.5
+        if a1 <= a0:
+            continue
+        # Slight weathering so the ring is not a perfect extrusion.
+        wear = 0.01 * math.sin(i * 2.17 + 0.4)
+        r0 = rad + 0.004 * abs(math.sin(i * 1.7))
+        r1 = rad + brick_depth + wear
+        y0, y1 = -half, half
+        k = len(vertices)
+
+        def pt(r, a, y):
+            return (r * math.cos(a), y, r * math.sin(a))
+
+        vertices.extend([
+            pt(r0, a0, y0), pt(r0, a1, y0), pt(r1, a1, y0), pt(r1, a0, y0),
+            pt(r0, a0, y1), pt(r0, a1, y1), pt(r1, a1, y1), pt(r1, a0, y1),
+        ])
+        faces.extend(tuple(k + i for i in f) for f in (
+            (0, 1, 2, 3),      # -Y face
+            (4, 7, 6, 5),      # +Y face
+            (0, 4, 5, 1),      # inner reveal
+            (3, 2, 6, 7),      # outer arris
+            (1, 5, 6, 2),      # joint face a1
+            (0, 3, 7, 4),      # joint face a0
+        ))
+    return vertices, faces
+
+
+def ridge_beast(scale=1.0):
+    """Glazed chiwen / 鸱吻 sitting on a ridge end.
+
+    Local +X faces the ridge tip, +Z is up, z=0 is the tile bed. Blocky on
+    purpose: the silhouette has to read against mist at canal distance.
+    """
+    s = scale
+    vertices, faces = [], []
+    _box_mesh(vertices, faces, -0.24 * s, 0.20 * s, -0.11 * s, 0.11 * s, 0.00, 0.22 * s)
+    _box_mesh(vertices, faces, -0.16 * s, 0.26 * s, -0.07 * s, 0.07 * s, 0.16 * s, 0.34 * s)
+    _box_mesh(vertices, faces, 0.14 * s, 0.40 * s, -0.08 * s, 0.08 * s, 0.20 * s, 0.46 * s)
+    _box_mesh(vertices, faces, 0.32 * s, 0.56 * s, -0.10 * s, 0.10 * s, 0.34 * s, 0.56 * s)
+    _box_mesh(vertices, faces, 0.48 * s, 0.66 * s, -0.05 * s, 0.05 * s, 0.44 * s, 0.54 * s)
+    _box_mesh(vertices, faces, 0.46 * s, 0.62 * s, -0.05 * s, 0.05 * s, 0.30 * s, 0.40 * s)
+    _box_mesh(vertices, faces, -0.06 * s, 0.30 * s, -0.018 * s, 0.018 * s, 0.30 * s, 0.52 * s)
+    _box_mesh(vertices, faces, -0.42 * s, -0.18 * s, -0.045 * s, 0.045 * s, 0.06 * s, 0.24 * s)
+    return vertices, faces
+
+
+def hanging_fascia(width, height=0.52, thickness=0.055, cols=5):
+    """Carved hanging fascia (挂落) under an eave beam.
+
+    Origin at the top centre; the panel hangs in -Z. Thin in Y so it sits
+    against the lintel without colliding with the walkway.
+    """
+    vertices, faces = [], []
+    hw, d = width / 2, thickness / 2
+    frame = 0.045
+    _box_mesh(vertices, faces, -hw, hw, -d, d, -0.055, 0.0)
+    _box_mesh(vertices, faces, -hw, -hw + frame, -d, d, -height, 0.0)
+    _box_mesh(vertices, faces, hw - frame, hw, -d, d, -height, 0.0)
+    _box_mesh(vertices, faces, -hw + 0.03, hw - 0.03, -d, d, -height, -height + 0.05)
+    inner_w = width - 2 * frame
+    for c in range(1, cols):
+        x = -hw + frame + inner_w * c / cols
+        _box_mesh(vertices, faces, x - 0.012, x + 0.012, -d * 0.7, d * 0.7,
+                  -height + 0.05, -0.055)
+    rows = 2
+    for r in range(1, rows + 1):
+        z = -height + 0.05 + (height - 0.10) * r / (rows + 1)
+        _box_mesh(vertices, faces, -hw + frame, hw - frame, -d * 0.7, d * 0.7,
+                  z - 0.012, z + 0.012)
+    for x in (-hw + 0.10, 0.0, hw - 0.10):
+        _box_mesh(vertices, faces, x - 0.028, x + 0.028, -d, d,
+                  -height - 0.14, -height)
+        _box_mesh(vertices, faces, x - 0.018, x + 0.018, -d * 0.8, d * 0.8,
+                  -height - 0.22, -height - 0.14)
+    return vertices, faces
+
+
+def beauty_lean(length, height=0.74, curve=0.20, posts=6):
+    """美人靠 / 吴王靠: outward-curving gallery bench.
+
+    Origin at the deck; the seat runs along X and the backrest bulges toward
+    -Y (the street / water side).
+    """
+    vertices, faces = [], []
+    n = max(3, posts + 1)
+    _box_mesh(vertices, faces, -length / 2, length / 2, -0.20, 0.16, 0.34, 0.42)
+    for i in range(n):
+        x = -length / 2 + length * i / (n - 1)
+        _box_mesh(vertices, faces, x - 0.04, x + 0.04, -0.14, 0.12, 0.0, 0.34)
+        path = [
+            (x, 0.10, 0.42),
+            (x, 0.10 - curve * 0.55, 0.42 + (height - 0.42) * 0.55),
+            (x, 0.10 - curve, height),
+        ]
+        pv, pf = sweep([(0.028, 0.0), (0.0, 0.028), (-0.028, 0.0), (0.0, -0.028)],
+                       path, close_profile=True)
+        k = len(vertices)
+        vertices.extend(pv)
+        faces.extend(tuple(i + k for i in face) for face in pf)
+    rail = [( -length / 2 + length * i / (n - 1), 0.10 - curve, height) for i in range(n)]
+    rv, rf = sweep([(0.03, 0.0), (0.0, 0.03), (-0.03, 0.0), (0.0, -0.03)],
+                   rail, close_profile=True)
+    k = len(vertices)
+    vertices.extend(rv)
+    faces.extend(tuple(i + k for i in face) for face in rf)
+    return vertices, faces

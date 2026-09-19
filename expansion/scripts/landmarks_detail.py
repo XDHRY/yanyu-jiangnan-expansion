@@ -125,6 +125,22 @@ def _hall(b, root, prefix, width, depth, stream, floors=1, height=None,
     b.mesh(root, prefix + "roof_tiles", verts, faces, "tile", (ox, oy, eave + 0.02))
     verts, faces = g.ridge_tile(rw + 0.2, rise, lift, flare, 0.42, 0.34)
     b.mesh(root, prefix + "ridge", verts, faces, "tile", (ox, oy, eave))
+    if hip:
+        beast_x = max(0.0, (rw - rd) / 2.0) + 0.38
+        beast_z = eave + rise + 0.14
+        beast_s = 1.15
+    else:
+        beast_x = rw / 2.0 + flare * 0.4
+        beast_z = eave + rise + lift * 0.4 + 0.22
+        beast_s = 0.9
+    for sx in (-1, 1):
+        bv, bf = g.ridge_beast(scale=beast_s)
+        b.mesh(root, prefix + f"chiwen_{sx}", bv, bf, "ceramic",
+               (ox + sx * beast_x, oy, beast_z), 0.0 if sx > 0 else math.pi)
+    if not open_sides:
+        fv, ff = g.hanging_fascia(width * 0.78, height=0.55, cols=max(5, int(width / 2.2)))
+        b.mesh(root, prefix + "fascia", fv, ff, "timber",
+               (ox, -depth / 2 + 0.42 + oy, eave - 0.35))
     return eave + rise
 
 
@@ -245,24 +261,14 @@ def _build_tingyuxuan_courtyard(b, root, stream):
         ])
     b.mesh(root, "moon_gate_wall", v, f, "plaster")
 
-    # Moon gate stone arch voussoir
-    v_arch, f_arch = [], []
-    for i in range(n_seg):
-        a = 2 * math.pi * i / n_seg
-        b_ang = 2 * math.pi * (i + 0.96) / n_seg
-        seg_v = []
-        for y in [gy - wall_thick / 2 - 0.05, gy + wall_thick / 2 + 0.05]:
-            for r, t in [(rad, a), (rad, b_ang), (rad + 0.20, b_ang), (rad + 0.20, a)]:
-                seg_v.append((gx + r * math.cos(t), y, zc + r * math.sin(t)))
-        k = len(v_arch)
-        v_arch.extend(seg_v)
-        f_arch.extend([
-            (k, k + 1, k + 2, k + 3),
-            (k + 4, k + 7, k + 6, k + 5),
-            (k, k + 4, k + 5, k + 1),
-            (k + 3, k + 2, k + 6, k + 7),
-        ])
-    b.mesh(root, "moon_gate_arch", v_arch, f_arch, "stone")
+    # Segmented brick voussoir: discrete wedges with recessed mortar joints.
+    v_arch, f_arch = g.segmented_arch_voussoir(
+        rad, wall_thick + 0.10, brick_depth=0.22, n_bricks=40, mortar=0.018)
+    b.mesh(root, "moon_gate_voussoir", v_arch, f_arch, "stone", (gx, gy, zc))
+    # Inner reveal ring so the aperture reads as masonry, not a cut plaster hole.
+    v_rev, f_rev = g.segmented_arch_voussoir(
+        rad - 0.04, wall_thick - 0.08, brick_depth=0.05, n_bricks=32, mortar=0.012)
+    b.mesh(root, "moon_gate_reveal", v_rev, f_rev, "stone", (gx, gy, zc))
 
     # East lattice window on return wall
     b.box(root, "east_return_wall", (0.46, 12.0, 3.8), (gx + rad + 10.0, gy - 6.0, 1.9), "plaster")
@@ -284,11 +290,32 @@ def _build_tingyuxuan_courtyard(b, root, stream):
     b.box(root, "tingyu_beam_x2", (6.4, 0.28, 0.36), (tx, ty + 2.5, 4.89), "timber")
     b.box(root, "tingyu_beam_y1", (0.28, 6.4, 0.36), (tx - 2.5, ty, 4.89), "timber")
     b.box(root, "tingyu_beam_y2", (0.28, 6.4, 0.36), (tx + 2.5, ty, 4.89), "timber")
+    # Carved hanging fascia (挂落) on the four eave beams
+    for side, rot, loc in (
+        (0.0, 0.0, (tx, ty - 2.5, 4.71)),
+        (math.pi, 0.0, (tx, ty + 2.5, 4.71)),
+        (math.pi / 2, 0.0, (tx - 2.5, ty, 4.71)),
+        (-math.pi / 2, 0.0, (tx + 2.5, ty, 4.71)),
+    ):
+        fv, ff = g.hanging_fascia(5.6, height=0.48, cols=5)
+        b.mesh(root, f"tingyu_fascia_{int(side * 10)}", fv, ff, "timber", loc, side)
+    # 美人靠 benches facing the pond on the south and east openings
+    bv, bf = g.beauty_lean(5.2, height=0.78, curve=0.22, posts=5)
+    b.mesh(root, "tingyu_lean_south", bv, bf, "timber", (tx, ty - 2.55, 0.87))
+    b.mesh(root, "tingyu_lean_east", bv, bf, "timber",
+           (tx + 2.55, ty, 0.87), -math.pi / 2)
     # Hip roof over Tingyuxuan
     rv, rf = g.hip_roof_surface(8.2, 8.2, 2.4, 1.1, 0.65, 0.4)
     b.mesh(root, "tingyu_roof", rv, rf, "tile", (tx, ty, 5.05))
     rcv, rcf = g.roof_courses(8.2, 8.2, 2.4, 1.1, 0.65, 0.4, pitch=0.45)
     b.mesh(root, "tingyu_roof_courses", rcv, rcf, "tile", (tx, ty, 5.07))
+    rtv, rtf = g.ridge_tile(8.4, 2.4, 0.65, 0.4, 0.32, 0.24)
+    b.mesh(root, "tingyu_ridge", rtv, rtf, "tile", (tx, ty, 5.05))
+    # Square hip: a short pair of 正吻 sitting on the peak, not the eaves.
+    for sx in (-1, 1):
+        cv, cf = g.ridge_beast(scale=0.95)
+        b.mesh(root, f"tingyu_chiwen_{sx}", cv, cf, "ceramic",
+               (tx + sx * 0.42, ty, 7.57), 0.0 if sx > 0 else math.pi)
     # Tea table and bench
     b.box(root, "tea_table", (2.4, 1.0, 0.16), (tx, ty, 1.60), "timber")
     b.box(root, "tea_leg_1", (0.16, 0.8, 0.72), (tx - 0.9, ty, 1.24), "timber")
