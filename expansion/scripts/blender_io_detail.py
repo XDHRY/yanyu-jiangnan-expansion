@@ -1427,6 +1427,30 @@ def _hero_district(builder, config):
     return best, (sums[best][0] / n, sums[best][1] / n)
 
 
+def _dense_focus(builder, district, fallback):
+    """Weighted centroid of lived-in assets, not the planning-grid centre.
+
+    The config centre often falls on a broad court or road. Review cameras should
+    aim at where shops, houses and stalls actually accumulate, otherwise a dense
+    district can still render as an empty square.
+    """
+    weights = {
+        "inn": 4.0, "shop": 3.0, "stall": 2.2, "house": 1.5,
+        "pavilion": 1.2, "lantern": 0.35,
+    }
+    pts = []
+    for spec in builder.roots.values():
+        if spec["district"] != district or spec["family"] not in weights:
+            continue
+        w = weights[spec["family"]]
+        pts.append((spec["location"][0], spec["location"][1], w))
+    if not pts:
+        return fallback
+    total = sum(p[2] for p in pts) or 1.0
+    return (sum(p[0] * p[2] for p in pts) / total,
+            sum(p[1] * p[2] for p in pts) / total)
+
+
 def _channels(config):
     """Water centrelines, derived from the district grid.
 
@@ -1559,8 +1583,8 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
         density = sum(
             1 for other in builder.roots.values()
             if other["district"] == hero_id
-            and other["family"] in ("shop", "inn")
-            and math.hypot(other["location"][0] - x, other["location"][1] - y) < 34.0
+            and other["family"] in ("shop", "inn", "house", "stall")
+            and math.hypot(other["location"][0] - x, other["location"][1] - y) < 38.0
         )
         # Dense commercial rows beat isolated edge buildings; moon exposure is
         # a secondary tie-breaker so the street remains readable at night.
@@ -1584,10 +1608,10 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
                       y + fy * 0.8 + ty * along * 18.0, look_h)
             shot = dict(name="JNX_Lane", lens=44.0, district=hero_id,
                         location=eye, target=target, dof_distance=22.0, fstop=3.6)
-            if not lantern_in_frame(eye, target):
-                return shot
-            if fallback is None:
-                fallback = shot
+            # Lantern emission was tamed by pixel QA, so do not exile the camera
+            # to an empty district edge merely to keep every lantern out of frame.
+            # The densest clear commercial row is now the preferred answer.
+            return shot
     return fallback
 
 
@@ -1640,7 +1664,8 @@ def _shots(builder, config, water_z, mood="drizzle"):
     x0, y0, x1, y1 = _planned_bounds(builder, pad=40.0)
     cx, cy = (x0 + x1) / 2, (y0 + y1) / 2
     span = max(x1 - x0, y1 - y0)
-    hero_id, (hx, hy) = _hero_district(builder, config)
+    hero_id, planned_focus = _hero_district(builder, config)
+    hx, hy = _dense_focus(builder, hero_id, planned_focus)
 
     if config:
         vx, hz = _channels(config)
