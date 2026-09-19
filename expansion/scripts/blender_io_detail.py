@@ -908,7 +908,7 @@ def _lantern_paper(graph):
     """
     bsdf = _paper(graph)
     graph.value(bsdf, "Emission Color", (1.0, 0.62, 0.28, 1.0))
-    graph.value(bsdf, "Emission Strength", 4.5)
+    graph.value(bsdf, "Emission Strength", 2.6)
     return bsdf
 
 
@@ -1276,7 +1276,7 @@ def build_lighting(scene, mood="drizzle"):
 
     # Warm intimate point light hanging inside Tingyuxuan pavilion (D07)
     tingyu_lamp_data = bpy.data.lights.new("JNX_Tingyu_Lamp", "POINT")
-    tingyu_lamp_data.energy = 105.0
+    tingyu_lamp_data.energy = 85.0
     tingyu_lamp_data.shadow_soft_size = 0.32
     tingyu_lamp_data.color = (1.0, 0.62, 0.28)
     tingyu_lamp = bpy.data.objects.new("JNX_Tingyu_Lamp", tingyu_lamp_data)
