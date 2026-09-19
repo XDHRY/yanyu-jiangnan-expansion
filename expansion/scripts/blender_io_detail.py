@@ -1556,15 +1556,23 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
         fx, fy = math.sin(rot), -math.cos(rot)
         tx, ty = math.cos(rot), math.sin(rot)
         lit = fx * mx + fy * my
-        candidates.append((lit, x, y, fx, fy, tx, ty))
+        density = sum(
+            1 for other in builder.roots.values()
+            if other["district"] == hero_id
+            and other["family"] in ("shop", "inn")
+            and math.hypot(other["location"][0] - x, other["location"][1] - y) < 34.0
+        )
+        # Dense commercial rows beat isolated edge buildings; moon exposure is
+        # a secondary tie-breaker so the street remains readable at night.
+        candidates.append((density, lit, x, y, fx, fy, tx, ty))
     candidates.sort(reverse=True)
 
     fallback = None
-    for lit, x, y, fx, fy, tx, ty in candidates:
+    for density, lit, x, y, fx, fy, tx, ty in candidates:
         # Stand back far enough to frame the whole bay, and step sideways so the
         # row recedes instead of filling the lens with one flat wall.
-        for stand, drift in ((25.0, 18.0), (25.0, -18.0), (30.0, 12.0),
-                             (30.0, -12.0), (34.0, 20.0)):
+        for stand, drift in ((13.0, 11.0), (13.0, -11.0), (16.0, 14.0),
+                             (16.0, -14.0), (20.0, 10.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
             if _blocked(boxes, eye):
                 continue
@@ -1572,10 +1580,10 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
             # composition turned a temporary stall into the whole frame and
             # exposed the procedural bay as a blocky facade.
             along = -1.0 if drift >= 0.0 else 1.0
-            target = (x + fx * 1.2 + tx * along * 24.0,
-                      y + fy * 1.2 + ty * along * 24.0, look_h)
-            shot = dict(name="JNX_Lane", lens=50.0, district=hero_id,
-                        location=eye, target=target, dof_distance=28.0, fstop=4.0)
+            target = (x + fx * 0.8 + tx * along * 18.0,
+                      y + fy * 0.8 + ty * along * 18.0, look_h)
+            shot = dict(name="JNX_Lane", lens=44.0, district=hero_id,
+                        location=eye, target=target, dof_distance=22.0, fstop=3.6)
             if not lantern_in_frame(eye, target):
                 return shot
             if fallback is None:
@@ -1653,10 +1661,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
         # Establish the hero quarter rather than exposing the entire generated
         # town as a board. Compression and a lower angle let roofs, canal and
         # borrowed mountains overlap into one landscape composition.
-        dict(name="JNX_Overview", lens=96.0,
-             location=(hx + span * 0.155, hy - span * 0.215, span * 0.078),
-             target=(hx + span * 0.005, hy + span * 0.070, 4.6),
-             dof_distance=span * 0.19, fstop=5.6),
+        dict(name="JNX_Overview", lens=78.0,
+             location=(hx + span * 0.19, hy - span * 0.31, span * 0.042),
+             target=(hx - span * 0.010, hy + span * 0.055, 5.5),
+             dof_distance=span * 0.24, fstop=5.0),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
