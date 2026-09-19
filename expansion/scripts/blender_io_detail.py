@@ -1519,8 +1519,8 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     a facade turned away from it is a black rectangle -- and keeps the first
     candidate whose eye position is clear of solid geometry.
     """
-    eye_h = 4.15
-    look_h = 3.05
+    eye_h = 3.35
+    look_h = 4.10
     mx, my = _moon_from_xy(mood)
     # Emissive lantern paper saturates whatever else is in the frame, so the
     # test is whether a lantern falls inside the lens rather than how far away
@@ -1653,10 +1653,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
         # Establish the hero quarter rather than exposing the entire generated
         # town as a board. Compression and a lower angle let roofs, canal and
         # borrowed mountains overlap into one landscape composition.
-        dict(name="JNX_Overview", lens=82.0,
-             location=(hx + span * 0.31, hy - span * 0.39, span * 0.15),
-             target=(hx - span * 0.025, hy + span * 0.075, 5.2),
-             dof_distance=span * 0.34, fstop=7.1),
+        dict(name="JNX_Overview", lens=88.0,
+             location=(hx + span * 0.22, hy - span * 0.29, span * 0.115),
+             target=(hx + span * 0.015, hy + span * 0.085, 5.0),
+             dof_distance=span * 0.25, fstop=6.3),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
@@ -1681,10 +1681,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
              target=(91.0, 56.2, 4.05),
              dof_distance=14.0, fstop=2.8),
         # Close artistic framing: gazing through the circular moon gate into borrowed landscape
-        dict(name="JNX_MoonGate_Vista", lens=68.0,
-             location=(87.9, 43.9, 3.45),
-             target=(92.6, 62.5, 4.45),
-             dof_distance=19.0, fstop=3.2),
+        dict(name="JNX_MoonGate_Vista", lens=72.0,
+             location=(90.6, 50.0, 3.50),
+             target=(93.0, 64.0, 4.50),
+             dof_distance=15.0, fstop=3.4),
     ])
     return shots
 
