@@ -1519,8 +1519,8 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     a facade turned away from it is a black rectangle -- and keeps the first
     candidate whose eye position is clear of solid geometry.
     """
-    eye_h = 3.6
-    look_h = 2.6
+    eye_h = 4.15
+    look_h = 3.05
     mx, my = _moon_from_xy(mood)
     # Emissive lantern paper saturates whatever else is in the frame, so the
     # test is whether a lantern falls inside the lens rather than how far away
@@ -1563,14 +1563,19 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     for lit, x, y, fx, fy, tx, ty in candidates:
         # Stand back far enough to frame the whole bay, and step sideways so the
         # row recedes instead of filling the lens with one flat wall.
-        for stand, drift in ((18.0, 10.0), (18.0, -10.0), (22.0, 0.0),
-                             (16.0, 12.0), (24.0, 6.0)):
+        for stand, drift in ((25.0, 18.0), (25.0, -18.0), (30.0, 12.0),
+                             (30.0, -12.0), (34.0, 20.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
             if _blocked(boxes, eye):
                 continue
-            target = (x + fx * 0.4, y + fy * 0.4, look_h)
-            shot = dict(name="JNX_Lane", lens=35.0, district=hero_id,
-                        location=eye, target=target, dof_distance=16.0, fstop=3.5)
+            # Look down the row instead of square-on at one shop. The former
+            # composition turned a temporary stall into the whole frame and
+            # exposed the procedural bay as a blocky facade.
+            along = -1.0 if drift >= 0.0 else 1.0
+            target = (x + fx * 1.2 + tx * along * 24.0,
+                      y + fy * 1.2 + ty * along * 24.0, look_h)
+            shot = dict(name="JNX_Lane", lens=50.0, district=hero_id,
+                        location=eye, target=target, dof_distance=28.0, fstop=4.0)
             if not lantern_in_frame(eye, target):
                 return shot
             if fallback is None:
@@ -1645,10 +1650,13 @@ def _shots(builder, config, water_z, mood="drizzle"):
         # A perspective establishing shot replaces the map-like orthographic
         # view. It still exposes district structure for QA, but reads as a town
         # in landscape rather than a regular board-game grid.
-        dict(name="JNX_Overview", lens=70.0,
-             location=(hx + span * 0.52, hy - span * 0.68, span * 0.23),
-             target=(hx - span * 0.05, hy + span * 0.13, 6.0),
-             dof_distance=span * 0.52, fstop=8.0),
+        # Establish the hero quarter rather than exposing the entire generated
+        # town as a board. Compression and a lower angle let roofs, canal and
+        # borrowed mountains overlap into one landscape composition.
+        dict(name="JNX_Overview", lens=82.0,
+             location=(hx + span * 0.31, hy - span * 0.39, span * 0.15),
+             target=(hx - span * 0.025, hy + span * 0.075, 5.2),
+             dof_distance=span * 0.34, fstop=7.1),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
@@ -1673,10 +1681,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
              target=(91.0, 56.2, 4.05),
              dof_distance=14.0, fstop=2.8),
         # Close artistic framing: gazing through the circular moon gate into borrowed landscape
-        dict(name="JNX_MoonGate_Vista", lens=58.0,
-             location=(88.8, 43.0, 3.15),
-             target=(91.4, 61.5, 4.0),
-             dof_distance=16.0, fstop=3.0),
+        dict(name="JNX_MoonGate_Vista", lens=68.0,
+             location=(87.9, 43.9, 3.45),
+             target=(92.6, 62.5, 4.45),
+             dof_distance=19.0, fstop=3.2),
     ])
     return shots
 
