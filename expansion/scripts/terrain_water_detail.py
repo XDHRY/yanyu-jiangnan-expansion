@@ -69,31 +69,34 @@ def build(b, config, plan):
 
     water = b.root("JNX_WORLD_WATER", "canal_network", "WORLD", (0, 0, 0),
                    task="tasks/systems/S01_water_network.md")
-    b.box(water, "water", (760, 580, 0.15), (0, 0, -0.075), "water")
+    # The slab has to outrun every camera. At 760 x 580 it ended inside the
+    # overview frame, and its straight edge read as a hard rectangle laid over
+    # the water; the overview ortho frame spans ~800 m, so cover it with room.
+    x0, y0, x1, y1 = config["bounds"]
+    span = max(x1 - x0, y1 - y0) + 900.0
+    b.box(water, "water", (span, span, 0.15), (0, 0, -0.075), "water")
     b.socket(water, "water_datum", (0, 0, 0), (0, 0, 1))
 
+    outlines = plan["land"]
+    centers = plan["centers"]
     for d in config["districts"]:
-        cx, cy = d["center"]
+        cx, cy = centers[d["id"]]
         stream = rng(config["seed"], d["id"] + ":terrain")
         r = b.root(f"JNX_{d['id']}_GROUND", "terrain", d["id"], (cx, cy, 0),
                    task=f"tasks/districts/{d['id']}.md")
 
-        # Irregular land mass: the planning envelope is respected, the water
-        # edge is not a straight line.
-        outline = g.bank_outline(LAND_HALF_X, LAND_HALF_Y, 0.06, stream)
+        # The bank the layout placed against. Cutting a second outline here is
+        # what used to put paving and whole plots over open water.
+        outline = outlines[d["id"]]
         verts, faces = g.organic_slab(outline, ground, ground - 3.5)
         b.mesh(r, "land", verts, faces, "earth")
 
-        # Stepped revetment on all four sides, following the same envelope.
-        for side, (length, angle, offset) in enumerate((
-            (LAND_HALF_Y * 2 - 4, math.pi / 2, (-LAND_HALF_X + 1.0, 0.0)),
-            (LAND_HALF_Y * 2 - 4, -math.pi / 2, (LAND_HALF_X - 1.0, 0.0)),
-            (LAND_HALF_X * 2 - 4, 0.0, (0.0, -LAND_HALF_Y + 1.0)),
-            (LAND_HALF_X * 2 - 4, math.pi, (0.0, LAND_HALF_Y - 1.0)),
-        )):
-            qv, qf = g.stepped_quay(length, ground, steps=4)
-            b.mesh(r, f"quay_{side}", qv, qf, "stone",
-                   (offset[0], offset[1], 0.0), angle)
+        # Stepped revetment walking the same bank as the land, so the stone
+        # course meets the water wherever the outline happens to run. Four
+        # straight walls at the nominal envelope left the revetment stranded
+        # inland wherever the bank was bitten back.
+        rv, rf = g.shore_revetment(outline, ground, steps=4)
+        b.mesh(r, "revetment", rv, rf, "stone")
 
         # Paved streets follow the layout polylines (converted to local space).
         for ordinal, street in enumerate(plan["streets"][d["id"]]):

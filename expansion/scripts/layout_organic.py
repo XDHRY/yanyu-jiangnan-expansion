@@ -24,6 +24,7 @@ from __future__ import annotations
 
 import math
 
+import geometry as g
 from kernel import rng
 
 LANDMARK_KEEPOUT = (-34.0, 20.0, 34.0, 74.0)
@@ -36,6 +37,54 @@ ROAD_ENDS = {
 # Land half-extents from the spatial contract (168 x 160 m of ground).
 LAND_HALF_X = 84.0
 LAND_HALF_Y = 80.0
+# Deck bearing a bridge needs on each bank to read as landing on ground.
+BRIDGE_BEARING = 6.0
+
+
+def district_centers(config):
+    """The one set of district centres every builder must place against.
+
+    Buildings, land, quays, docks, boats, reeds and landmarks all have to agree
+    on where a district is, and they used to disagree: this module nudged each
+    centre by up to 18 m while terrain and props kept reading the raw grid
+    centre, so the land stayed put and the streets and houses on it slid off the
+    bank.
+
+    Centres therefore stay on the config lattice, and anything that wants to
+    move an island moves it here. The room to do that is small: adjacent islands
+    sit 12 m apart east-west and the deck spanning that gap only carries
+    ``BRIDGE_BEARING`` on each bank, so a couple of metres is the whole budget.
+    Breaking the lattice properly is a change to config/world.json.
+    """
+    return {d["id"]: (float(d["center"][0]), float(d["center"][1]))
+            for d in config["districts"]}
+
+
+def district_outlines(config):
+    """The authoritative land polygon for each district, in local coordinates.
+
+    Land, its revetment, the quay streets and the buildings all have to agree on
+    where the water edge is. When they did not, the bank was one shape and the
+    things standing on it were placed against another, which is what left the
+    paving and a few plots hanging over open water.
+    """
+    out = {}
+    for d in config["districts"]:
+        stream = rng(config["seed"], d["id"] + ":bank")
+        out[d["id"]] = g.district_bank(LAND_HALF_X, LAND_HALF_Y, stream)
+    return out
+
+
+def _footprint_on_land(outline, cx, cy, width, depth, rot, margin=1.2):
+    """True when a rotated footprint sits inside the bank with ``margin`` to spare."""
+    ca, sa = math.cos(rot), math.sin(rot)
+    for sx, sy in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        ox, oy = sx * width / 2.0, sy * depth / 2.0
+        px = cx + ox * ca - oy * sa
+        py = cy + ox * sa + oy * ca
+        if g.polygon_clearance(outline, px, py) < margin:
+            return False
+    return True
 
 
 def _rect_overlap(a, b, gap=0.0):
@@ -95,8 +144,13 @@ class Street:
         nx, ny = -ty * side, tx * side
         ax = px + nx * (self.width / 2.0 + setback)
         ay = py + ny * (self.width / 2.0 + setback)
-        # local -Y must point along (-nx,-ny): rotation of atan2 gives +Y, so add pi
-        rot = math.atan2(ny, nx) + math.pi / 2.0
+        # The plot sits at +(nx,ny) from the street, so local -Y has to point
+        # back along (-nx,-ny). Rotating (0,-1) by r gives (sin r, -cos r); with
+        # r = atan2(ny,nx) - pi/2 that is exactly (-nx,-ny). Adding pi/2 instead
+        # pointed every front at (nx,ny) -- away from the street -- which lined
+        # all twelve districts with blank back walls: no shopfront, no door, no
+        # sign, and no interior ever visible from the roadway.
+        rot = math.atan2(ny, nx) - math.pi / 2.0
         return (ax, ay), rot
 
 
@@ -127,18 +181,43 @@ def _cross(stream):
     ], 6.0, "cross")
 
 
-def _quay_streets():
-    """Water frontage lines on the south and the two flanks."""
-    inset = 6.5
-    return [
-        Street([(-70.0, -LAND_HALF_Y + inset), (-24.0, -LAND_HALF_Y + inset + 1.2),
-                (24.0, -LAND_HALF_Y + inset - 0.8), (70.0, -LAND_HALF_Y + inset + 1.0)],
-               4.0, "quay_s"),
-        Street([(-LAND_HALF_X + inset, -58.0), (-LAND_HALF_X + inset + 1.1, -18.0),
-                (-LAND_HALF_X + inset - 0.6, 18.0)], 3.5, "quay_w"),
-        Street([(LAND_HALF_X - inset, -58.0), (LAND_HALF_X - inset - 1.1, -18.0),
-                (LAND_HALF_X - inset + 0.6, 18.0)], 3.5, "quay_e"),
-    ]
+def _quay_streets(stream, outline):
+    """Water frontage lines that follow the bank that was actually built.
+
+    These used to be three literal polylines with a fixed 6.5 m inset, so all
+    twelve districts carried a byte-identical waterfront -- measured across the
+    set, the quay shape had exactly one variant. The quay is the most legible
+    ring of the town from the air, which is why the overview read as one tile
+    repeated even when the buildings inside differed. Here each quay walks the
+    real shoreline and is pulled inland until its whole ribbon is on land.
+    """
+    inset = stream.uniform(5.5, 7.5)
+    out = []
+
+    def walk(axis, sign, span, kind, width):
+        points = []
+        for k in range(9):
+            s = -span + 2.0 * span * k / 8.0
+            origin = (s, 0.0) if axis == "y" else (0.0, s)
+            direction = (0.0, float(sign)) if axis == "y" else (float(sign), 0.0)
+            hit = g.polygon_ray_hit(outline, origin, direction)
+            if hit is None:
+                continue
+            edge = hit
+            # Keep the whole ribbon on land: its centre must sit a half-width
+            # plus the inset clear of the bank.
+            back = min(edge, width / 2.0 + inset)
+            if axis == "y":
+                points.append((s, sign * (edge - back)))
+            else:
+                points.append((sign * (edge - back), s))
+        if len(points) >= 2:
+            out.append(Street(points, width, kind))
+
+    walk("y", -1, 70.0, "quay_s", 4.0)
+    walk("x", -1, 58.0, "quay_w", 3.5)
+    walk("x", 1, 58.0, "quay_e", 3.5)
+    return out
 
 
 def _alleys(stream):
@@ -151,10 +230,10 @@ def _alleys(stream):
     return out
 
 
-def _street_plan(district_id, seed):
+def _street_plan(district_id, seed, outline):
     stream = rng(seed, district_id + ":streets")
     plan = [_spine(stream), _cross(stream)]
-    plan.extend(_quay_streets())
+    plan.extend(_quay_streets(stream, outline))
     plan.extend(_alleys(stream))
     return plan
 
@@ -243,17 +322,14 @@ def make_layout(config):
     if len(ids) != len(config["districts"]):
         raise ValueError("duplicate district id")
 
+    centers = district_centers(config)
+    outlines = district_outlines(config)
     for d in config["districts"]:
-        # Jitter district centres so the overview doesn't read as a checkerboard
-        # of identical islands. The jitter is seeded per-district and capped at
-        # ±18 m so road endpoints (±84/±80 from centre) still land in the
-        # district's land envelope and bridges still span the gap.
-        jitter_stream = rng(seed, d["id"] + ":center_jitter")
-        cx = d["center"][0] + jitter_stream.uniform(-18.0, 18.0)
-        cy = d["center"][1] + jitter_stream.uniform(-18.0, 18.0)
+        cx, cy = centers[d["id"]]
+        outline = outlines[d["id"]]
         want = d["building_count"]
         families = d["building_families"]
-        streets = _street_plan(d["id"], seed)
+        streets = _street_plan(d["id"], seed, outline)
         stream = rng(seed, d["id"] + ":parcels")
         placed = []
         index = 0
@@ -290,8 +366,10 @@ def make_layout(config):
                     rot += istream.uniform(-0.05, 0.05)
 
                     bounds = _oriented_bounds(ax, ay, width + 1.8, depth + 1.8, rot)
-                    if (abs(ax) + (bounds[2] - bounds[0]) / 2 > LAND_HALF_X - 4.0 or
-                            abs(ay) + (bounds[3] - bounds[1]) / 2 > LAND_HALF_Y - 4.0):
+                    # Reject against the bank that is actually built, not the
+                    # rectangle it was cut from: an outline that bites twelve
+                    # metres inland makes the nominal envelope a fiction.
+                    if not _footprint_on_land(outline, ax, ay, width, depth, rot):
                         s += width + istream.uniform(1.0, 3.0)
                         continue
                     if _rect_overlap(bounds, LANDMARK_KEEPOUT, 2.0):
@@ -357,20 +435,17 @@ def make_layout(config):
                 rotation=0.0 if horizontal else math.pi / 2,
             ))
 
-    # Recompute jittered centres for the street world-space export so
-    # street polylines match building placement, not the raw grid.
-    _jittered = {}
-    for d in config["districts"]:
-        js = rng(seed, d["id"] + ":center_jitter")
-        _jittered[d["id"]] = (d["center"][0] + js.uniform(-18.0, 18.0),
-                              d["center"][1] + js.uniform(-18.0, 18.0))
-
+    # Streets export in world space against the same centres the buildings
+    # used, so pavement and frontage agree by construction.
     return dict(buildings=buildings, links=links,
+                land=outlines,
+                centers=centers,
                 streets={d["id"]: [dict(kind=s.kind, width=s.width,
-                                        points=[[_jittered[d["id"]][0] + x,
-                                                 _jittered[d["id"]][1] + y]
+                                        points=[[centers[d["id"]][0] + x,
+                                                 centers[d["id"]][1] + y]
                                                 for x, y in s.points])
-                                   for s in _street_plan(d["id"], seed)]
+                                   for s in _street_plan(d["id"], seed,
+                                                         outlines[d["id"]])]
                          for d in config["districts"]},
                 reserved_legacy=dict(district="D07", center=[90, 46], footprint=[60, 48],
                                      status="reserved_not_imported"))

@@ -167,11 +167,18 @@ def build(b, config, plan):
         bridge(b, link, rng(seed, link["id"] + ":bridge"))
 
     for d in config["districts"]:
-        cx, cy = d["center"]
+        cx, cy = plan["centers"][d["id"]]
+        outline = plan["land"][d["id"]]
         for i in range(d["dock_count"]):
             stream = rng(seed, f"{d['id']}:dock:{i}")
             # Spread docks along the south quay, off the road axis and the
             # bridge approaches.
             slots = (-52.0, -18.0, 22.0, 54.0)
             dx = slots[i % len(slots)] + stream.uniform(-3.0, 3.0)
-            dock(b, d["id"], i, (cx + dx, cy - 78.5, 0.0), stream)
+            # A dock is a platform from the shore over the water, so its root
+            # belongs on the bank. At a fixed -78.5 the root ended up floating
+            # detached wherever the shoreline was bitten inland.
+            dy = g.polygon_ray_hit(outline, (dx, 0.0), (0.0, -1.0))
+            back = 2.5
+            y = -(dy - back) if dy is not None else -78.5
+            dock(b, d["id"], i, (cx + dx, cy + y, 0.0), stream)

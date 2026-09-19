@@ -398,6 +398,145 @@ def bank_outline(half_x, half_y, wobble, stream, points=48):
     return outline
 
 
+def _pin_release(angle, pinned, half_angle):
+    """0 at a pinned angle, easing to 1 past twice ``half_angle``.
+
+    Smoothstepped so a held stretch of bank meets a bitten one without a crease.
+    """
+    best = TAU
+    for p in pinned:
+        best = min(best, abs((angle - p + math.pi) % TAU - math.pi))
+    if best <= half_angle:
+        return 0.0
+    t = min(1.0, (best - half_angle) / half_angle)
+    return t * t * (3.0 - 2.0 * t)
+
+
+def district_bank(half_x, half_y, stream, wobble=0.17, points=72,
+                  pinned=(0.0, TAU / 4, TAU / 2, TAU * 3 / 4),
+                  pin_half_angle=0.075):
+    """Island outline that differs per district but keeps its bridge landings.
+
+    ``bank_outline`` drives its edge with harmonics 3/5/8 at a 6% amplitude,
+    which averages out: measured over the twelve districts it returns areas
+    within 0.1% and half-widths within 1.4 m of each other, so the town reads as
+    one rectangle tiled twelve times no matter how the buildings on it vary.
+    Here the shape is carried mainly by the first two harmonics at a larger
+    amplitude, so a bank can lose a dozen metres to one bay and keep its full
+    extent at the next headland.
+
+    The four ``pinned`` angles are the road ends of
+    ``docs/02_spatial_contract.md``. A deck overlaps its bank by only
+    ``BRIDGE_BEARING`` metres, so a bite there would leave the bridge ending over
+    open water; the edge is held at full extent within ``pin_half_angle`` of each
+    road end and eased back out over twice that.
+
+    Callers must not build this per module. Two modules drawing their own bank
+    for the same district is what left buildings hanging over water before;
+    the authoritative outline per district is ``plan["land"]``.
+    """
+    outline = []
+    wobble = min(max(float(wobble), 0.0), 0.45)
+    phase = [stream.uniform(0, TAU) for _ in range(3)]
+    gain = [stream.uniform(0.60, 1.0) for _ in range(3)]
+    for k in range(points):
+        a = TAU * k / points
+        cx, cy = math.cos(a), math.sin(a)
+        m = max(abs(cx), abs(cy)) or 1e-6
+        # Project onto the planning rectangle, then bite the water edge inward.
+        x, y = cx / m * half_x, cy / m * half_y
+        n = (math.sin(a + phase[0]) * 0.62 * gain[0] +
+             math.sin(a * 2 + phase[1]) * 0.44 * gain[1] +
+             math.sin(a * 5 + phase[2]) * 0.16 * gain[2])
+        n = max(-1.0, min(1.0, n))
+        bite = wobble * (0.5 + 0.5 * n) * _pin_release(a, pinned, pin_half_angle)
+        outline.append((x * (1.0 - bite), y * (1.0 - bite)))
+    return outline
+
+
+def point_in_polygon(outline, x, y):
+    """Crossing-number test; the outline is treated as closed."""
+    inside = False
+    n = len(outline)
+    for i in range(n):
+        x0, y0 = outline[i]
+        x1, y1 = outline[(i + 1) % n]
+        if (y0 > y) != (y1 > y):
+            if x < x0 + (y - y0) / (y1 - y0) * (x1 - x0):
+                inside = not inside
+    return inside
+
+
+def polygon_clearance(outline, x, y):
+    """Distance from a point to the outline: positive inside, negative outside.
+
+    Used to keep footprints and paving on the land that was actually built,
+    rather than on the nominal rectangle the land is cut from.
+    """
+    best = float("inf")
+    n = len(outline)
+    for i in range(n):
+        x0, y0 = outline[i]
+        x1, y1 = outline[(i + 1) % n]
+        dx, dy = x1 - x0, y1 - y0
+        seg = dx * dx + dy * dy
+        t = 0.0 if seg < 1e-12 else max(0.0, min(1.0,
+                                                 ((x - x0) * dx + (y - y0) * dy) / seg))
+        best = min(best, math.hypot(x - (x0 + dx * t), y - (y0 + dy * t)))
+    return best if point_in_polygon(outline, x, y) else -best
+
+
+def polygon_ray_hit(outline, origin, direction):
+    """Nearest forward intersection of a ray with the outline, or None.
+
+    Lets a quay find the shoreline it is supposed to run along.
+    """
+    ox, oy = origin
+    dx, dy = direction
+    best = None
+    n = len(outline)
+    for i in range(n):
+        ax, ay = outline[i]
+        bx, by = outline[(i + 1) % n]
+        ex, ey = bx - ax, by - ay
+        den = dx * ey - dy * ex
+        if abs(den) < 1e-12:
+            continue
+        wx, wy = ax - ox, ay - oy
+        t = (wx * ey - wy * ex) / den
+        u = (wx * dy - wy * dx) / den
+        if t >= 0.0 and 0.0 <= u <= 1.0 and (best is None or t < best):
+            best = t
+    return best
+
+
+def shore_revetment(outline, top_z, steps=4, tread=0.55):
+    """Stone course stepping from the bank top down into the water.
+
+    Follows ``outline`` so the revetment meets the water at the bank that was
+    actually built. Each step is the outline pushed outward by one more tread,
+    which reads as a quay stair from the canal and keeps the whole ring
+    connected however irregular the shoreline is.
+    """
+    n = len(outline)
+    verts = [(x, y, top_z) for x, y in outline]
+    faces = []
+    for k in range(steps):
+        z = top_z * (1.0 - (k + 1) / steps) - (k + 1) * 0.02
+        reach = (k + 1) * tread
+        for x, y in outline:
+            norm = math.hypot(x, y) or 1.0
+            verts.append((x + x / norm * reach, y + y / norm * reach, z))
+    # Connect the bank top to the first step, then step to step.
+    for ring in range(steps):
+        a = ring * n
+        b = (ring + 1) * n
+        for i in range(n):
+            j = (i + 1) % n
+            faces.append((a + i, a + j, b + j, b + i))
+    return verts, faces
+
+
 def stepped_quay(length, height, steps=4, tread=0.55):
     """Revetment that steps down to the water instead of a single flat wall."""
     vertices, faces = [], []

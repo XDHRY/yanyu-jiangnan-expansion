@@ -35,7 +35,8 @@ def _street_clearance(streets, x, y):
     return best
 
 
-def _scatter(count, stream, streets, parcels, cx, cy, margin=5.0, tries=60):
+def _scatter(count, stream, streets, parcels, cx, cy, margin=5.0, tries=60,
+             outline=None):
     """Dart-throw positions that avoid roads, plots and the landmark block."""
     out = []
     while len(out) < count and tries > 0:
@@ -45,6 +46,9 @@ def _scatter(count, stream, streets, parcels, cx, cy, margin=5.0, tries=60):
                 break
             x = stream.uniform(-LAND_HALF_X + margin, LAND_HALF_X - margin)
             y = stream.uniform(-LAND_HALF_Y + margin, LAND_HALF_Y - margin)
+            # Keep trunks on the built bank, not on the nominal envelope.
+            if outline is not None and g.polygon_clearance(outline, x, y) < 3.0:
+                continue
             if _street_clearance(streets, x, y) < 2.2:
                 continue
             if -36.0 < x < 36.0 and 18.0 < y < 76.0:
@@ -122,8 +126,11 @@ def _boat(b, r, stream, awning=True):
 
 def build(b, config, plan):
     parcels = [x["parcel"] for x in plan["buildings"]]
+    centers = plan["centers"]
+    outlines = plan["land"]
     for d in config["districts"]:
-        cx, cy = d["center"]
+        cx, cy = centers[d["id"]]
+        outline = outlines[d["id"]]
         z = config["ground_z"]
         streets = [dict(kind=s["kind"], width=s["width"],
                         points=[[x - cx, y - cy] for x, y in s["points"]])
@@ -193,7 +200,8 @@ def build(b, config, plan):
             b.socket(r, "light", (0.55, 0, 2.5), (0, 0, -1))
 
         ps = rng(config["seed"], d["id"] + ":plants")
-        spots = _scatter(d["tree_count"], ps, streets, district_parcels, cx, cy)
+        spots = _scatter(d["tree_count"], ps, streets, district_parcels, cx, cy,
+                         outline=outline)
         bamboo_district = d["id"] in ("D03", "D11")
         for i, (px, py) in enumerate(spots):
             is_bamboo = bamboo_district and i % 3 != 2
@@ -211,7 +219,9 @@ def build(b, config, plan):
                 _broadleaf(b, r, h, ps)
             b.socket(r, "ground", (0, 0, 0), (0, 0, 1))
 
-        # Reed tufts soften the shoreline where there is no quay stair.
+        # Reed tufts soften the shoreline. They are pushed in until they stand
+        # on the bank that was built; the nominal envelope reaches several
+        # metres past it wherever the outline is bitten back.
         rs = rng(config["seed"], d["id"] + ":reeds")
         for i in range(14):
             edge = i % 4
@@ -223,6 +233,12 @@ def build(b, config, plan):
                 px, py = -LAND_HALF_X + rs.uniform(0.4, 1.6), rs.uniform(-66, 66)
             else:
                 px, py = LAND_HALF_X - rs.uniform(0.4, 1.6), rs.uniform(-66, 66)
+            clearance = g.polygon_clearance(outline, px, py)
+            if clearance < 1.0:
+                norm = math.hypot(px, py) or 1.0
+                pull = 1.0 - clearance
+                px -= px / norm * pull
+                py -= py / norm * pull
             r = b.root(f"JNX_{d['id']}_REED_{i:02d}", "reeds", d["id"],
                        (cx + px, cy + py, z - 1.4), rs.uniform(0, math.tau),
                        task="tasks/assets/A080.md")
@@ -266,6 +282,17 @@ def build(b, config, plan):
                 # Offset toward the water side of the quay
                 qx = cx + px + nx * (qs["width"] / 2 + ls.uniform(0.8, 2.0))
                 qy = cy + py + ny * (qs["width"] / 2 + ls.uniform(0.8, 2.0))
+                # ...but keep it on the quay. The offset reaches past the bank
+                # wherever the shoreline is bitten inland, which used to leave
+                # benches and wells standing in the canal.
+                lx, ly = qx - cx, qy - cy
+                clear = g.polygon_clearance(outline, lx, ly)
+                if clear < 1.2:
+                    norm = math.hypot(lx, ly) or 1.0
+                    pull = 1.2 - clear
+                    lx -= lx / norm * pull
+                    ly -= ly / norm * pull
+                    qx, qy = cx + lx, cy + ly
 
                 kind = life_idx % 5
                 if kind == 0:

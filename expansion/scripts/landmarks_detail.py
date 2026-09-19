@@ -424,7 +424,7 @@ def _build_tingyuxuan_courtyard(b, root, stream):
 def build(b, config, plan):
     """One landmark per district, keyed by the manifest's landmark field."""
     for d in config["districts"]:
-        cx, cy = d["center"]
+        cx, cy = plan["centers"][d["id"]]
         kind = d["landmark"]
         stream = rng(config["seed"], d["id"] + ":landmark")
         root = b.root(f"JNX_{d['id']}_LANDMARK", kind, d["id"],

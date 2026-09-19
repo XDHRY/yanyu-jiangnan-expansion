@@ -1070,7 +1070,13 @@ def build_world(scene, mood="drizzle"):
 
 
 def build_distant_scenery(scene, bounds, radius=540.0, height=155.0):
-    """Panoramic ink landscape screen borrowing Song dynasty scenery beyond the canals."""
+    """Panoramic ink landscape screen borrowing Song dynasty scenery beyond the canals.
+
+    A closed ring rather than the arc it used to be. An arc leaves two cut ends,
+    and both showed up in the eye-level shots as a vertical edge where the
+    mountains stopped mid-sky; a ring has no ends to see. Its outer face is
+    transparent (see the material), so it never intrudes on the overview.
+    """
     import bpy, os, math
 
     p = _find_texture("landscape")
@@ -1083,16 +1089,16 @@ def build_distant_scenery(scene, bounds, radius=540.0, height=155.0):
     except Exception:
         return None
 
-    # Cylindrical panorama screen on the northern horizon
+    # Cylindrical panorama screen, closed on the full circle
     mesh_data = bpy.data.meshes.new("JNX_MESH_distant_landscape")
-    n_segments = 80
+    n_segments = 120
     verts = []
     faces = []
     uvs = []
     for j in range(2):
         z = -15.0 if j == 0 else height
         for i in range(n_segments + 1):
-            a = -math.pi * 0.68 + (math.pi * 1.36) * i / n_segments
+            a = -math.pi + 2.0 * math.pi * i / n_segments
             x = radius * math.sin(a)
             y = radius * math.cos(a) + 60.0
             verts.append((x, y, z))
@@ -1122,7 +1128,31 @@ def build_distant_scenery(scene, bounds, radius=540.0, height=155.0):
 
     output = graph.add("ShaderNodeOutputMaterial", column=6)
     bsdf = graph.add("ShaderNodeBsdfPrincipled", column=4)
-    graph.link(bsdf, "BSDF", output, "Surface")
+
+    # Backdrop, not set dressing: only the inner face carries the painting. The
+    # screen is an open arc at radius 540, and the overview camera sits outside
+    # it, so its back faces and its two cut ends read as a hard-edged flat quad
+    # laid over the water. Transparent on back faces leaves the mountains to the
+    # shots taken from inside the town, which is what they are painted for.
+    transparent = graph.add("ShaderNodeBsdfTransparent", column=4, row=-2.0)
+    facing = graph.add("ShaderNodeNewGeometry", column=2, row=-2.0)
+    mix = graph.add("ShaderNodeMixShader", column=5)
+    graph.link(facing, "Backfacing", mix, "Fac")
+    graph.link(bsdf, "BSDF", mix, 1)
+    graph.link(transparent, "BSDF", mix, 2)
+
+    # The ring's top edge was a hard arc drawn across the sky. Dissolving the
+    # upper band into the sky is both what removes it and what 留白 asks for:
+    # the hills lift off into haze instead of ending on a cut line.
+    split, _ = _world_z(graph, column=2, row=-4.0)
+    fade = _map_range(graph, height * 0.52, height * 0.97, 0.0, 1.0,
+                      column=3, row=-4.0)
+    graph.link(split, "Z", fade, "Value")
+    soften = graph.add("ShaderNodeMixShader", column=5, row=-2.5)
+    graph.link(fade, "Result", soften, "Fac")
+    graph.link(mix, "Shader", soften, 1)
+    graph.link(transparent, "BSDF", soften, 2)
+    graph.link(soften, "Shader", output, "Surface")
 
     tex = graph.add("ShaderNodeTexImage", column=0)
     tex.image = img
@@ -1457,6 +1487,65 @@ def _blocked(boxes, point, margin=1.1):
     return False
 
 
+def _moon_from_xy(mood):
+    """Horizontal direction the key light comes from, as a unit (x, y).
+
+    A Blender sun points along its local -Z, so its travel direction is
+    Rz(azim) . Rx(elev) . (0,0,-1) = (-sin a sin e, cos a sin e, -cos e). The
+    light arrives from the opposite of that, and only the horizontal part
+    matters for deciding which facade it can reach.
+    """
+    spec = mood_spec(mood)
+    elev = math.radians(spec["moon_elev"])
+    azim = math.radians(spec["moon_azim"])
+    fx = math.sin(azim) * math.sin(elev)
+    fy = -math.cos(azim) * math.sin(elev)
+    n = math.hypot(fx, fy) or 1.0
+    return fx / n, fy / n
+
+
+def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
+    """Stand in the street facing a shopfront the moon actually lights.
+
+    This shot used to sit at a fixed offset from the district centre, which was
+    fine while the town was a lattice and wrong the moment the layout began
+    placing against the shoreline: the camera ended up inside a gable and the
+    frame came back as one flat plaster wall. It now walks the shop and inn rows
+    of the hero district, prefers the facades the moon key falls on -- at night
+    a facade turned away from it is a black rectangle -- and keeps the first
+    candidate whose eye position is clear of solid geometry.
+    """
+    eye_h = 3.6
+    look_h = 2.6
+    mx, my = _moon_from_xy(mood)
+
+    candidates = []
+    for spec in builder.roots.values():
+        if spec["district"] != hero_id or spec["family"] not in ("shop", "inn"):
+            continue
+        x, y, _ = spec["location"]
+        rot = spec["rotation"]
+        # Front faces local -Y, so the outward facade normal is (sin r, -cos r)
+        # and the street runs perpendicular to it.
+        fx, fy = math.sin(rot), -math.cos(rot)
+        tx, ty = math.cos(rot), math.sin(rot)
+        lit = fx * mx + fy * my
+        candidates.append((lit, x, y, fx, fy, tx, ty))
+    candidates.sort(reverse=True)
+
+    for lit, x, y, fx, fy, tx, ty in candidates:
+        # Stand back far enough to frame the whole bay, and step sideways so the
+        # row recedes instead of filling the lens with one flat wall.
+        for stand, drift in ((12.0, 5.5), (12.0, -5.5), (14.0, 0.0)):
+            eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
+            if _blocked(boxes, eye):
+                continue
+            target = (x + fx * 0.4, y + fy * 0.4, look_h)
+            return dict(name="JNX_Lane", lens=40.0, district=hero_id,
+                        location=eye, target=target, dof_distance=11.0, fstop=3.2)
+    return None
+
+
 def _clear_shots(builder, shots):
     """Pull any perspective camera that starts inside solid geometry back out.
 
@@ -1496,7 +1585,7 @@ def _clear_shots(builder, shots):
     return out
 
 
-def _shots(builder, config, water_z):
+def _shots(builder, config, water_z, mood="drizzle"):
     """Overview plus eye-level shots that test the things we rebuilt.
 
     The close shots stand in the canal midlines and look along them, so the
@@ -1516,7 +1605,11 @@ def _shots(builder, config, water_z):
     lane_y = min(hz, key=lambda v: abs(v - hy)) if hz else hy - 90.0
     lane_x = min(vx, key=lambda v: abs(v - hx)) if vx else hx + 90.0
 
-    return [
+    # The lane shot is resolved against real facades, so the camera ends up in a
+    # street rather than at a coordinate that used to be a street.
+    lane = _lane_shot(builder, hero_id, _world_aabbs(builder), mood)
+
+    shots = [
         dict(name="JNX_Overview", ortho=True, ortho_scale=span * 1.15,
              location=(cx + span * 0.55, cy - span * 0.62, span * 0.55),
              target=(cx, cy, 6.0)),
@@ -1533,14 +1626,10 @@ def _shots(builder, config, water_z):
              location=(lane_x - 2.0, lane_y - 112.0, water_z + 2.0),
              target=(lane_x + 1.0, lane_y + 40.0, water_z + 6.0),
              dof_distance=90.0, fstop=4.0),
-        # Walking-height shot looking ACROSS the spine at shopfronts and ajar
-        # doors, not along the street.  The camera stands on the opposite side
-        # of the street from a shop row and looks into their facades so
-        # interiors, signboards and door thresholds fill the middle ground.
-        dict(name="JNX_Lane", lens=40.0, district=hero_id,
-             location=(hx - 18.0, hy + 6.8, 3.7),
-             target=(hx - 18.0, hy - 8.0, 4.2),
-             dof_distance=10.0, fstop=2.8),
+    ]
+    if lane:
+        shots.append(lane)
+    shots.extend([
         # Inside Tingyuxuan looking out: tea table and warm lamp in the
         # foreground, leaning plum over the pond, moon gate and mountains beyond.
         dict(name="JNX_TingYuXuan", lens=32.0,
@@ -1552,7 +1641,8 @@ def _shots(builder, config, water_z):
              location=(91.0, 42.5, 3.2),
              target=(91.4, 60.0, 4.2),
              dof_distance=12.0, fstop=2.6),
-    ]
+    ])
+    return shots
 
 
 def write_blend(builder, folder, preview=False, config=None, mood="drizzle",
@@ -1619,7 +1709,7 @@ def write_blend(builder, folder, preview=False, config=None, mood="drizzle",
     build_distant_scenery(scene, _planned_bounds(builder))
     build_mist(scene, _planned_bounds(builder), water_z=water_z, mood=mood)
     build_lighting(scene, mood)
-    cameras = build_cameras(scene, _clear_shots(builder, _shots(builder, config, water_z)))
+    cameras = build_cameras(scene, _clear_shots(builder, _shots(builder, config, water_z, mood)))
     scene.camera = cameras.get("JNX_TingYuXuan", cameras["JNX_Canal_Hero"])
     configure_render(scene, samples=samples)
 
@@ -1627,7 +1717,12 @@ def write_blend(builder, folder, preview=False, config=None, mood="drizzle",
     bpy.data.libraries.write(target, {scene}, compress=True)
 
     if preview:
-        for name in ("JNX_TingYuXuan", "JNX_Canal_Hero", "JNX_MoonGate_Vista", "JNX_Lane", "JNX_Water_Level", "JNX_Overview"):
+        # Follow whatever cameras the scene actually got: the lane shot is
+        # resolved against real facades and is skipped when there is no shop row
+        # to stand in front of, so a hardcoded list would KeyError.
+        order = ("JNX_TingYuXuan", "JNX_Canal_Hero", "JNX_MoonGate_Vista",
+                 "JNX_Lane", "JNX_Water_Level", "JNX_Overview")
+        for name in [n for n in order if n in cameras]:
             scene.camera = cameras[name]
             scene.render.filepath = str((folder / f"{name}.png").resolve())
             bpy.ops.render.render(write_still=True, scene=scene.name)
