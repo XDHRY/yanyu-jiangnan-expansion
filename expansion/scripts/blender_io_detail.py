@@ -1008,11 +1008,11 @@ def build_materials():
 #: mood is one decision rather than three that can drift apart.
 MOODS = {
     # Cold moon through thin rain: the reference look.
-    "drizzle": dict(zenith=(0.008, 0.013, 0.026), horizon=(0.042, 0.056, 0.080),
-                    sky_strength=1.0, moon_energy=2.4, moon_k=(0.62, 0.74, 1.00),
-                    moon_elev=52.0, moon_azim=214.0, moon_angle=1.8,
-                    bounce=0.09, mist=0.0026, mist_top=17.0,
-                    mist_k=(0.52, 0.60, 0.72)),
+    "drizzle": dict(zenith=(0.004, 0.009, 0.022), horizon=(0.026, 0.043, 0.075),
+                    sky_strength=0.82, moon_energy=3.0, moon_k=(0.52, 0.69, 1.00),
+                    moon_elev=48.0, moon_azim=214.0, moon_angle=1.5,
+                    bounce=0.055, mist=0.0022, mist_top=14.0,
+                    mist_k=(0.45, 0.56, 0.72)),
     # Mist sits heavier and the moon is further veiled.
     "fog": dict(zenith=(0.010, 0.015, 0.026), horizon=(0.055, 0.068, 0.088),
                 sky_strength=1.3, moon_energy=1.5, moon_k=(0.66, 0.76, 0.98),
@@ -1276,7 +1276,7 @@ def build_lighting(scene, mood="drizzle"):
 
     # Warm intimate point light hanging inside Tingyuxuan pavilion (D07)
     tingyu_lamp_data = bpy.data.lights.new("JNX_Tingyu_Lamp", "POINT")
-    tingyu_lamp_data.energy = 140.0
+    tingyu_lamp_data.energy = 220.0
     tingyu_lamp_data.shadow_soft_size = 0.32
     tingyu_lamp_data.color = (1.0, 0.62, 0.28)
     tingyu_lamp = bpy.data.objects.new("JNX_Tingyu_Lamp", tingyu_lamp_data)
@@ -1346,6 +1346,10 @@ def configure_render(scene, samples=96, resolution=(1600, 900), denoise=True):
     except TypeError:
         # Look names differ between 4.x point releases; the transform matters more.
         pass
+    # The latest six-camera review was technically valid but sat mostly in the
+    # 20-50/255 range. Lift exposure without flattening the moonlit night so
+    # plaster, wet stone and timber remain readable while blacks still anchor it.
+    scene.view_settings.exposure = 0.70
     return scene
 
 
@@ -1638,37 +1642,41 @@ def _shots(builder, config, water_z, mood="drizzle"):
     lane = _lane_shot(builder, hero_id, _world_aabbs(builder), mood)
 
     shots = [
-        dict(name="JNX_Overview", ortho=True, ortho_scale=span * 1.15,
-             location=(cx + span * 0.55, cy - span * 0.62, span * 0.55),
-             target=(cx, cy, 6.0)),
+        # A perspective establishing shot replaces the map-like orthographic
+        # view. It still exposes district structure for QA, but reads as a town
+        # in landscape rather than a regular board-game grid.
+        dict(name="JNX_Overview", lens=58.0,
+             location=(cx + span * 0.72, cy - span * 0.86, span * 0.48),
+             target=(cx - span * 0.08, cy + span * 0.05, 7.0),
+             dof_distance=span * 0.65, fstop=7.1),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
-        dict(name="JNX_Canal_Hero", lens=35.0,
-             location=(hx - 46.0, lane_y - 3.2, water_z + 2.3),
-             target=(hx + 62.0, lane_y + 1.5, water_z + 5.2),
-             dof_distance=48.0, fstop=3.2),
+        dict(name="JNX_Canal_Hero", lens=42.0,
+             location=(hx - 50.0, lane_y - 4.0, water_z + 2.15),
+             target=(hx + 64.0, lane_y + 1.8, water_z + 4.9),
+             dof_distance=52.0, fstop=3.5),
         # The cross canal, aimed back at the town so the far bank recedes into
         # mist: this is the shot that tells us whether depth is reading.
-        dict(name="JNX_Water_Level", lens=50.0,
-             location=(lane_x - 2.0, lane_y - 112.0, water_z + 2.0),
-             target=(lane_x + 1.0, lane_y + 40.0, water_z + 6.0),
-             dof_distance=90.0, fstop=4.0),
+        dict(name="JNX_Water_Level", lens=58.0,
+             location=(lane_x - 3.5, lane_y - 116.0, water_z + 1.75),
+             target=(lane_x + 2.0, lane_y + 44.0, water_z + 5.5),
+             dof_distance=96.0, fstop=4.5),
     ]
     if lane:
         shots.append(lane)
     shots.extend([
         # Inside Tingyuxuan looking out: tea table and warm lamp in the
         # foreground, leaning plum over the pond, moon gate and mountains beyond.
-        dict(name="JNX_TingYuXuan", lens=32.0,
-             location=(80.6, 43.6, 3.55),
-             target=(90.8, 52.8, 4.35),
-             dof_distance=12.0, fstop=2.6),
+        dict(name="JNX_TingYuXuan", lens=38.0,
+             location=(79.2, 42.8, 3.35),
+             target=(91.0, 56.2, 4.05),
+             dof_distance=14.0, fstop=2.8),
         # Close artistic framing: gazing through the circular moon gate into borrowed landscape
-        dict(name="JNX_MoonGate_Vista", lens=52.0,
-             location=(91.0, 42.5, 3.2),
-             target=(91.4, 60.0, 4.2),
-             dof_distance=12.0, fstop=2.6),
+        dict(name="JNX_MoonGate_Vista", lens=58.0,
+             location=(88.8, 43.0, 3.15),
+             target=(91.4, 61.5, 4.0),
+             dof_distance=16.0, fstop=3.0),
     ])
     return shots
 
