@@ -619,7 +619,7 @@ def plum_blossom(size=0.085, angle=0.0):
     return vertices, faces
 
 
-def leaf_cluster(radius, stream, lobes=5, sides=7, squash=0.72):
+def leaf_cluster(radius, stream, lobes=5, sides=11, squash=0.72):
     """A crown built from overlapping blobs so the silhouette is not a cone."""
     vertices, faces = [], []
     for _ in range(lobes):
@@ -627,7 +627,7 @@ def leaf_cluster(radius, stream, lobes=5, sides=7, squash=0.72):
         cy = stream.uniform(-radius * 0.55, radius * 0.55)
         cz = stream.uniform(-radius * 0.3, radius * 0.45)
         r = radius * stream.uniform(0.45, 0.72)
-        rings = 4
+        rings = 6
         base = len(vertices)
         for ri in range(rings + 1):
             phi = math.pi * ri / rings
