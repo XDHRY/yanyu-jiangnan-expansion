@@ -1653,10 +1653,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
         # Establish the hero quarter rather than exposing the entire generated
         # town as a board. Compression and a lower angle let roofs, canal and
         # borrowed mountains overlap into one landscape composition.
-        dict(name="JNX_Overview", lens=88.0,
-             location=(hx + span * 0.22, hy - span * 0.29, span * 0.115),
-             target=(hx + span * 0.015, hy + span * 0.085, 5.0),
-             dof_distance=span * 0.25, fstop=6.3),
+        dict(name="JNX_Overview", lens=96.0,
+             location=(hx + span * 0.155, hy - span * 0.215, span * 0.078),
+             target=(hx + span * 0.005, hy + span * 0.070, 4.6),
+             dof_distance=span * 0.19, fstop=5.6),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
@@ -1681,10 +1681,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
              target=(91.0, 56.2, 4.05),
              dof_distance=14.0, fstop=2.8),
         # Close artistic framing: gazing through the circular moon gate into borrowed landscape
-        dict(name="JNX_MoonGate_Vista", lens=72.0,
-             location=(90.6, 50.0, 3.50),
-             target=(93.0, 64.0, 4.50),
-             dof_distance=15.0, fstop=3.4),
+        dict(name="JNX_MoonGate_Vista", lens=76.0,
+             location=(84.6, 44.8, 3.35),
+             target=(92.0, 61.8, 4.30),
+             dof_distance=19.0, fstop=3.5),
     ])
     return shots
 
