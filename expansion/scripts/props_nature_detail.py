@@ -161,17 +161,50 @@ def build(b, config, plan):
             rot = math.atan2(ty, tx)
             r = b.root(f"JNX_{d['id']}_STALL_{i:02d}", "stall", d["id"],
                        (cx + px, cy + py, z), rot, task="tasks/assets/A053.md")
-            b.box(r, "table", (2.9, 1.4, 0.12), (0, 0, 0.92), "timber")
-            for xx in (-1.3, 1.3):
-                for yy in (-0.6, 0.6):
-                    b.cylinder(r, f"post_{xx}_{yy}", 0.06, 2.3, (xx, yy, 0), "timber", 6)
-            av, af = g.arched_awning(3.3, 2.2, 0.45, ribs=5)
-            b.mesh(r, "awning", av, af, "cloth", (0, 0, 2.3))
-            b.box(r, "crate", (0.7, 0.6, 0.5), (stream.uniform(-1, 1), -0.9, 0.25), "timber")
-            b.cylinder(r, "basket", 0.22, 0.28, (0.85, 0.15, 1.06), "bamboo", 8)
-            b.cylinder(r, "jar", 0.14, 0.32, (-0.7, 0.1, 1.06), "ceramic", 8)
-            b.box(r, "cloth_bolt", (0.55, 0.18, 0.12), (0.1, 0.35, 1.04), "cloth")
-            b.socket(r, "wares", (0, 0, 0.98), (0, 0, 1))
+            # Street stalls used to be identical 3.3 x 2.2 m blue canopies,
+            # which read as modern industrial awnings in close shots. Give each
+            # one a smaller, slightly irregular footprint and denser wares.
+            stall_w = stream.uniform(2.35, 2.80)
+            stall_d = stream.uniform(1.05, 1.35)
+            canopy_h = stream.uniform(2.02, 2.24)
+            b.box(r, "table", (stall_w - 0.18, stall_d * 0.78, 0.11),
+                  (0, 0, 0.88), "timber")
+            px_post = stall_w * 0.44
+            py_post = stall_d * 0.42
+            for xx in (-px_post, px_post):
+                for yy in (-py_post, py_post):
+                    b.cylinder(r, f"post_{xx}_{yy}", 0.05, canopy_h,
+                               (xx, yy, 0), "timber", 6)
+            av, af = g.arched_awning(stall_w + 0.20, stall_d + 0.18,
+                                     stream.uniform(0.22, 0.34), ribs=4)
+            b.mesh(r, "awning", av, af, "cloth", (0, 0, canopy_h))
+
+            # Layered small-scale clutter makes the market read as inhabited
+            # without introducing expensive unique meshes.
+            for ci in range(2):
+                cw = stream.uniform(0.42, 0.62)
+                cd = stream.uniform(0.38, 0.55)
+                ch = stream.uniform(0.30, 0.48)
+                b.box(r, f"crate_{ci}", (cw, cd, ch),
+                      (stream.uniform(-0.9, 0.9),
+                       -stall_d * 0.56 - ci * 0.12,
+                       ch * 0.5), "timber")
+            for bi, bx in enumerate((-0.72, 0.70)):
+                b.cylinder(r, f"basket_{bi}", stream.uniform(0.18, 0.24),
+                           stream.uniform(0.22, 0.30),
+                           (bx, stream.uniform(-0.05, 0.22), 1.02),
+                           "bamboo", 8)
+            for ji, jx in enumerate((-0.45, 0.05, 0.48)):
+                b.cylinder(r, f"jar_{ji}", stream.uniform(0.10, 0.15),
+                           stream.uniform(0.23, 0.34),
+                           (jx, stream.uniform(0.00, 0.25), 1.00),
+                           "ceramic", 8)
+            b.box(r, "cloth_bolt", (0.48, 0.16, 0.10),
+                  (0.05, 0.32, 1.01), "cloth")
+            b.box(r, "hanging_sign", (0.34, 0.05, 0.48),
+                  (-px_post + 0.10, -py_post - 0.04, canopy_h - 0.62),
+                  "timber")
+            b.socket(r, "wares", (0, 0, 0.96), (0, 0, 1))
 
         for i in range(d["dock_count"]):
             bs = rng(config["seed"], f"{d['id']}:boat:{i}")
