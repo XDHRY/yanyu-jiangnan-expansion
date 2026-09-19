@@ -1297,6 +1297,47 @@ def _look_at(obj, target):
     obj.rotation_euler = direction.to_track_quat("-Z", "Y").to_euler()
 
 
+def build_hero_lantern_lights(scene, builder, config):
+    """A handful of real warm light pools around the densest market street.
+
+    Emissive paper makes lanterns visible, but at 16-sample CI resolution it
+    contributes too little bounce to sell wet night streets. Keep this bounded
+    to eight D02-style hero lanterns rather than adding lights to the whole town.
+    """
+    import bpy
+    if not config:
+        return []
+    hero_id, planned = _hero_district(builder, config)
+    hx, hy = _dense_focus(builder, hero_id, planned)
+    lamps = []
+    for key, spec in builder.roots.items():
+        if spec["district"] != hero_id or spec["family"] != "lantern":
+            continue
+        dist = math.hypot(spec["location"][0] - hx, spec["location"][1] - hy)
+        socket = next((s for s in spec.get("sockets", []) if s["name"] == "light"), None)
+        if socket:
+            lamps.append((dist, key, spec, socket))
+    lamps.sort(key=lambda x: x[0])
+    made = []
+    for _, key, spec, socket in lamps[:8]:
+        rx, ry, rz = spec["location"]
+        sx, sy, sz = socket["location"]
+        rot = spec["rotation"]
+        ca, sa = math.cos(rot), math.sin(rot)
+        wx = rx + sx * ca - sy * sa
+        wy = ry + sx * sa + sy * ca
+        wz = rz + sz
+        data = bpy.data.lights.new("JNX_HERO_LIGHT_" + key, "POINT")
+        data.energy = 55.0
+        data.color = (1.0, 0.42, 0.16)
+        data.shadow_soft_size = 0.85
+        obj = bpy.data.objects.new(data.name, data)
+        scene.collection.objects.link(obj)
+        obj.location = (wx, wy, wz)
+        made.append(obj)
+    return made
+
+
 def build_cameras(scene, shots):
     """Create every requested shot; returns name -> camera object."""
     import bpy
@@ -1656,8 +1697,8 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
     for density, lit, x, y, fx, fy, tx, ty in candidates:
         # Stand back far enough to frame the whole bay, and step sideways so the
         # row recedes instead of filling the lens with one flat wall.
-        for stand, drift in ((13.0, 11.0), (13.0, -11.0), (16.0, 14.0),
-                             (16.0, -14.0), (20.0, 10.0)):
+        for stand, drift in ((15.0, 7.0), (15.0, -7.0), (18.0, 9.0),
+                             (18.0, -9.0), (21.0, 6.0)):
             eye = (x + fx * stand + tx * drift, y + fy * stand + ty * drift, eye_h)
             if _blocked(boxes, eye) or _inside_footprint(footprints, eye):
                 continue
@@ -1665,10 +1706,10 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
             # composition turned a temporary stall into the whole frame and
             # exposed the procedural bay as a blocky facade.
             along = -1.0 if drift >= 0.0 else 1.0
-            target = (x + fx * 0.8 + tx * along * 18.0,
-                      y + fy * 0.8 + ty * along * 18.0, look_h)
-            shot = dict(name="JNX_Lane", lens=44.0, district=hero_id,
-                        location=eye, target=target, dof_distance=22.0, fstop=3.6)
+            target = (x + fx * 0.8 + tx * along * 22.0,
+                      y + fy * 0.8 + ty * along * 22.0, look_h)
+            shot = dict(name="JNX_Lane", lens=50.0, district=hero_id,
+                        location=eye, target=target, dof_distance=26.0, fstop=3.8)
             if not _line_clear(boxes, eye, target):
                 continue
             # Lantern emission was tamed by pixel QA, so do not exile the camera
@@ -1749,10 +1790,10 @@ def _shots(builder, config, water_z, mood="drizzle"):
         # Establish the hero quarter rather than exposing the entire generated
         # town as a board. Compression and a lower angle let roofs, canal and
         # borrowed mountains overlap into one landscape composition.
-        dict(name="JNX_Overview", lens=78.0,
-             location=(hx + span * 0.19, hy - span * 0.31, span * 0.042),
-             target=(hx - span * 0.010, hy + span * 0.055, 5.5),
-             dof_distance=span * 0.24, fstop=5.0),
+        dict(name="JNX_Overview", lens=92.0,
+             location=(hx + span * 0.16, hy - span * 0.24, span * 0.032),
+             target=(hx - span * 0.018, hy + span * 0.030, 5.2),
+             dof_distance=span * 0.20, fstop=5.0),
         # Boat height in the canal, looking along it: eave curve, wet plaster,
         # quay steps and the bridge all stack up in depth. The bridge over this
         # canal sits at the hero district's x, ~46 m ahead, framing the shot.
@@ -1849,6 +1890,7 @@ def write_blend(builder, folder, preview=False, config=None, mood="drizzle",
     build_distant_scenery(scene, _planned_bounds(builder))
     build_mist(scene, _planned_bounds(builder), water_z=water_z, mood=mood)
     build_lighting(scene, mood)
+    build_hero_lantern_lights(scene, builder, config)
     cameras = build_cameras(scene, _clear_shots(builder, _shots(builder, config, water_z, mood)))
     scene.camera = cameras.get("JNX_TingYuXuan", cameras["JNX_Canal_Hero"])
     configure_render(scene, samples=samples)
