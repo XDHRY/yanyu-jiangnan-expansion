@@ -80,14 +80,20 @@ def _willow(b, r, height, stream):
 
 
 def _broadleaf(b, r, height, stream):
-    (tv, tf), spine = g.branch_skeleton(height * 0.55, stream, bends=4)
+    (tv, tf), spine = g.branch_skeleton(height * 0.58, stream, bends=5,
+                                        base_radius=0.24, taper=0.22)
     b.mesh(r, "trunk", tv, tf, "timber")
     tipx, tipy, _ = spine[-1]
-    for i in range(4):
+    # Several smaller overlapping crowns read as foliage masses instead of the
+    # old four-lobed low-poly ball, especially in eye-level street shots.
+    count = stream.randint(7, 10)
+    for i in range(count):
         a = stream.uniform(0, math.tau)
-        rad = stream.uniform(0.4, 1.7)
-        z = height * stream.uniform(0.5, 0.78)
-        cv, cf = g.leaf_cluster(stream.uniform(1.7, 2.8), stream, lobes=5)
+        rad = stream.uniform(0.35, 2.15) * (0.72 if i < 2 else 1.0)
+        z = height * stream.uniform(0.48, 0.83)
+        size = stream.uniform(1.0, 1.85) * (1.18 if i < 2 else 1.0)
+        cv, cf = g.leaf_cluster(size, stream, lobes=stream.randint(5, 8),
+                               squash=stream.uniform(0.58, 0.88))
         b.mesh(r, f"canopy_{i}", cv, cf, "leaf",
                (tipx + math.cos(a) * rad, tipy + math.sin(a) * rad, z))
 
