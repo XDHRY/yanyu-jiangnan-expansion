@@ -139,7 +139,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        camera: [JNX_Overview, JNX_Canal_Hero, JNX_Water_Level, JNX_Lane]
+        camera: [JNX_TingYuXuan, JNX_MoonGate_Vista, JNX_Canal_Hero, JNX_Lane, JNX_Water_Level, JNX_Overview]
     steps:
       - uses: actions/checkout@v4
 

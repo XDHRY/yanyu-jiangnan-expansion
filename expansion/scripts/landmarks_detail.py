@@ -184,6 +184,193 @@ def _courtyard_complex(b, root, stream, kind):
     b.socket(root, "court_centre", (0.0, -4.0, 0.1), (0.0, 0.0, 1.0))
 
 
+def _build_tingyuxuan_courtyard(b, root, stream):
+    """The central artistic showcase: Moon gate, Tingyuxuan pavilion, scholar rocks, leaning plum."""
+    # 1. Base courtyard plinth & pond
+    b.box(root, "court_plinth", (42.0, 36.0, 0.45), (0.0, 0.0, 0.225), "stone")
+    b.box(root, "pond", (22.0, 12.0, 0.12), (0.0, -4.0, 0.40), "water")
+    # Pond stone borders
+    for side in (-1, 1):
+        for j in range(12):
+            b.box(root, f"pond_border_y_{side}_{j}", (0.55, 1.0, 0.32),
+                  (side * 11.2, -9.5 + j * 1.0, 0.45), "stone")
+    for j in range(22):
+        b.box(root, f"pond_border_x_{j}", (1.0, 0.55, 0.32),
+              (-10.5 + j * 1.0, -10.2, 0.45), "stone")
+    # S-curved stepping stones crossing the quiet pond
+    for i in range(10):
+        sy = -8.5 + i * 0.95
+        sx = 1.6 * math.sin(i * 0.42) - 0.8
+        b.box(root, f"stepping_stone_{i}", (1.2, 0.6, 0.25), (sx, sy, 0.46), "stone")
+
+    # 2. Moon gate wall with true circular aperture
+    gx, gy, zc = 1.4, 7.5, 2.7
+    rad, H = 2.0, 5.0
+    wall_thick = 0.46
+    # West wall & East wall
+    b.box(root, "wall_west", (12.0, wall_thick, H), (gx - rad - 6.0, gy, H / 2), "plaster")
+    b.box(root, "wall_east", (10.0, wall_thick, H), (gx + rad + 5.0, gy, H / 2), "plaster")
+    # Wall footing stone
+    b.box(root, "wall_footing_w", (12.2, wall_thick + 0.12, 0.46), (gx - rad - 6.0, gy, 0.23), "stone")
+    b.box(root, "wall_footing_e", (10.2, wall_thick + 0.12, 0.46), (gx + rad + 5.0, gy, 0.23), "stone")
+    # Wall top tile cap
+    b.roof(root, "wall_tiles_w", 12.4, 1.4, 0.35, (gx - rad - 6.0, gy, H))
+    b.roof(root, "wall_tiles_e", 10.4, 1.4, 0.35, (gx + rad + 5.0, gy, H))
+
+    # Circular moon gate aperture mesh
+    v, f = [], []
+    n_seg = 64
+    for i in range(n_seg):
+        a = 2 * math.pi * i / n_seg
+        b_ang = 2 * math.pi * (i + 1) / n_seg
+        inner = [(gx + rad * math.cos(t), zc + rad * math.sin(t)) for t in [a, b_ang]]
+        outer = []
+        for t in [a, b_ang]:
+            dx, dz = math.cos(t), math.sin(t)
+            fac = min(rad * 1.01 / max(abs(dx), 1e-6),
+                      ((H - zc) if dz > 0 else zc) / max(abs(dz), 1e-6))
+            outer.append((gx + fac * dx, zc + fac * dz))
+        k = len(v)
+        for y in [gy - wall_thick / 2, gy + wall_thick / 2]:
+            v.extend([
+                (inner[0][0], y, inner[0][1]),
+                (inner[1][0], y, inner[1][1]),
+                (outer[1][0], y, outer[1][1]),
+                (outer[0][0], y, outer[0][1]),
+            ])
+        f.extend([
+            (k, k + 1, k + 2, k + 3),
+            (k + 7, k + 6, k + 5, k + 4),
+            (k, k + 4, k + 5, k + 1),
+        ])
+    b.mesh(root, "moon_gate_wall", v, f, "plaster")
+
+    # Moon gate stone arch voussoir
+    v_arch, f_arch = [], []
+    for i in range(n_seg):
+        a = 2 * math.pi * i / n_seg
+        b_ang = 2 * math.pi * (i + 0.96) / n_seg
+        seg_v = []
+        for y in [gy - wall_thick / 2 - 0.05, gy + wall_thick / 2 + 0.05]:
+            for r, t in [(rad, a), (rad, b_ang), (rad + 0.20, b_ang), (rad + 0.20, a)]:
+                seg_v.append((gx + r * math.cos(t), y, zc + r * math.sin(t)))
+        k = len(v_arch)
+        v_arch.extend(seg_v)
+        f_arch.extend([
+            (k, k + 1, k + 2, k + 3),
+            (k + 4, k + 7, k + 6, k + 5),
+            (k, k + 4, k + 5, k + 1),
+            (k + 3, k + 2, k + 6, k + 7),
+        ])
+    b.mesh(root, "moon_gate_arch", v_arch, f_arch, "stone")
+
+    # East lattice window on return wall
+    b.box(root, "east_return_wall", (0.46, 12.0, 3.8), (gx + rad + 10.0, gy - 6.0, 1.9), "plaster")
+    for wy in (gy - 3.0, gy - 8.0):
+        wv, wf = g.lattice_window(1.4, 1.6, 0.06, 4, 4)
+        b.mesh(root, f"lattice_window_{int(wy)}", wv, wf, "timber", (gx + rad + 10.0, wy, 2.0), math.pi / 2)
+
+    # 3. Tingyuxuan open tea pavilion (West side of the pond)
+    tx, ty = -9.5, 0.5
+    b.box(root, "tingyu_plinth", (7.0, 7.0, 0.42), (tx, ty, 0.66), "stone")
+    # Four corner stone bases and wooden pillars
+    for cx in (tx - 2.5, tx + 2.5):
+        for cy_col in (ty - 2.5, ty + 2.5):
+            verts, faces = g.column_base(0.30, 0.22)
+            b.mesh(root, f"tingyu_base_{int(cx)}_{int(cy_col)}", verts, faces, "stone", (cx, cy_col, 0.87))
+            b.cylinder(root, f"tingyu_post_{int(cx)}_{int(cy_col)}", 0.18, 3.8, (cx, cy_col, 1.09), "timber")
+    # Pavilion roof beams
+    b.box(root, "tingyu_beam_x1", (6.4, 0.28, 0.36), (tx, ty - 2.5, 4.89), "timber")
+    b.box(root, "tingyu_beam_x2", (6.4, 0.28, 0.36), (tx, ty + 2.5, 4.89), "timber")
+    b.box(root, "tingyu_beam_y1", (0.28, 6.4, 0.36), (tx - 2.5, ty, 4.89), "timber")
+    b.box(root, "tingyu_beam_y2", (0.28, 6.4, 0.36), (tx + 2.5, ty, 4.89), "timber")
+    # Hip roof over Tingyuxuan
+    rv, rf = g.hip_roof_surface(8.2, 8.2, 2.4, 1.1, 0.65, 0.4)
+    b.mesh(root, "tingyu_roof", rv, rf, "tile", (tx, ty, 5.05))
+    rcv, rcf = g.roof_courses(8.2, 8.2, 2.4, 1.1, 0.65, 0.4, pitch=0.45)
+    b.mesh(root, "tingyu_roof_courses", rcv, rcf, "tile", (tx, ty, 5.07))
+    # Tea table and bench
+    b.box(root, "tea_table", (2.4, 1.0, 0.16), (tx, ty, 1.60), "timber")
+    b.box(root, "tea_leg_1", (0.16, 0.8, 0.72), (tx - 0.9, ty, 1.24), "timber")
+    b.box(root, "tea_leg_2", (0.16, 0.8, 0.72), (tx + 0.9, ty, 1.24), "timber")
+    # Ceramic tea pot and cups
+    b.cylinder(root, "tea_pot", 0.15, 0.22, (tx, ty, 1.68), "ceramic", sides=10)
+    for cup_x in (tx - 0.4, tx + 0.4):
+        b.cylinder(root, f"tea_cup_{int(cup_x*10)}", 0.06, 0.08, (cup_x, ty - 0.1, 1.68), "ceramic", sides=8)
+    # Lit lantern under pavilion eave
+    b.cylinder(root, "tingyu_lantern_post", 0.05, 0.6, (tx, ty, 4.3), "iron", sides=6)
+    sv, sf = g.revolve([(0.04, 0), (0.24, 0.1), (0.26, 0.35), (0.20, 0.5), (0.05, 0.55)], sides=12)
+    b.mesh(root, "tingyu_lantern_shade", sv, sf, "paper", (tx, ty, 3.75))
+
+    # 4. Scholar rocks (Taihu stones, 瘦漏透皱) by the water
+    for idx, (rx, ry, h_scale, r_scale) in enumerate([
+        (-4.8, -1.2, 2.6, 0.85),
+        (7.5, -2.5, 3.1, 0.95),
+        (-6.2, -6.0, 1.8, 0.65),
+    ]):
+        sv, sf = g.scholar_rock_sculpt(h_scale, r_scale, stream)
+        b.mesh(root, f"scholar_stone_{idx}", sv, sf, "stone", (rx, ry, 0.45))
+        # Moss footings around rocks
+        for mi in range(6):
+            ma = stream.uniform(0, math.tau)
+            mr = stream.uniform(0.4, 0.9)
+            b.box(root, f"rock_moss_{idx}_{mi}", (0.35, 0.25, 0.12),
+                  (rx + mr * math.cos(ma), ry + mr * math.sin(ma), 0.46), "leaf")
+
+    # 5. The iconic leaning plum tree (老梅苍干与主景横斜枝)
+    tree_base = (-3.8, 2.5, 0.45)
+    (trunk_v, trunk_f), spine = g.branch_skeleton(5.8, stream, taper=0.22, base_radius=0.34, bends=6)
+    b.mesh(root, "plum_trunk", trunk_v, trunk_f, "timber", tree_base)
+    # Lateral arching boughs crossing over the pond and toward the moon gate
+    bough_pts = [
+        (-3.8, 2.5, 2.8),
+        (-2.2, 2.0, 3.4),
+        (-0.5, 2.4, 4.0),
+        (1.2, 3.2, 4.5),
+        (2.8, 3.8, 4.7),
+        (4.2, 4.4, 5.1),
+    ]
+    bough_v, bough_f = g.sweep([(0.14, 0), (0.10, 0.10), (0, 0.14), (-0.10, 0.10),
+                                (-0.14, 0), (-0.10, -0.10), (0, -0.14), (0.10, -0.10)],
+                               bough_pts, close_profile=True)
+    b.mesh(root, "plum_bough", bough_v, bough_f, "timber")
+    # Secondary hanging twigs (垂梢)
+    for tw_idx, t_pos in enumerate([( -1.2, 2.2, 3.6), ( 0.8, 3.0, 4.2), ( 2.5, 3.6, 4.4)]):
+        tw_pts = [t_pos, (t_pos[0]+0.3, t_pos[1]-0.4, t_pos[2]-0.7), (t_pos[0]+0.5, t_pos[1]-0.6, t_pos[2]-1.3)]
+        tw_v, tw_f = g.sweep([(0.04, 0), (0, 0.04), (-0.04, 0), (0, -0.04)], tw_pts, close_profile=True)
+        b.mesh(root, f"plum_twig_{tw_idx}", tw_v, tw_f, "timber")
+
+    # Dense blossom clusters on the lateral boughs (点梅五瓣花簇)
+    for b_idx in range(32):
+        t = (b_idx + 1) / 34.0
+        bx = -3.8 + t * 7.8 + stream.uniform(-0.35, 0.35)
+        by = 2.0 + t * 2.4 + stream.uniform(-0.35, 0.35)
+        bz = 2.6 + t * 2.5 + stream.uniform(-0.2, 0.4)
+        cv, cf = g.leaf_cluster(stream.uniform(0.55, 0.85), stream, lobes=5, squash=0.6)
+        b.mesh(root, f"plum_blossoms_{b_idx}", cv, cf, "leaf", (bx, by, bz))
+
+    # Petals scattered across the quiet pond surface (水上落梅)
+    for p_idx in range(64):
+        px = stream.uniform(-8.5, 8.5)
+        py = stream.uniform(-9.5, -0.2)
+        b.box(root, f"pond_petal_{p_idx}", (0.10, 0.07, 0.005),
+              (px, py, 0.46), "cloth", rotation=stream.uniform(0, math.tau))
+
+    # Stone bench for contemplating the water (观水石榻)
+    b.box(root, "stone_bench", (2.4, 0.75, 0.22), (5.5, 1.2, 0.68), "stone")
+    b.box(root, "stone_bench_leg1", (0.35, 0.55, 0.46), (4.6, 1.2, 0.34), "stone")
+    b.box(root, "stone_bench_leg2", (0.35, 0.55, 0.46), (6.4, 1.2, 0.34), "stone")
+
+    # Stroll path extending behind the moon gate toward the borrowed landscape
+    for p_idx in range(8):
+        b.box(root, f"north_stone_path_{p_idx}", (1.6, 0.9, 0.14),
+              (gx + 0.3 * math.sin(p_idx * 0.6), gy + 2.5 + p_idx * 1.1, 0.46), "stone")
+
+    b.socket(root, "legacy_anchor", (0.0, 0.0, 0.45), (0.0, -1.0, 0.0))
+    b.socket(root, "moon_gate", (gx, gy, zc), (0.0, -1.0, 0.0))
+    b.socket(root, "forecourt", (0.0, -18.0, 0.0))
+
+
 def build(b, config, plan):
     """One landmark per district, keyed by the manifest's landmark field."""
     for d in config["districts"]:
@@ -195,15 +382,8 @@ def build(b, config, plan):
                       task=f"tasks/districts/{d['id']}.md")
 
         if kind == "legacy_reserve":
-            # Reserve the old courtyard's footprint; never import or run legacy.
-            b.box(root, "reserve_plinth", (60.0, 48.0, 0.2), (0.0, 0.0, 0.1), "stone")
-            for sx in (-1, 1):
-                verts, faces = g.stepped_quay(48.0, 0.9, 3, 0.5)
-                b.mesh(root, f"reserve_step_{sx}", verts, faces, "stone",
-                       (sx * 30.0, 0.0, 0.0), math.pi / 2 if sx > 0 else -math.pi / 2)
-            b.roots[root]["status"] = "reserved_not_imported"
-            b.socket(root, "legacy_anchor", (0.0, 0.0, 0.2), (0.0, -1.0, 0.0))
-            b.socket(root, "forecourt", (0.0, -26.0, 0.0))
+            _build_tingyuxuan_courtyard(b, root, stream)
+            b.roots[root]["status"] = "detailed_legacy_courtyard"
             continue
 
         if kind == "tower":

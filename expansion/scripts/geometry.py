@@ -650,3 +650,39 @@ def arch_bridge_body(span, width, rise=2.7, thickness=0.55, sections=21,
             quad = (a, a + 1, b + 1, b)
             faces.append(quad if side > 0 else quad[::-1])
     return vertices, faces
+
+
+def scholar_rock_sculpt(height, radius, stream, segments=22, rings=18):
+    """Sculpted scholar rock (太湖石) with waist pinch, surface furrows and erosion hollows."""
+    verts = []
+    faces = []
+    p1 = stream.uniform(0, math.tau)
+    p2 = stream.uniform(0, math.tau)
+    for ri in range(rings + 1):
+        v_fac = ri / rings
+        z = v_fac * height
+        phi = math.pi * v_fac
+        # waist pinch at mid-height (瘦)
+        waist = 0.62 + 0.45 * math.sin(phi)
+        for si in range(segments):
+            theta = math.tau * si / segments
+            # bumps and erosion furrows (皱与透)
+            distort = (1.0 + 0.26 * math.sin(theta * 3 + v_fac * 4.0 + p1)
+                           + 0.18 * math.cos(theta * 5 - v_fac * 5.5 + p2))
+            r = radius * waist * distort
+            x = r * math.cos(theta) + 0.18 * math.sin(v_fac * math.pi)
+            y = r * math.sin(theta) * 0.72
+            verts.append((x, y, z))
+    for ri in range(rings):
+        for si in range(segments):
+            si_next = (si + 1) % segments
+            a = ri * segments + si
+            b = ri * segments + si_next
+            c = (ri + 1) * segments + si_next
+            d = (ri + 1) * segments + si
+            faces.append((a, b, c, d))
+    # Cap bottom and top
+    faces.append(tuple(reversed(range(segments))))
+    top_base = rings * segments
+    faces.append(tuple(range(top_base, top_base + segments)))
+    return verts, faces

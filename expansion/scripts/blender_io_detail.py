@@ -206,6 +206,49 @@ def _object_random(graph, column=-4, row=3.0):
 # per-variant recipes
 # --------------------------------------------------------------------------
 
+
+def _find_texture(name: str):
+    import os
+    candidates = [
+        os.path.abspath(os.path.join("textures", f"{name}.png")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "textures", f"{name}.png")),
+    ]
+    for p in candidates:
+        if os.path.isfile(p):
+            return p
+    return None
+
+
+def _load_texture_image(name: str):
+    import bpy
+    p = _find_texture(name)
+    if not p:
+        return None
+    try:
+        img = bpy.data.images.load(p, check_existing=True)
+        img.pack()
+        return img
+    except Exception:
+        return None
+
+
+def _triplanar_albedo(graph, tex_name, scale=1.0, blend=0.25, column=-3, row=3.0):
+    """Triplanar box-projected image texture for seamless macro grain without UV."""
+    img = _load_texture_image(tex_name)
+    if not img:
+        return None
+    tex_node = graph.add("ShaderNodeTexImage", column=column, row=row)
+    tex_node.image = img
+    tex_node.projection = "BOX"
+    tex_node.projection_blend = blend
+    coords = graph.add("ShaderNodeTexCoord", column=column - 2, row=row)
+    mapping = graph.add("ShaderNodeMapping", column=column - 1, row=row)
+    graph.value(mapping, "Scale", (scale, scale, scale))
+    graph.link(coords, "Object", mapping, "Vector")
+    graph.link(mapping, "Vector", tex_node, "Vector")
+    return tex_node
+
+
 def _base_principled(graph):
     output = graph.add("ShaderNodeOutputMaterial", column=6, row=0.0)
     bsdf = graph.add("ShaderNodeBsdfPrincipled", column=4, row=0.0)
@@ -269,7 +312,17 @@ def _plaster(graph):
     damp_tint = graph.add("ShaderNodeRGB", column=1, row=-0.6)
     damp_tint.outputs[0].default_value = (0.26, 0.28, 0.26, 1.0)
     graph.link(damp_tint, "Color", damp_colour, "B")
-    graph.link(damp_colour, "Result", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "plaster", scale=0.35, column=2, row=2.4)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=3, row=1.0)
+        graph.value(mix_tex, "Factor", 0.75)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(damp_colour, "Result", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(damp_colour, "Result", bsdf, "Base Color")
 
     rough = _map_range(graph, 0.0, 1.0, 0.94, 0.72, column=2, row=-2.0)
     graph.link(stain, "Fac", rough, "Value")
@@ -317,7 +370,17 @@ def _tile(graph):
     moss_colour = graph.add("ShaderNodeRGB", column=1, row=-1.4)
     moss_colour.outputs[0].default_value = (0.10, 0.16, 0.085, 1.0)
     graph.link(moss_colour, "Color", moss_mix, "B")
-    graph.link(moss_mix, "Result", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "clay", scale=1.1, column=2, row=1.8)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=3, row=0.6)
+        graph.value(mix_tex, "Factor", 0.70)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(moss_mix, "Result", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(moss_mix, "Result", bsdf, "Base Color")
 
     wet = _apply_wetness(graph, bsdf, dry_z=2.6, max_wet=0.35)
     rough = _map_range(graph, 0.0, 1.0, 0.58, 0.20, column=2, row=-2.4)
@@ -360,7 +423,17 @@ def _timber(graph):
     graph.link(shift, "Result", shift_colour, "Green")
     graph.link(shift, "Result", shift_colour, "Blue")
     graph.link(shift_colour, "Color", scaled, "Color2")
-    graph.link(scaled, "Color", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "wood", scale=0.85, column=1, row=2.2)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=2, row=1.0)
+        graph.value(mix_tex, "Factor", 0.65)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(scaled, "Color", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(scaled, "Color", bsdf, "Base Color")
 
     wet = _apply_wetness(graph, bsdf, dry_z=3.0, max_wet=0.5)
     rough = _map_range(graph, 0.0, 1.0, 0.80, 0.34, column=2, row=-2.4)
@@ -393,7 +466,17 @@ def _bark(graph):
         (0.78, (0.185, 0.160, 0.125, 1.0)),
     ], column=-1, row=1.0)
     graph.link(fissures, "Fac", tone, "Fac")
-    graph.link(tone, "Color", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "bark", scale=0.6, column=0, row=2.4)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=1, row=1.0)
+        graph.value(mix_tex, "Factor", 0.72)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(tone, "Color", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(tone, "Color", bsdf, "Base Color")
     graph.value(bsdf, "Roughness", 0.93)
     bump = graph.add("ShaderNodeBump", column=3, row=-2.0)
     graph.value(bump, "Strength", 0.6)
@@ -422,7 +505,17 @@ def _brick(graph):
         (0.76, (0.385, 0.405, 0.390, 1.0)),
     ], column=-1, row=1.0)
     graph.link(coarse, "Fac", tone, "Fac")
-    graph.link(tone, "Color", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "stone", scale=0.55, column=0, row=2.0)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=1, row=1.0)
+        graph.value(mix_tex, "Factor", 0.68)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(tone, "Color", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(tone, "Color", bsdf, "Base Color")
     wet = _apply_wetness(graph, bsdf, dry_z=3.2, max_wet=0.55)
     rough = _map_range(graph, 0.0, 1.0, 0.86, 0.30, column=2, row=-2.4)
     graph.link(wet, "Value", rough, "Value")
@@ -446,7 +539,17 @@ def _paving(graph):
         (0.80, (0.360, 0.375, 0.360, 1.0)),
     ], column=-1, row=1.0)
     graph.link(slabs, "Fac", tone, "Fac")
-    graph.link(tone, "Color", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "stone", scale=0.45, column=0, row=2.0)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=1, row=1.0)
+        graph.value(mix_tex, "Factor", 0.65)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(tone, "Color", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(tone, "Color", bsdf, "Base Color")
     # Polished where feet fall, rough at the edges; wetness stacks on top.
     polish = _map_range(graph, 0.35, 0.75, 0.88, 0.42, column=-1, row=2.6)
     graph.link(wear, "Fac", polish, "Value")
@@ -489,7 +592,17 @@ def _wet_stone(graph):
     algae_colour = graph.add("ShaderNodeRGB", column=1, row=-0.8)
     algae_colour.outputs[0].default_value = (0.055, 0.105, 0.060, 1.0)
     graph.link(algae_colour, "Color", algae_mix, "B")
-    graph.link(algae_mix, "Result", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "stone", scale=0.5, column=2, row=2.5)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=3, row=1.0)
+        graph.value(mix_tex, "Factor", 0.70)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(algae_mix, "Result", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(algae_mix, "Result", bsdf, "Base Color")
 
     wet = _apply_wetness(graph, bsdf, dry_z=3.6, max_wet=0.95)
     rough = _map_range(graph, 0.0, 1.0, 0.82, 0.12, column=3, row=-2.4)
@@ -585,7 +698,17 @@ def _leaf(graph):
     for channel in ("Red", "Green", "Blue"):
         graph.link(shift, "Result", shift_colour, channel)
     graph.link(shift_colour, "Color", scaled, "Color2")
-    graph.link(scaled, "Color", bsdf, "Base Color")
+
+    tex = _triplanar_albedo(graph, "wood", scale=0.85, column=1, row=2.2)
+    if tex:
+        mix_tex = _mix_rgb(graph, column=2, row=1.0)
+        graph.value(mix_tex, "Factor", 0.65)
+        mix_tex.blend_type = "MULTIPLY"
+        graph.link(scaled, "Color", mix_tex, "A")
+        graph.link(tex, "Color", mix_tex, "B")
+        graph.link(mix_tex, "Result", bsdf, "Base Color")
+    else:
+        graph.link(scaled, "Color", bsdf, "Base Color")
     graph.value(bsdf, "Roughness", 0.78)
     # Backlit leaves glow; approximated with translucency, not emission.
     if "Subsurface Weight" in bsdf.inputs:
@@ -861,6 +984,78 @@ def build_world(scene, mood="drizzle"):
     return world
 
 
+def build_distant_scenery(scene, bounds, radius=540.0, height=155.0):
+    """Panoramic ink landscape screen borrowing Song dynasty scenery beyond the canals."""
+    import bpy, os, math
+
+    p = _find_texture("landscape")
+    if not p:
+        return None
+
+    try:
+        img = bpy.data.images.load(p, check_existing=True)
+        img.pack()
+    except Exception:
+        return None
+
+    # Cylindrical panorama screen on the northern horizon
+    mesh_data = bpy.data.meshes.new("JNX_MESH_distant_landscape")
+    n_segments = 80
+    verts = []
+    faces = []
+    uvs = []
+    for j in range(2):
+        z = -15.0 if j == 0 else height
+        for i in range(n_segments + 1):
+            a = -math.pi * 0.68 + (math.pi * 1.36) * i / n_segments
+            x = radius * math.sin(a)
+            y = radius * math.cos(a) + 60.0
+            verts.append((x, y, z))
+            uvs.append((i / n_segments, j))
+
+    for i in range(n_segments):
+        a = i
+        b = i + 1
+        c = i + 1 + (n_segments + 1)
+        d = i + (n_segments + 1)
+        faces.append((a, b, c, d))
+
+    mesh_data.from_pydata(verts, [], faces)
+    mesh_data.update()
+
+    uv_layer = mesh_data.uv_layers.new(name="LandscapeUV")
+    for loop in mesh_data.loops:
+        uv_layer.data[loop.index].uv = uvs[loop.vertex_index]
+
+    obj = bpy.data.objects.new("JNX_DISTANT_LANDSCAPE", mesh_data)
+    scene.collection.objects.link(obj)
+
+    mat = bpy.data.materials.new("JNX_MAT_distant_landscape")
+    mat.use_nodes = True
+    mat.node_tree.nodes.clear()
+    graph = _Graph(mat.node_tree)
+
+    output = graph.add("ShaderNodeOutputMaterial", column=6)
+    bsdf = graph.add("ShaderNodeBsdfPrincipled", column=4)
+    graph.link(bsdf, "BSDF", output, "Surface")
+
+    tex = graph.add("ShaderNodeTexImage", column=0)
+    tex.image = img
+    uv_node = graph.add("ShaderNodeUVMap", column=-2)
+    uv_node.uv_map = "LandscapeUV"
+    graph.link(uv_node, "UV", tex, "Vector")
+
+    graph.link(tex, "Color", bsdf, "Base Color")
+    graph.link(tex, "Color", bsdf, "Emission Color")
+    graph.value(bsdf, "Emission Strength", 0.45)
+    graph.value(bsdf, "Roughness", 1.0)
+    if "Specular IOR Level" in bsdf.inputs:
+        graph.value(bsdf, "Specular IOR Level", 0.0)
+
+    mesh_data.materials.append(mat)
+    return obj
+
+
 def build_mist(scene, bounds, water_z=0.0, top=None, density=None,
                mood="drizzle"):
     """A bounded, height-graded scatter volume: low mist over the canals.
@@ -963,6 +1158,16 @@ def build_lighting(scene, mood="drizzle"):
     bounce = bpy.data.objects.new("JNX_Bounce", bounce_data)
     scene.collection.objects.link(bounce)
     bounce.rotation_euler = (math.radians(-64.0), 0.0, math.radians(30.0))
+
+    # Warm intimate point light hanging inside Tingyuxuan pavilion (D07)
+    tingyu_lamp_data = bpy.data.lights.new("JNX_Tingyu_Lamp", "POINT")
+    tingyu_lamp_data.energy = 85.0
+    tingyu_lamp_data.shadow_soft_size = 0.25
+    tingyu_lamp_data.color = (1.0, 0.62, 0.28)
+    tingyu_lamp = bpy.data.objects.new("JNX_Tingyu_Lamp", tingyu_lamp_data)
+    scene.collection.objects.link(tingyu_lamp)
+    tingyu_lamp.location = (80.5, 46.5, 5.75)
+
     return moon, bounce
 
 
@@ -1249,6 +1454,16 @@ def _shots(builder, config, water_z):
              location=(hx - 64.0, hy + 2.0, 3.7),
              target=(hx + 60.0, hy - 1.0, 5.4),
              dof_distance=34.0, fstop=2.8),
+        # Central garden showcase in D07: Tingyuxuan pavilion, moon gate, leaning plum and distant mountains
+        dict(name="JNX_TingYuXuan", lens=42.0,
+             location=(88.5, 34.0, 3.4),
+             target=(91.4, 53.5, 4.5),
+             dof_distance=20.0, fstop=3.0),
+        # Close artistic framing: gazing through the circular moon gate into borrowed landscape
+        dict(name="JNX_MoonGate_Vista", lens=52.0,
+             location=(91.0, 42.5, 3.2),
+             target=(91.4, 60.0, 4.2),
+             dof_distance=12.0, fstop=2.6),
     ]
 
 
@@ -1313,17 +1528,18 @@ def write_blend(builder, folder, preview=False, config=None, mood="drizzle",
         obj.rotation_euler.z = item["rotation"]
 
     build_world(scene, mood)
+    build_distant_scenery(scene, _planned_bounds(builder))
     build_mist(scene, _planned_bounds(builder), water_z=water_z, mood=mood)
     build_lighting(scene, mood)
     cameras = build_cameras(scene, _clear_shots(builder, _shots(builder, config, water_z)))
-    scene.camera = cameras["JNX_Canal_Hero"]
+    scene.camera = cameras.get("JNX_TingYuXuan", cameras["JNX_Canal_Hero"])
     configure_render(scene, samples=samples)
 
     target = str((folder / "JNX_Expansion.blend").resolve())
     bpy.data.libraries.write(target, {scene}, compress=True)
 
     if preview:
-        for name in ("JNX_Canal_Hero", "JNX_Overview", "JNX_Water_Level"):
+        for name in ("JNX_TingYuXuan", "JNX_Canal_Hero", "JNX_MoonGate_Vista", "JNX_Lane", "JNX_Water_Level", "JNX_Overview"):
             scene.camera = cameras[name]
             scene.render.filepath = str((folder / f"{name}.png").resolve())
             bpy.ops.render.render(write_still=True, scene=scene.name)
