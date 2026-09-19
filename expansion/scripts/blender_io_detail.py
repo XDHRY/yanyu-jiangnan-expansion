@@ -1515,6 +1515,25 @@ def _blocked(boxes, point, margin=1.1):
     return False
 
 
+def _line_clear(boxes, eye, target, margin=0.18):
+    """Reject cameras whose view ray crosses solid geometry before the subject.
+
+    Eye-point clearance alone is insufficient: a camera can stand in free space
+    while looking straight through the back of a shop. Sample the useful part of
+    the sight line and reject any candidate that enters a solid AABB.
+    """
+    for step in range(2, 18):
+        t = step / 20.0
+        p = (
+            eye[0] + (target[0] - eye[0]) * t,
+            eye[1] + (target[1] - eye[1]) * t,
+            eye[2] + (target[2] - eye[2]) * t,
+        )
+        if _blocked(boxes, p, margin=margin):
+            return False
+    return True
+
+
 def _moon_from_xy(mood):
     """Horizontal direction the key light comes from, as a unit (x, y).
 
@@ -1608,9 +1627,11 @@ def _lane_shot(builder, hero_id, boxes, mood="drizzle"):
                       y + fy * 0.8 + ty * along * 18.0, look_h)
             shot = dict(name="JNX_Lane", lens=44.0, district=hero_id,
                         location=eye, target=target, dof_distance=22.0, fstop=3.6)
+            if not _line_clear(boxes, eye, target):
+                continue
             # Lantern emission was tamed by pixel QA, so do not exile the camera
             # to an empty district edge merely to keep every lantern out of frame.
-            # The densest clear commercial row is now the preferred answer.
+            # The densest clear commercial row with a genuinely open sightline wins.
             return shot
     return fallback
 
